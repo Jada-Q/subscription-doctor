@@ -3,6 +3,9 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 const isDev = process.env.NODE_ENV === "development";
 
+// CSP: 'unsafe-inline' and 'unsafe-eval' are required for ONNX Runtime WASM execution.
+// ONNX Runtime uses eval() for WASM instantiation and inline scripts for worker setup.
+// TODO: Revisit if onnxruntime-web adds CSP-compatible mode in a future release.
 const cspHeader = `
   default-src 'self';
   script-src 'self' 'unsafe-inline' 'unsafe-eval';

@@ -7,7 +7,7 @@ export interface ServiceRule {
   appStorePrice: number;
   officialPrice: number;
   category: string;
-  billingCycle: "monthly" | "annual" | "yearly" | "weekly";
+  billingCycle: "monthly" | "yearly" | "weekly";
   overlaps: string[];
   advice: string; // optimization tip in Japanese
   alternatives: Alternative[]; // cheaper/better alternatives
@@ -28,6 +28,6 @@ export interface MatchedTransaction {
   matchedRule: ServiceRule | null;
   matchType: "keyword_exact" | "keyword_partial" | "unmatched";
   appleTaxAmount: number; // appStorePrice - officialPrice, 0 if no tax
-  billingCycle: "monthly" | "annual" | "yearly" | "weekly" | "unknown";
+  billingCycle: "monthly" | "yearly" | "weekly" | "unknown";
   rawLine: string;
 }

@@ -66,6 +66,28 @@ export default function RootLayout({
     >
       <head>
         <meta name="theme-color" content="#2563eb" />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "WebApplication",
+              name: "サブスク診断",
+              alternateName: "Subscription Doctor",
+              description:
+                "クレジットカード明細のスクリーンショットからApple税・重複サブスクを検出。ブラウザ内完結でプライバシー安全。",
+              applicationCategory: "FinanceApplication",
+              operatingSystem: "Web Browser",
+              offers: {
+                "@type": "Offer",
+                price: "0",
+                priceCurrency: "JPY",
+              },
+              inLanguage: "ja",
+              url: "https://subscription-doctor.vercel.app",
+            }),
+          }}
+        />
       </head>
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback } from "react";
 import {
   PAYMENT_TEMPLATES,
   MERCHANT_CATEGORIES,
@@ -12,21 +12,21 @@ import { loadOwnedIds, saveOwnedIds } from "./lib/storage";
 
 type View = "setup" | "calculator";
 
+function getInitialState(): { view: View; ownedIds: Set<string> } {
+  const saved = loadOwnedIds();
+  if (saved.length > 0) {
+    return { view: "calculator", ownedIds: new Set(saved) };
+  }
+  return { view: "setup", ownedIds: new Set() };
+}
+
 export default function PaymentCalculatorPage() {
-  const [view, setView] = useState<View>("setup");
-  const [ownedIds, setOwnedIds] = useState<Set<string>>(new Set());
+  const [initial] = useState(getInitialState);
+  const [view, setView] = useState<View>(initial.view);
+  const [ownedIds, setOwnedIds] = useState<Set<string>>(initial.ownedIds);
   const [category, setCategory] = useState<MerchantCategory | null>(null);
   const [amount, setAmount] = useState("");
   const [results, setResults] = useState<RankedResult[] | null>(null);
-
-  // Load saved owned cards on mount
-  useEffect(() => {
-    const saved = loadOwnedIds();
-    if (saved.length > 0) {
-      setOwnedIds(new Set(saved));
-      setView("calculator");
-    }
-  }, []);
 
   const toggleOwned = useCallback((id: string) => {
     setOwnedIds((prev) => {

@@ -58,10 +58,25 @@ export default function PrivacyPage() {
           本サービスはCookieを使用しません。トラッキングツールやアナリティクスは導入していません。
         </p>
 
-        <h2>6. データの保存期間</h2>
+        <h2>6. データの保存</h2>
+        <h3>6.1 診断データ（タブを閉じると削除）</h3>
         <p>
-          本サービスはデータを保存しません。ブラウザのタブを閉じると、
-          すべての処理データはメモリから自動的に削除されます。
+          OCR処理結果、取引情報、診断レポートなどの診断データは、ブラウザの一時メモリ（sessionStorage）に保存されます。
+          ブラウザのタブを閉じると、これらのデータは自動的に削除されます。
+        </p>
+        <h3>6.2 設定データ（ブラウザに保持）</h3>
+        <p>
+          以下の非個人データは、利便性向上のためブラウザのlocalStorageに保存されます。
+          個人を特定する情報は含まれません。
+        </p>
+        <ul>
+          <li>支払い計算器で選択したカード情報（カードIDのみ）</li>
+          <li>カスタム支払い方法の設定</li>
+          <li>利用頻度の記録（回数制限の管理用）</li>
+        </ul>
+        <p>
+          これらのデータはブラウザの設定からいつでも削除できます
+          （設定 → サイトデータの削除、またはブラウザの履歴・Cookieの消去）。
         </p>
 
         <h2>7. セキュリティ</h2>
@@ -84,7 +99,7 @@ export default function PrivacyPage() {
 
         <h2>10. お問い合わせ</h2>
         <p>
-          本ポリシーに関するご質問は、GitHubリポジトリのIssueにてお寄せください。
+          本ポリシーに関するご質問は、<a href="https://github.com/Jada-Q/subscription-doctor/issues" target="_blank" rel="noopener noreferrer" className="text-blue-600 underline hover:text-blue-800">GitHubリポジトリのIssue</a>にてお寄せください。
         </p>
 
         <h2>11. 準拠法</h2>

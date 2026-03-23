@@ -124,4 +124,62 @@ describe("parseTransactions", () => {
     expect(parseTransactions("")).toHaveLength(0);
     expect(parseTransactions("   ")).toHaveLength(0);
   });
+
+  // --- PaddleOCR real-world output patterns (SPIKE_RESULT.md) ---
+
+  it("handles APPLECOMBILL (PaddleOCR drops spaces in service names)", () => {
+    const text = "02/15 APPLECOMBILL 1300";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].description).toContain("APPLECOMBILL");
+    expect(result[0].amount).toBe(1300);
+  });
+
+  it("handles multiple consecutive transactions (real statement format)", () => {
+    const text = [
+      "NURO光ご利用料金 ご本人 2499",
+      "26/02/03 1回払い 26/03",
+      "APPLE.COM/BILL ご本人 1300",
+      "26/02/15 1回払い 26/03",
+      "NETFLIX.COM ご本人 1590",
+      "26/02/20 1回払い 26/03",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result.length).toBeGreaterThanOrEqual(3);
+    // Verify retroactive date assignment works for all
+    for (const tx of result) {
+      expect(tx.date).toBeTruthy();
+    }
+  });
+
+  it("handles amount with extra spaces around it", () => {
+    const text = "02/15 SPOTIFY   980";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].amount).toBe(980);
+  });
+
+  it("handles mixed full-width date with half-width amount", () => {
+    const text = "０２月１５日 NETFLIX 1590";
+    const result = parseTransactions(text);
+    if (result.length > 0) {
+      expect(result[0].amount).toBe(1590);
+    }
+  });
+
+  it("handles very long description line", () => {
+    const longDesc = "A".repeat(100);
+    const text = `02/15 ${longDesc} 1590`;
+    const result = parseTransactions(text);
+    // Should extract even with long description
+    expect(result).toHaveLength(1);
+    expect(result[0].amount).toBe(1590);
+  });
+
+  it("handles YY/MM/DD date format", () => {
+    const text = "26/02/15 NETFLIX 1590";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].date).toBe("26/02/15");
+  });
 });

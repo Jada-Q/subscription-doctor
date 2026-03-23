@@ -76,6 +76,7 @@ export default function SubscriptionDoctorPage() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const imageUrlRef = useRef<string | null>(null);
   const processingRef = useRef(false);
+  const hasResultRef = useRef(!!restored);
 
   // Track page view once
   useEffect(() => {
@@ -145,6 +146,7 @@ export default function SubscriptionDoctorPage() {
         setStatus("レポート生成中...");
         const rpt = generateReport(matchedTxs, overlapGroups);
         setReport(rpt);
+        hasResultRef.current = true;
 
         recordScan();
         trackEvent("result_view", { matched: rpt.matchedCount, score: rpt.score });
@@ -157,14 +159,13 @@ export default function SubscriptionDoctorPage() {
         setError(msg);
         setStatus("");
         // Stay on result page if we already have results, otherwise show error on upload page
-        if (!report) {
+        if (!hasResultRef.current) {
           setStep("upload");
         }
       } finally {
         processingRef.current = false;
       }
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     []
   );
 
