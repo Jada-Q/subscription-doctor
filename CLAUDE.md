@@ -46,6 +46,13 @@ All env vars are **optional** for the core MVP. The app runs fully without any `
 
 If `SENTRY_AUTH_TOKEN` is missing, source map upload is silently disabled (`sourcemaps.disable` in next.config.ts).
 
+## Error Handling Conventions
+
+- **localStorage/sessionStorage**: `try-catch` with silent ignore (quota errors are unrecoverable)
+- **OCR / core pipeline errors**: Catch → `setError(msg)` to show user-visible error message
+- **Optional services (Sentry, Analytics)**: Silent fallback — never block core functionality
+- **Rule**: Never `catch { console.log() }` alone — either show to user or silently ignore with a reason
+
 ## Known Issues / Tech Debt
 
 - **Affiliate URLs are placeholders**: `affiliateUrl` in `data/templates.ts` currently points to official card issuer websites, not ASP tracking links (A8.net / もしもアフィリエイト). Requires ASP account registration to replace.
