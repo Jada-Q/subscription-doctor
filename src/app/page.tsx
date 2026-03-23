@@ -326,30 +326,57 @@ export default function HomePage() {
               </section>
             )}
 
-            {/* Matched Subscriptions */}
+            {/* Matched Subscriptions with Advice */}
             {report.allTransactions.filter((m) => m.matchedService).length > 0 && (
               <section>
                 <h2 className="font-bold text-lg mb-2">検出されたサブスク</h2>
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {report.allTransactions
                     .filter((m) => m.matchedService)
                     .map((item: MatchedTransaction, i: number) => (
-                      <div
-                        key={i}
-                        className="flex justify-between items-center p-3 border rounded-lg"
-                      >
-                        <div>
-                          <div className="font-medium">{item.matchedService}</div>
-                          <div className="text-xs text-gray-500">
-                            {item.date} ・{" "}
-                            <span className="text-green-600">
-                              {item.matchType === "keyword_exact" ? "完全一致" : "部分一致"}
-                            </span>
+                      <div key={i} className="border rounded-lg overflow-hidden">
+                        <div className="flex justify-between items-center p-3">
+                          <div>
+                            <div className="font-medium">{item.matchedService}</div>
+                            <div className="text-xs text-gray-500">
+                              {item.date !== "unknown" ? item.date : ""}{item.date !== "unknown" ? " ・ " : ""}
+                              <span className="text-green-600">
+                                {item.matchType === "keyword_exact" ? "完全一致" : "部分一致"}
+                              </span>
+                              {item.matchedRule?.category && (
+                                <span className="ml-1 text-gray-400">
+                                  ・{categoryLabel(item.matchedRule.category)}
+                                </span>
+                              )}
+                            </div>
+                          </div>
+                          <div className="font-medium">
+                            ¥{item.amount.toLocaleString()}
                           </div>
                         </div>
-                        <div className="font-medium">
-                          ¥{item.amount.toLocaleString()}
-                        </div>
+                        {/* Advice */}
+                        {item.matchedRule?.advice && (
+                          <div className="px-3 pb-3">
+                            <div className="p-2 bg-blue-50 rounded text-xs text-blue-800">
+                              <span className="font-medium">💡 </span>
+                              {item.matchedRule.advice}
+                            </div>
+                            {item.matchedRule.alternatives && item.matchedRule.alternatives.length > 0 && (
+                              <div className="mt-1.5 space-y-1">
+                                {item.matchedRule.alternatives.map((alt, j) => (
+                                  <div key={j} className="flex justify-between text-xs text-gray-600 px-1">
+                                    <span>{alt.name} <span className="text-gray-400">({alt.note})</span></span>
+                                    {alt.price > 0 && (
+                                      <span className={alt.price < item.amount ? "text-green-600 font-medium" : ""}>
+                                        ¥{alt.price.toLocaleString()}/月
+                                      </span>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        )}
                       </div>
                     ))}
                 </div>
@@ -491,6 +518,23 @@ function SummaryCard({
       </div>
     </div>
   );
+}
+
+function categoryLabel(category: string): string {
+  const labels: Record<string, string> = {
+    cloud_storage: "クラウド",
+    streaming: "動画配信",
+    music: "音楽",
+    shopping: "ショッピング",
+    ai_tools: "AI",
+    productivity: "生産性",
+    internet: "インターネット",
+    gaming: "ゲーム",
+    media: "メディア",
+    developer: "開発",
+    bundle: "バンドル",
+  };
+  return labels[category] || category;
 }
 
 function FeatureCard({

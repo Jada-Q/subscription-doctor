@@ -9,6 +9,14 @@ export interface ServiceRule {
   category: string;
   billingCycle: "monthly" | "annual";
   overlaps: string[];
+  advice: string; // optimization tip in Japanese
+  alternatives: Alternative[]; // cheaper/better alternatives
+}
+
+export interface Alternative {
+  name: string;
+  price: number; // monthly JPY
+  note: string; // short description
 }
 
 export interface MatchedTransaction {

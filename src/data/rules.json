@@ -9,7 +9,11 @@
     "officialPrice": 130,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"]
+    "overlaps": ["google_one", "onedrive"],
+    "advice": "Google One 100GBは月額¥250で容量2倍。iCloudとの併用が不要なら乗り換え検討を。",
+    "alternatives": [
+      { "name": "Google One 100GB", "price": 250, "note": "容量2倍" }
+    ]
   },
   {
     "id": "icloud_200gb",
@@ -21,7 +25,11 @@
     "officialPrice": 400,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"]
+    "overlaps": ["google_one", "onedrive"],
+    "advice": "Google One 200GBも同額¥380。Apple製品中心ならiCloudがベスト。",
+    "alternatives": [
+      { "name": "Google One 200GB", "price": 380, "note": "ほぼ同額" }
+    ]
   },
   {
     "id": "icloud_2tb",
@@ -33,7 +41,11 @@
     "officialPrice": 1300,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"]
+    "overlaps": ["google_one", "onedrive"],
+    "advice": "Google One 2TBは月額¥1,300で同額。写真バックアップだけならGoogle Photosの無料枠(15GB)も活用を。",
+    "alternatives": [
+      { "name": "Google One 2TB", "price": 1300, "note": "同額・YouTube Premium特典付き" }
+    ]
   },
   {
     "id": "icloud_6tb",
@@ -45,7 +57,11 @@
     "officialPrice": 3900,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"]
+    "overlaps": ["google_one", "onedrive"],
+    "advice": "本当に6TB必要ですか？不要なデータを整理すれば2TBプラン(¥1,300)に下げられるかも。",
+    "alternatives": [
+      { "name": "iCloud+ 2TB", "price": 1300, "note": "データ整理で十分かも" }
+    ]
   },
   {
     "id": "apple_music",
@@ -57,7 +73,12 @@
     "officialPrice": 1080,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "youtube_premium"]
+    "overlaps": ["spotify_premium", "youtube_premium"],
+    "advice": "Spotifyは公式サイトから月額¥980。YouTube Premiumなら広告なし動画も付きます。",
+    "alternatives": [
+      { "name": "Spotify Premium (公式)", "price": 980, "note": "月¥100お得" },
+      { "name": "YouTube Premium", "price": 1280, "note": "広告なし動画付き" }
+    ]
   },
   {
     "id": "apple_tv_plus",
@@ -69,7 +90,11 @@
     "officialPrice": 900,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "Apple Oneバンドル(¥1,200)ならMusic+TV++Arcade+iCloud 50GBがセットでお得。",
+    "alternatives": [
+      { "name": "Apple One Individual", "price": 1200, "note": "4サービスまとめて" }
+    ]
   },
   {
     "id": "apple_one_individual",
@@ -81,7 +106,9 @@
     "officialPrice": 1200,
     "category": "bundle",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "Apple Oneは4サービス込みでお得なバンドル。個別契約より割安です。",
+    "alternatives": []
   },
   {
     "id": "netflix_standard",
@@ -93,7 +120,12 @@
     "officialPrice": 1490,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "App Store経由なら月¥100割高。netflix.com から直接契約がお得。広告付きプラン(¥890)もあります。",
+    "alternatives": [
+      { "name": "Netflix 広告付き", "price": 890, "note": "広告ありで月¥600以上お得" },
+      { "name": "Netflix 公式直接契約", "price": 1490, "note": "Apple税を回避" }
+    ]
   },
   {
     "id": "spotify_premium",
@@ -105,7 +137,12 @@
     "officialPrice": 980,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["apple_music", "youtube_premium"]
+    "overlaps": ["apple_music", "youtube_premium"],
+    "advice": "公式サイトから直接契約すれば月額¥980（¥300お得）。無料プランでも十分かも。",
+    "alternatives": [
+      { "name": "Spotify 公式直接契約", "price": 980, "note": "月¥300お得" },
+      { "name": "Spotify 無料プラン", "price": 0, "note": "広告付きで無料" }
+    ]
   },
   {
     "id": "youtube_premium",
@@ -117,7 +154,11 @@
     "officialPrice": 1280,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "apple_music"]
+    "overlaps": ["spotify_premium", "apple_music"],
+    "advice": "公式サイトなら月額¥1,280（¥270お得）。YouTube Musicも含まれるので音楽サブスクが不要に。",
+    "alternatives": [
+      { "name": "YouTube Premium 公式", "price": 1280, "note": "Apple税を回避" }
+    ]
   },
   {
     "id": "amazon_prime",
@@ -129,7 +170,11 @@
     "officialPrice": 600,
     "category": "shopping",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "年払い(¥5,900/年=月¥492)にすると月額より年間¥1,300お得。",
+    "alternatives": [
+      { "name": "Amazon Prime 年払い", "price": 492, "note": "月額換算で¥108お得" }
+    ]
   },
   {
     "id": "disney_plus",
@@ -141,7 +186,11 @@
     "officialPrice": 990,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "年払い(¥9,900/年=月¥825)にすると2ヶ月分お得。",
+    "alternatives": [
+      { "name": "Disney+ 年払い", "price": 825, "note": "月額換算で¥165お得" }
+    ]
   },
   {
     "id": "chatgpt_plus",
@@ -153,7 +202,12 @@
     "officialPrice": 2800,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "公式サイト(chat.openai.com)から直接契約すると月額$20(約¥2,800)。App Store経由は¥200割高。",
+    "alternatives": [
+      { "name": "ChatGPT Plus 公式", "price": 2800, "note": "Apple税を回避" },
+      { "name": "Claude Pro", "price": 2800, "note": "Anthropic製AI、コーディングに強い" }
+    ]
   },
   {
     "id": "adobe_cc",
@@ -165,7 +219,12 @@
     "officialPrice": 6480,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "フォトプラン(Lightroom+Photoshop)は月額¥1,078。全アプリが不要なら大幅節約。Canvaで代替できることも。",
+    "alternatives": [
+      { "name": "Adobe フォトプラン", "price": 1078, "note": "Lightroom+Photoshopのみ" },
+      { "name": "Canva Pro", "price": 1000, "note": "デザイン用途なら十分" }
+    ]
   },
   {
     "id": "microsoft_365",
@@ -177,7 +236,11 @@
     "officialPrice": 1490,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": ["google_one"]
+    "overlaps": ["google_one"],
+    "advice": "Google Workspace(無料)やLibreOffice(無料)で代替可能かも。OneDrive 1TBが必要なら維持。",
+    "alternatives": [
+      { "name": "Google Workspace", "price": 0, "note": "無料で基本機能は十分" }
+    ]
   },
   {
     "id": "google_one",
@@ -189,7 +252,9 @@
     "officialPrice": 250,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["icloud_2tb", "icloud_200gb", "onedrive"]
+    "overlaps": ["icloud_2tb", "icloud_200gb"],
+    "advice": "iCloudと併用していませんか？どちらか一方に統一すると節約に。",
+    "alternatives": []
   },
   {
     "id": "nuro_hikari",
@@ -201,7 +266,13 @@
     "officialPrice": 0,
     "category": "internet",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "NURO光は最大2Gbpsで高速ですが、GMOとくとくBB光(¥4,818)やenひかり(¥4,620)など、より安い光回線もあります。速度が十分なら乗り換え検討を。",
+    "alternatives": [
+      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応で高速" },
+      { "name": "enひかり", "price": 4620, "note": "業界最安級・縛りなし" },
+      { "name": "楽天ひかり", "price": 4180, "note": "楽天ポイント還元あり" }
+    ]
   },
   {
     "id": "au_hikari",
@@ -213,7 +284,12 @@
     "officialPrice": 0,
     "category": "internet",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "auスマホとのセット割がない場合、GMOとくとくBB光やenひかりの方が安い場合があります。",
+    "alternatives": [
+      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応" },
+      { "name": "enひかり", "price": 4620, "note": "縛りなし最安級" }
+    ]
   },
   {
     "id": "softbank_hikari",
@@ -225,7 +301,12 @@
     "officialPrice": 0,
     "category": "internet",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "SoftBankスマホとのセット割がない場合、より安い光回線への乗り換えを検討。",
+    "alternatives": [
+      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応" },
+      { "name": "enひかり", "price": 4620, "note": "縛りなし最安級" }
+    ]
   },
   {
     "id": "docomo_hikari",
@@ -237,7 +318,12 @@
     "officialPrice": 0,
     "category": "internet",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "ドコモスマホとのセット割がない場合、enひかり(¥4,620)やGMOとくとくBB光が安い。",
+    "alternatives": [
+      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応" },
+      { "name": "enひかり", "price": 4620, "note": "縛りなし最安級" }
+    ]
   },
   {
     "id": "hulu",
@@ -249,7 +335,9 @@
     "officialPrice": 1026,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "日テレ系コンテンツが中心。Netflixと両方契約中なら、視聴頻度が低い方を解約検討。",
+    "alternatives": []
   },
   {
     "id": "u_next",
@@ -261,7 +349,12 @@
     "officialPrice": 2189,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "月額¥2,189は動画サブスク最高額級。毎月¥1,200ポイント付きですが、使い切れていますか？",
+    "alternatives": [
+      { "name": "Netflix 広告付き", "price": 890, "note": "海外コンテンツ中心" },
+      { "name": "Amazon Prime Video", "price": 600, "note": "コスパ最強" }
+    ]
   },
   {
     "id": "dazn",
@@ -273,7 +366,12 @@
     "officialPrice": 3700,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "年間プラン(¥30,000/年=月¥2,500)なら月額より大幅お得。App Store経由なら公式サイトが¥500/月安い。",
+    "alternatives": [
+      { "name": "DAZN 年間プラン", "price": 2500, "note": "月額換算で¥1,200お得" },
+      { "name": "DAZN 公式直接契約", "price": 3700, "note": "Apple税を回避" }
+    ]
   },
   {
     "id": "abema_premium",
@@ -285,7 +383,11 @@
     "officialPrice": 960,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "無料放送でも多くのコンテンツが視聴可能。見逃し配信だけなら無料で十分かも。",
+    "alternatives": [
+      { "name": "ABEMA 無料プラン", "price": 0, "note": "広告付きで基本無料" }
+    ]
   },
   {
     "id": "line_music",
@@ -297,7 +399,11 @@
     "officialPrice": 980,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "apple_music", "youtube_premium"]
+    "overlaps": ["spotify_premium", "apple_music", "youtube_premium"],
+    "advice": "公式サイトから月額¥980。LINEの着うた設定が不要ならSpotify(¥980)の方が曲数豊富。",
+    "alternatives": [
+      { "name": "Spotify Premium", "price": 980, "note": "曲数最多級" }
+    ]
   },
   {
     "id": "notion",
@@ -309,7 +415,9 @@
     "officialPrice": 0,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "個人利用なら無料プランで十分な場合が多い。チーム機能が不要なら見直しを。",
+    "alternatives": []
   },
   {
     "id": "canva_pro",
@@ -321,7 +429,9 @@
     "officialPrice": 0,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "無料プランでもテンプレート豊富。プレミアム素材を頻繁に使わないなら無料で十分。",
+    "alternatives": []
   },
   {
     "id": "dropbox",
@@ -333,7 +443,11 @@
     "officialPrice": 0,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "icloud_2tb"]
+    "overlaps": ["google_one", "icloud_2tb"],
+    "advice": "Google DriveやiCloudと重複していませんか？一つに統一すると節約に。",
+    "alternatives": [
+      { "name": "Google One 100GB", "price": 250, "note": "安価なクラウド" }
+    ]
   },
   {
     "id": "claude_pro",
@@ -345,7 +459,9 @@
     "officialPrice": 0,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "ChatGPT Plusと両方契約中なら、用途に合った方に絞ると節約に。",
+    "alternatives": []
   },
   {
     "id": "github",
@@ -357,7 +473,9 @@
     "officialPrice": 0,
     "category": "developer",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "個人開発なら無料プランで十分。プライベートリポジトリも無制限で使えます。",
+    "alternatives": []
   },
   {
     "id": "nintendo_online",
@@ -369,7 +487,11 @@
     "officialPrice": 0,
     "category": "gaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "年払い(¥2,400/年=月¥200)が月額(¥306)より大幅お得。ファミリープランなら1人あたりさらに安く。",
+    "alternatives": [
+      { "name": "年間プラン", "price": 200, "note": "月額換算で¥106お得" }
+    ]
   },
   {
     "id": "playstation_plus",
@@ -381,7 +503,9 @@
     "officialPrice": 0,
     "category": "gaming",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "年払いにすると月額より大幅お得。オンライン対戦をしないならEssentialで十分。",
+    "alternatives": []
   },
   {
     "id": "rakuten_magazine",
@@ -393,7 +517,11 @@
     "officialPrice": 0,
     "category": "media",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "年払い(¥3,960/年=月¥330)が月額(¥418)より年間¥1,056お得。",
+    "alternatives": [
+      { "name": "楽天マガジン年払い", "price": 330, "note": "月額換算で¥88お得" }
+    ]
   },
   {
     "id": "yahoo_premium",
@@ -405,7 +533,9 @@
     "officialPrice": 0,
     "category": "shopping",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "SoftBankユーザーなら無料特典で使えます。特典を使い切れていないなら解約検討を。",
+    "alternatives": []
   },
   {
     "id": "kindle_unlimited",
@@ -417,7 +547,9 @@
     "officialPrice": 0,
     "category": "media",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "月に2冊以上読めば元が取れます。読書量が少ない月は一時解約も可能。",
+    "alternatives": []
   },
   {
     "id": "audible",
@@ -429,6 +561,8 @@
     "officialPrice": 0,
     "category": "media",
     "billingCycle": "monthly",
-    "overlaps": []
+    "overlaps": [],
+    "advice": "月1冊のクレジット制。聴き終わらないなら一時休会(最大3ヶ月)で節約を。",
+    "alternatives": []
   }
 ]
