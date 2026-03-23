@@ -564,5 +564,79 @@
     "overlaps": [],
     "advice": "月1冊のクレジット制。聴き終わらないなら一時休会(最大3ヶ月)で節約を。",
     "alternatives": []
+  },
+  {
+    "id": "suno_ai",
+    "service": "Suno AI",
+    "plan": "",
+    "keywords": ["SUNO", "SUNOINC", "SUNO INC", "SUNO.AI"],
+    "amounts": [],
+    "appStorePrice": 0,
+    "officialPrice": 0,
+    "category": "ai_tools",
+    "billingCycle": "monthly",
+    "overlaps": [],
+    "advice": "AI音楽生成サービス。無料プランでも1日5曲生成可能。利用頻度が低いなら無料プランで十分かも。",
+    "alternatives": [
+      { "name": "Udio", "price": 0, "note": "無料プランあり・高品質AI音楽" }
+    ]
+  },
+  {
+    "id": "udio",
+    "service": "Udio",
+    "plan": "",
+    "keywords": ["UDIO"],
+    "amounts": [],
+    "appStorePrice": 0,
+    "officialPrice": 0,
+    "category": "ai_tools",
+    "billingCycle": "monthly",
+    "overlaps": ["suno_ai"],
+    "advice": "AI音楽生成サービス。Sunoと両方契約中なら、どちらか一方に絞ると節約に。",
+    "alternatives": [
+      { "name": "Suno AI", "price": 0, "note": "無料プランあり・人気AI音楽" }
+    ]
+  },
+  {
+    "id": "midjourney",
+    "service": "Midjourney",
+    "plan": "",
+    "keywords": ["MIDJOURNEY"],
+    "amounts": [],
+    "appStorePrice": 0,
+    "officialPrice": 0,
+    "category": "ai_tools",
+    "billingCycle": "monthly",
+    "overlaps": [],
+    "advice": "AI画像生成サービス。年払いで月額20%オフ。利用頻度が低いなら月契約で必要な時だけ。",
+    "alternatives": []
+  },
+  {
+    "id": "notion",
+    "service": "Notion",
+    "plan": "",
+    "keywords": ["NOTION"],
+    "amounts": [],
+    "appStorePrice": 0,
+    "officialPrice": 0,
+    "category": "productivity",
+    "billingCycle": "monthly",
+    "overlaps": [],
+    "advice": "個人利用なら無料プランで十分。チームプランは年払いで月額18%オフ。",
+    "alternatives": []
+  },
+  {
+    "id": "cursor",
+    "service": "Cursor",
+    "plan": "",
+    "keywords": ["CURSOR", "ANYSPHERE"],
+    "amounts": [],
+    "appStorePrice": 0,
+    "officialPrice": 0,
+    "category": "developer",
+    "billingCycle": "monthly",
+    "overlaps": [],
+    "advice": "AIコーディングエディタ。年払いで$192/年($16/月)が月額$20より20%お得。",
+    "alternatives": []
   }
 ]

@@ -5,7 +5,7 @@ import { recognizeImage } from "@/lib/ocr";
 import type { OcrResult } from "@/lib/ocr";
 import { parseTransactions } from "@/lib/parser";
 import type { ParsedTransaction } from "@/lib/parser";
-import { matchTransactions, detectOverlaps } from "@/lib/matcher";
+import { matchTransactions, detectOverlaps, categorizeMerchant } from "@/lib/matcher";
 import type { MatchedTransaction } from "@/lib/matcher";
 import { generateReport, gradeLabel } from "@/lib/report";
 import type { Report } from "@/lib/report";
@@ -423,20 +423,26 @@ export default function HomePage() {
                 <div className="mt-2 space-y-1">
                   {report.allTransactions
                     .filter((m) => !m.matchedService)
-                    .map((item: MatchedTransaction, i: number) => (
-                      <div
-                        key={i}
-                        className="flex justify-between items-center p-2 text-gray-500"
-                      >
-                        <div>
-                          <span>{item.description}</span>
-                          {item.date !== "unknown" && (
-                            <span className="text-xs ml-2">{item.date}</span>
-                          )}
+                    .map((item: MatchedTransaction, i: number) => {
+                      const merchantCat = categorizeMerchant(item.description);
+                      return (
+                        <div
+                          key={i}
+                          className="flex justify-between items-center p-2 text-gray-500"
+                        >
+                          <div>
+                            <span>{item.description}</span>
+                            {item.date !== "unknown" && (
+                              <span className="text-xs ml-2">{item.date}</span>
+                            )}
+                            {merchantCat && (
+                              <span className="text-xs ml-2 text-gray-400">・{merchantCat}</span>
+                            )}
+                          </div>
+                          <span>¥{item.amount.toLocaleString()}</span>
                         </div>
-                        <span>¥{item.amount.toLocaleString()}</span>
-                      </div>
-                    ))}
+                      );
+                    })}
                 </div>
               </details>
             )}
