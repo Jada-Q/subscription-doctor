@@ -16,6 +16,40 @@ npm run lint         # ESLint
 
 The build script runs `scripts/download-models.mjs` before `next build`. This downloads PaddleOCR ONNX models and WASM files to `public/models/`. These files are gitignored and must be downloaded on each fresh environment (CI, Vercel).
 
+`npm test` should produce **5 test files, 51 tests, all passing**. If any test fails, do not commit.
+
+## Code Conventions
+
+- **Test files**: Colocated with source as `*.test.ts`. Core logic (`src/lib/`, `src/features/*/lib/`) must have tests. UI components do not require tests.
+- **Feature modules**: New features go in `src/features/<name>/` with their own `index.ts`, page component, `lib/`, and `data/` as needed.
+- **Shared components**: Reusable UI goes in `src/components/` and must be re-exported from `src/components/index.ts`.
+- **All new files must be `git add`ed before pushing** — the Vercel build will fail with module-not-found if any imported file is untracked.
+- **Inline styles on layout-critical elements** (TabNavigator, page shell): Tailwind classes have been unreliable here, use `style={{}}` instead.
+- **Japanese UI text**: All user-facing strings are in Japanese. Advice, labels, and error messages must be written in natural Japanese.
+
+## Environment Variables
+
+All env vars are **optional** for the core MVP. The app runs fully without any `.env.local`.
+
+| Variable | Required | Purpose |
+|----------|----------|---------|
+| `NEXT_PUBLIC_SENTRY_DSN` | No | Client-side error monitoring |
+| `SENTRY_DSN` | No | Server-side error monitoring |
+| `SENTRY_ORG` / `SENTRY_PROJECT` | No | Sentry source map upload (CI only) |
+| `SENTRY_AUTH_TOKEN` | No | Sentry source map upload (CI only) |
+| `GEMINI_API_KEY` | No | v1.1 AI fallback for unmatched services |
+| `NEXT_PUBLIC_SUPABASE_URL` | No | v1.1 future feature |
+
+If `SENTRY_AUTH_TOKEN` is missing, source map upload is silently disabled (`sourcemaps.disable` in next.config.ts).
+
+## Known Issues / Tech Debt
+
+- **Affiliate URLs are placeholders**: `affiliateUrl` in `data/templates.ts` currently points to official card issuer websites, not ASP tracking links (A8.net / もしもアフィリエイト). Requires ASP account registration to replace.
+- **AI Fallback not implemented**: Planned Gemini-based identification for unmatched transactions (`GEMINI_API_KEY`). Would be the first server-side API route.
+- **`next/dynamic` breaks page shell SSR**: Do NOT use `dynamic()` imports in `page.tsx` — the wrapper div and TabNavigator will not render in SSR output, leaving only the feature page content visible.
+- **No CI pipeline**: No GitHub Actions yet. `npm test && npm run build` should pass before every push.
+- **cancelUrl accuracy**: URLs point to official account/cancel pages but services may restructure their URLs. Some point to support landing pages rather than direct cancel buttons.
+
 ## Architecture
 
 Japanese-language privacy-first app that analyzes credit card statement screenshots to detect subscription waste. **All processing happens in-browser** — no data leaves the client.
