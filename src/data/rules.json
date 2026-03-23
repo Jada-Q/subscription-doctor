@@ -11,9 +11,7 @@
     "billingCycle": "monthly",
     "overlaps": ["google_one", "onedrive"],
     "advice": "Google One 100GBは月額¥250で容量2倍。iCloudとの併用が不要なら乗り換え検討を。",
-    "alternatives": [
-      { "name": "Google One 100GB", "price": 250, "note": "容量2倍" }
-    ]
+    "alternatives": []
   },
   {
     "id": "icloud_200gb",
@@ -44,7 +42,7 @@
     "overlaps": ["google_one", "onedrive"],
     "advice": "Google One 2TBは月額¥1,300で同額。写真バックアップだけならGoogle Photosの無料枠(15GB)も活用を。",
     "alternatives": [
-      { "name": "Google One 2TB", "price": 1300, "note": "同額・YouTube Premium特典付き" }
+      { "name": "Google One 2TB", "price": 1300, "note": "同額だがYouTube Premium特典付き" }
     ]
   },
   {
@@ -92,8 +90,7 @@
     "overlaps": ["spotify_premium", "youtube_premium"],
     "advice": "Spotifyは公式サイトから月額¥980。YouTube Premiumなら広告なし動画も付きます。",
     "alternatives": [
-      { "name": "Spotify Premium (公式)", "price": 980, "note": "月¥100お得" },
-      { "name": "YouTube Premium", "price": 1280, "note": "広告なし動画付き" }
+      { "name": "Spotify Premium (公式)", "price": 980, "note": "月¥100お得" }
     ]
   },
   {
@@ -109,7 +106,7 @@
     "overlaps": [],
     "advice": "Apple Oneバンドル(¥1,200)ならMusic+TV++Arcade+iCloud 50GBがセットでお得。",
     "alternatives": [
-      { "name": "Apple One Individual", "price": 1200, "note": "4サービスまとめて" }
+      { "name": "Apple One Individual", "price": 1200, "note": "¥300増で Music+Arcade+iCloud 50GB付き" }
     ]
   },
   {
