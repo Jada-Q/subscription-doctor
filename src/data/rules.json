@@ -64,6 +64,22 @@
     ]
   },
   {
+    "id": "onedrive",
+    "service": "Microsoft OneDrive",
+    "plan": "100GB",
+    "keywords": ["ONEDRIVE", "MICROSOFT ONEDRIVE"],
+    "amounts": [229],
+    "appStorePrice": 0,
+    "officialPrice": 0,
+    "category": "cloud_storage",
+    "billingCycle": "monthly",
+    "overlaps": ["google_one", "icloud_2tb", "icloud_200gb", "dropbox"],
+    "advice": "Microsoft 365に含まれる1TB OneDriveの方がコスパ良好。単体契約なら見直しを。",
+    "alternatives": [
+      { "name": "Google One 100GB", "price": 250, "note": "ほぼ同額で安定" }
+    ]
+  },
+  {
     "id": "apple_music",
     "service": "Apple Music",
     "plan": "Individual",
@@ -609,20 +625,6 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "AI画像生成サービス。年払いで月額20%オフ。利用頻度が低いなら月契約で必要な時だけ。",
-    "alternatives": []
-  },
-  {
-    "id": "notion",
-    "service": "Notion",
-    "plan": "",
-    "keywords": ["NOTION"],
-    "amounts": [],
-    "appStorePrice": 0,
-    "officialPrice": 0,
-    "category": "productivity",
-    "billingCycle": "monthly",
-    "overlaps": [],
-    "advice": "個人利用なら無料プランで十分。チームプランは年払いで月額18%オフ。",
     "alternatives": []
   },
   {

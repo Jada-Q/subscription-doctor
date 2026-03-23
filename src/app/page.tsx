@@ -420,14 +420,9 @@ export default function HomePage() {
                           <div>
                             <div className="font-medium">{item.matchedService}</div>
                             <div className="text-xs text-gray-500">
-                              {item.date !== "unknown" ? item.date : ""}{item.date !== "unknown" ? " ・ " : ""}
-                              <span className="text-green-600">
-                                {item.matchType === "keyword_exact" ? "完全一致" : "部分一致"}
-                              </span>
+                              {item.date !== "unknown" && <span>{item.date}</span>}
                               {item.matchedRule?.category && (
-                                <span className="ml-1 text-gray-400">
-                                  ・{categoryLabel(item.matchedRule.category)}
-                                </span>
+                                <span>{item.date !== "unknown" ? " ・ " : ""}{categoryLabel(item.matchedRule.category)}</span>
                               )}
                             </div>
                           </div>
@@ -536,6 +531,11 @@ export default function HomePage() {
                 </pre>
               </div>
             </details>
+
+            {/* Disclaimer */}
+            <p className="text-xs text-gray-400 text-center">
+              ※ 本サービスの提案は参考情報です。契約変更・解約は自己責任でお願いします。
+            </p>
 
             {/* Action Buttons */}
             <div className="space-y-3">
