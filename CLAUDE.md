@@ -22,9 +22,15 @@ The build script runs `scripts/download-models.mjs` before `next build`. This do
 
 `npm test` should produce **14 test files, 120 tests, all passing**. If any test fails, do not commit.
 
-## Deploy Checklist
+## Deploy / PR Checklist
 
-Before merging a PR: `npm test` 全绿 → `npm run lint` 無エラー → `npm run build` 成功。All imported files must be `git add`ed (Vercel will fail with `module-not-found` otherwise).
+Before merging a PR:
+1. `npm test` 全绿
+2. `npm run lint` 無エラー（src/ 内の error = 0）
+3. `npm run build` 成功
+4. All imported files must be `git add`ed (Vercel will fail with `module-not-found` otherwise)
+5. No `console.log`残留 in committed code
+6. Japanese UI text reviewed for natural phrasing
 
 ## Code Conventions
 
