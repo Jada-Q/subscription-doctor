@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://subscription-doctor.vercel.app"),
   title: "サブスク診断 — Subscription Doctor",
   description:
-    "クレジットカード明細のスクリーンショットからApple税・重複サブスクを検出。36種類のサービスに対応。データはブラウザ内で処理、サーバー送信なし。",
+    "クレジットカード明細のスクリーンショットからApple税・重複サブスクを検出。100種類以上のサービスに対応。データはブラウザ内で処理、サーバー送信なし。",
   keywords: [
     "サブスク 見直し",
     "サブスク 節約",

@@ -297,7 +297,7 @@ export default function SubscriptionDoctorPage() {
                 color="amber"
               />
               <FeatureCard
-                title="36種類のサービスに対応"
+                title="100種類以上のサービスに対応"
                 description="Netflix, Spotify, iCloud, NURO光, ChatGPT, Adobe CC など主要サービスを自動識別。"
                 color="blue"
               />
@@ -321,7 +321,7 @@ export default function SubscriptionDoctorPage() {
                 />
                 <FaqItem
                   q="対応しているサブスクは？"
-                  a="Netflix, Spotify, YouTube Premium, iCloud, Apple Music, Amazon Prime, ChatGPT Plus, Adobe CC, NURO光 など36種類以上のサービスを自動識別します。"
+                  a="Netflix, Spotify, YouTube Premium, iCloud, Apple Music, Amazon Prime, ChatGPT Plus, Adobe CC, NURO光 など100種類以上以上のサービスを自動識別します。"
                 />
                 <FaqItem
                   q="無料で使えますか？"
