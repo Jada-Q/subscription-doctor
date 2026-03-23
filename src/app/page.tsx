@@ -23,21 +23,32 @@ export default function HomePage() {
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
   const [report, setReport] = useState<Report | null>(null);
   const [isDemo, setIsDemo] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const imageUrlRef = useRef<string | null>(null);
+  const processingRef = useRef(false);
 
   const processImages = useCallback(
     async (files: File[]) => {
+      // Prevent double-processing (iOS Safari can fire onChange twice)
+      if (processingRef.current) return;
+      processingRef.current = true;
+
       // Rate limit check
       const limit = checkRateLimit();
       if (!limit.allowed) {
         const mins = Math.ceil(limit.retryAfterMs / 60000);
         setStatus(`利用制限に達しました。${mins}分後にお試しください。`);
+        processingRef.current = false;
         return;
       }
 
       setStep("processing");
-      if (imageUrl) URL.revokeObjectURL(imageUrl);
-      setImageUrl(URL.createObjectURL(files[0]));
+      setError(null);
+      if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
+      const newUrl = URL.createObjectURL(files[0]);
+      imageUrlRef.current = newUrl;
+      setImageUrl(newUrl);
 
       try {
         const canvas = canvasRef.current;
@@ -84,11 +95,18 @@ export default function HomePage() {
         setStep("result");
       } catch (e) {
         const msg = e instanceof Error ? e.message : String(e);
-        setStatus(`エラー: ${msg}`);
-        setStep("upload");
+        setError(msg);
+        setStatus("");
+        // Stay on result page if we already have results, otherwise show error on upload page
+        if (!report) {
+          setStep("upload");
+        }
+      } finally {
+        processingRef.current = false;
       }
     },
-    [imageUrl]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   const handleFileChange = useCallback(
@@ -102,15 +120,17 @@ export default function HomePage() {
   );
 
   const reset = useCallback(() => {
-    if (imageUrl) URL.revokeObjectURL(imageUrl);
+    if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
+    imageUrlRef.current = null;
     setImageUrl(null);
     setOcrResult(null);
     setTransactions([]);
     setReport(null);
     setIsDemo(false);
+    setError(null);
     setStep("upload");
     setStatus("");
-  }, [imageUrl]);
+  }, []);
 
   const runDemo = useCallback(() => {
     const demo = generateDemoResult();
@@ -197,8 +217,8 @@ export default function HomePage() {
                 </button>
               </div>
             </div>
-            {status && (
-              <p className="text-red-600 text-sm text-center">{status}</p>
+            {(status || error) && (
+              <p className="text-red-600 text-sm text-center">{error || status}</p>
             )}
 
             {/* Value Proposition */}
