@@ -147,8 +147,9 @@ export default function HomePage() {
         <canvas ref={canvasRef} className="hidden" />
 
         {step === "upload" && (
-          <div className="mt-8 text-center">
-            <div className="border-2 border-dashed border-gray-300 rounded-xl p-8">
+          <div className="mt-6 space-y-6">
+            {/* Upload Area */}
+            <div className="border-2 border-dashed border-gray-300 rounded-xl p-8 text-center">
               <p className="text-lg font-medium mb-2">
                 クレジットカード明細のスクリーンショットをアップロード
               </p>
@@ -167,18 +168,45 @@ export default function HomePage() {
                   className="hidden"
                 />
               </label>
+              <div className="mt-3">
+                <button
+                  type="button"
+                  onClick={runDemo}
+                  className="text-sm text-blue-600 underline hover:text-blue-800"
+                  style={{ touchAction: "manipulation" }}
+                >
+                  デモで試してみる
+                </button>
+              </div>
             </div>
-            <button
-              type="button"
-              onClick={runDemo}
-              className="mt-4 text-sm text-blue-600 underline hover:text-blue-800"
-              style={{ touchAction: "manipulation" }}
-            >
-              デモで試してみる
-            </button>
             {status && (
-              <p className="mt-4 text-red-600 text-sm">{status}</p>
+              <p className="text-red-600 text-sm text-center">{status}</p>
             )}
+
+            {/* Value Proposition */}
+            <div className="grid grid-cols-1 gap-3">
+              <FeatureCard
+                title="Apple税を発見"
+                description="App Store経由で割高になっているサブスクを検出。公式サイトとの価格差を表示します。"
+                color="red"
+              />
+              <FeatureCard
+                title="重複サブスクを検出"
+                description="SpotifyとYouTube Premiumなど、似たサービスの重複利用を見つけます。"
+                color="amber"
+              />
+              <FeatureCard
+                title="36種類のサービスに対応"
+                description="Netflix, Spotify, iCloud, NURO光, ChatGPT, Adobe CC など主要サービスを自動識別。"
+                color="blue"
+              />
+            </div>
+
+            {/* Privacy Note */}
+            <div className="text-center text-xs text-gray-400 space-y-1">
+              <p>OCR処理はすべてブラウザ内で完結。画像はサーバーに送信されません。</p>
+              <p>対応カード：楽天カード・三井住友・JCB・その他の明細スクリーンショット</p>
+            </div>
           </div>
         )}
 
@@ -461,6 +489,28 @@ function SummaryCard({
       >
         {value}
       </div>
+    </div>
+  );
+}
+
+function FeatureCard({
+  title,
+  description,
+  color,
+}: {
+  title: string;
+  description: string;
+  color: "red" | "amber" | "blue";
+}) {
+  const colorMap = {
+    red: "border-l-red-400 bg-red-50/50",
+    amber: "border-l-amber-400 bg-amber-50/50",
+    blue: "border-l-blue-400 bg-blue-50/50",
+  };
+  return (
+    <div className={`p-3 rounded-lg border-l-4 ${colorMap[color]}`}>
+      <div className="font-medium text-sm">{title}</div>
+      <div className="text-xs text-gray-500 mt-0.5">{description}</div>
     </div>
   );
 }
