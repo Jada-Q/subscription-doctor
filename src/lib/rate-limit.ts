@@ -1,5 +1,5 @@
 const STORAGE_KEY = "subsc-doctor-scans";
-const MAX_SCANS_PER_HOUR = 10;
+const MAX_SCANS_PER_HOUR = 30;
 const HOUR_MS = 60 * 60 * 1000;
 
 interface ScanRecord {
