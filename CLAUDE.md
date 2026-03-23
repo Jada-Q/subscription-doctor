@@ -47,7 +47,6 @@ If `SENTRY_AUTH_TOKEN` is missing, source map upload is silently disabled (`sour
 - **Affiliate URLs are placeholders**: `affiliateUrl` in `data/templates.ts` currently points to official card issuer websites, not ASP tracking links (A8.net / もしもアフィリエイト). Requires ASP account registration to replace.
 - **AI Fallback not implemented**: Planned Gemini-based identification for unmatched transactions (`GEMINI_API_KEY`). Would be the first server-side API route.
 - **`next/dynamic` breaks page shell SSR**: Do NOT use `dynamic()` imports in `page.tsx` — the wrapper div and TabNavigator will not render in SSR output, leaving only the feature page content visible.
-- **No CI pipeline**: No GitHub Actions yet. `npm test && npm run build` should pass before every push.
 - **cancelUrl accuracy**: URLs point to official account/cancel pages but services may restructure their URLs. Some point to support landing pages rather than direct cancel buttons.
 
 ## Architecture
