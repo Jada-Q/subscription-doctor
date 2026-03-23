@@ -209,19 +209,27 @@ export function parseTransactions(
   const transactions: ParsedTransaction[] = [];
   let lastDate: string | null = null;
 
-  for (let i = 0; i < lines.length; i++) {
-    const line = lines[i];
+  for (const line of lines) {
+    // ALWAYS extract date from every line, even lines we'll skip.
+    // Japanese card statements often put dates on "回払い" lines
+    // that appear AFTER the transaction description:
+    //   NURO光ご利用料金 ご本人 2,499
+    //   26/03/03 1回払い 26/04          ← date here, but would be skipped
+    const date = extractDate(line);
+    if (date) {
+      lastDate = date;
+      // Retroactively fix the previous transaction if it had no date
+      if (transactions.length > 0 && transactions[transactions.length - 1].date === "unknown") {
+        transactions[transactions.length - 1].date = date;
+      }
+    }
 
-    // Skip non-transaction lines
+    // Skip non-transaction lines (after extracting date above)
     if (SKIP_PATTERNS.some((p) => p.test(line))) continue;
 
-    const date = extractDate(line);
     const amount = extractAmount(line);
 
-    // Track last seen date for lines that have amount but no date
-    if (date) lastDate = date;
-
-    // Date-only line: just update lastDate, don't try to create a transaction
+    // Date-only line: just update lastDate (already done above)
     if (date && !amount && isDateOnlyLine(line)) continue;
 
     // A transaction line needs an amount > 0
