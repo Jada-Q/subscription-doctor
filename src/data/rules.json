@@ -1,0 +1,112 @@
+[
+  {
+    "id": "icloud_2tb",
+    "service": "Apple iCloud",
+    "plan": "2TB",
+    "keywords": ["APPLE COM BILL", "APPLE.COM/BILL", "APPLECOMBILL"],
+    "appStorePrice": 1300,
+    "officialPrice": 1300,
+    "category": "cloud_storage",
+    "billingCycle": "monthly",
+    "overlaps": ["google_one", "onedrive"]
+  },
+  {
+    "id": "netflix_standard",
+    "service": "Netflix",
+    "plan": "Standard",
+    "keywords": ["NETFLIX", "NETFLIX.COM"],
+    "appStorePrice": 1590,
+    "officialPrice": 1490,
+    "category": "streaming",
+    "billingCycle": "monthly",
+    "overlaps": []
+  },
+  {
+    "id": "spotify_premium",
+    "service": "Spotify",
+    "plan": "Premium",
+    "keywords": ["SPOTIFY", "SPOTIFYPREMIUM"],
+    "appStorePrice": 1280,
+    "officialPrice": 980,
+    "category": "music",
+    "billingCycle": "monthly",
+    "overlaps": ["apple_music", "youtube_premium"]
+  },
+  {
+    "id": "youtube_premium",
+    "service": "YouTube Premium",
+    "plan": "Individual",
+    "keywords": ["YOUTUBE PREMIUM", "YOUTUBEPREMIUM", "GOOGLE YOUTUBE"],
+    "appStorePrice": 1550,
+    "officialPrice": 1280,
+    "category": "music",
+    "billingCycle": "monthly",
+    "overlaps": ["spotify_premium", "apple_music"]
+  },
+  {
+    "id": "amazon_prime",
+    "service": "Amazon Prime",
+    "plan": "Monthly",
+    "keywords": ["AMAZON PRIME", "AMAZONPRIME", "AMZN PRIME"],
+    "appStorePrice": 600,
+    "officialPrice": 600,
+    "category": "shopping",
+    "billingCycle": "monthly",
+    "overlaps": []
+  },
+  {
+    "id": "apple_music",
+    "service": "Apple Music",
+    "plan": "Individual",
+    "keywords": ["APPLE MUSIC", "APPLE COM BILL"],
+    "appStorePrice": 1080,
+    "officialPrice": 1080,
+    "category": "music",
+    "billingCycle": "monthly",
+    "overlaps": ["spotify_premium", "youtube_premium"]
+  },
+  {
+    "id": "disney_plus",
+    "service": "Disney+",
+    "plan": "Standard",
+    "keywords": ["DISNEY PLUS", "DISNEYPLUS", "DISNEY+"],
+    "appStorePrice": 990,
+    "officialPrice": 990,
+    "category": "streaming",
+    "billingCycle": "monthly",
+    "overlaps": []
+  },
+  {
+    "id": "chatgpt_plus",
+    "service": "ChatGPT Plus",
+    "plan": "Plus",
+    "keywords": ["CHATGPT", "OPENAI", "CHATGPTSUBSCRIPTION"],
+    "appStorePrice": 3000,
+    "officialPrice": 2800,
+    "category": "ai_tools",
+    "billingCycle": "monthly",
+    "overlaps": []
+  },
+  {
+    "id": "adobe_cc",
+    "service": "Adobe Creative Cloud",
+    "plan": "Photography",
+    "keywords": ["ADOBE", "ADOBE CREATIVE", "ADOBECREATIVECLOUD"],
+    "appStorePrice": 6480,
+    "officialPrice": 6480,
+    "category": "productivity",
+    "billingCycle": "monthly",
+    "overlaps": []
+  },
+  {
+    "id": "microsoft_365",
+    "service": "Microsoft 365",
+    "plan": "Personal",
+    "keywords": ["MICROSOFT 365", "MICROSOFT365", "MS 365"],
+    "appStorePrice": 1490,
+    "officialPrice": 1490,
+    "category": "productivity",
+    "billingCycle": "monthly",
+    "overlaps": ["google_one"]
+  }
+]

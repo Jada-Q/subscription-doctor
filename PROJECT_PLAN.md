@@ -96,13 +96,20 @@
 
 ### 致命技术风险（已解决）
 
-**FATAL-1：「PaddleOCR.js」不是真实的 npm 包**
-没有叫 "PaddleOCR.js" 的成熟包。实际可用：`client-side-ocr`（支持日文）、`paddleocr`（X3ZvaWQ，v5+ONNX，新）、**`tesseract.js` v6.0.0**（百万下载，日文已验证，最稳定保底）。
-→ **第 1 周 Day 1-3 做 OCR Spike**，用真实日文账单测试后选定引擎。
+**FATAL-1：「PaddleOCR.js」不是真实的 npm 包** ✅ **已验证 (2026-03-23)**
+选定 `paddleocr` 1.1.1（X3ZvaWQ）+ PP-OCRv5 模型。Spike 测试结果：
+- PaddleOCR v5：**96.2% 信頼度、1.9秒**，日文/日期/金额全部正确识别
+- Tesseract.js v7：79.0% 信頼度、1.9秒，¥符号误识别(\t)、日期合并、日文多余空格
+- `client-side-ocr` 排除：不是库而是完整应用（含 React/Mantine UI 依赖）
+- **关键发现**：辞書文件 `ppocrv5_dict.txt` 第1行为空行（CTC blank token），不可过滤
 
-**FATAL-2：iOS Safari + ONNX Runtime 崩溃**
-PaddleOCR 系依赖 `onnxruntime-web`，在 iOS Safari：WebGPU 不支持、WASM 加载失败、内存暴涨崩溃。日本 iPhone 占 50-65%。
-→ **双引擎架构**：移动 Safari 用 Tesseract.js（自有 WASM，iOS 已验证）。
+**FATAL-2：iOS Safari + ONNX Runtime 崩溃** ✅ **已推翻 (2026-03-23)**
+实测结果：PaddleOCR + onnxruntime-web 在 iPhone Safari **正常运行**。
+- 设置 `numThreads: 1` + WASM backend → 无崩溃
+- iPhone 处理速度：demo 图 1.3s / 实拍照 2.9s（目标 <6s 大幅通过）
+- Tesseract.js 在 iPhone 上 10.7s → 不可用
+- **结论：双引擎不需要 → PaddleOCR 一本化，删除 Tesseract.js 依赖**
+- **注意：Next.js 16 Turbopack dev 模式输出 iOS 不兼容的 JS，必须用 production build 测试**
 
 **FATAL-3：heic2any 在 Safari 失效**
 iPhone 拍照默认 HEIC，但 `heic2any` 在 Safari 不工作。

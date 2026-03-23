@@ -37,6 +37,12 @@ yarn-error.log*
 # vercel
 .vercel
 
+# OCR models (large binary files, download at build time)
+public/models/*.onnx
+public/models/*.wasm
+public/models/*.mjs
+public/models/*.txt
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts
