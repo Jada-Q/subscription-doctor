@@ -16,6 +16,17 @@ function categoryLabel(category: string): string {
     media: "メディア",
     developer: "開発",
     bundle: "バンドル",
+    security: "セキュリティ",
+    security_home: "ホームセキュリティ",
+    dating: "マッチング",
+    mobile: "携帯",
+    health: "健康",
+    finance: "家計",
+    communication: "通信",
+    education: "教育",
+    entertainment: "エンタメ",
+    food_delivery: "食品宅配",
+    insurance: "保険",
   };
   return labels[category] || category;
 }
@@ -79,6 +90,18 @@ export function SubscriptionList({ report }: { report: Report }) {
                   }
                   return null;
                 })()}
+                {item.matchedRule?.cancelUrl && (
+                  <div className="mt-1.5">
+                    <a
+                      href={item.matchedRule.cancelUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-block text-xs text-red-600 hover:text-red-800 underline px-1"
+                    >
+                      解約手続きはこちら →
+                    </a>
+                  </div>
+                )}
               </div>
             )}
           </div>

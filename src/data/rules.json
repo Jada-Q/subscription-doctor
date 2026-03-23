@@ -3,102 +3,188 @@
     "id": "icloud_50gb",
     "service": "Apple iCloud+",
     "plan": "50GB",
-    "keywords": ["APPLE COM BILL", "APPLE.COM/BILL", "APPLECOMBILL"],
-    "amounts": [130],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLE.COM/BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      130
+    ],
     "appStorePrice": 130,
     "officialPrice": 130,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"],
+    "overlaps": [
+      "google_one",
+      "onedrive"
+    ],
     "advice": "Google One 100GBは月額¥250で容量2倍。iCloudとの併用が不要なら乗り換え検討を。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "icloud_200gb",
     "service": "Apple iCloud+",
     "plan": "200GB",
-    "keywords": ["APPLE COM BILL", "APPLE.COM/BILL", "APPLECOMBILL"],
-    "amounts": [400],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLE.COM/BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      400
+    ],
     "appStorePrice": 400,
     "officialPrice": 400,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"],
+    "overlaps": [
+      "google_one",
+      "onedrive"
+    ],
     "advice": "Google One 200GBも同額¥380。Apple製品中心ならiCloudがベスト。",
     "alternatives": [
-      { "name": "Google One 200GB", "price": 380, "note": "ほぼ同額" }
-    ]
+      {
+        "name": "Google One 200GB",
+        "price": 380,
+        "note": "ほぼ同額"
+      }
+    ],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "icloud_2tb",
     "service": "Apple iCloud+",
     "plan": "2TB",
-    "keywords": ["APPLE COM BILL", "APPLE.COM/BILL", "APPLECOMBILL"],
-    "amounts": [1300],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLE.COM/BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      1300
+    ],
     "appStorePrice": 1300,
     "officialPrice": 1300,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"],
+    "overlaps": [
+      "google_one",
+      "onedrive"
+    ],
     "advice": "Google One 2TBは月額¥1,300で同額。写真バックアップだけならGoogle Photosの無料枠(15GB)も活用を。",
     "alternatives": [
-      { "name": "Google One 2TB", "price": 1300, "note": "同額だがYouTube Premium特典付き" }
-    ]
+      {
+        "name": "Google One 2TB",
+        "price": 1300,
+        "note": "同額だがYouTube Premium特典付き"
+      }
+    ],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "icloud_6tb",
     "service": "Apple iCloud+",
     "plan": "6TB",
-    "keywords": ["APPLE COM BILL", "APPLE.COM/BILL", "APPLECOMBILL"],
-    "amounts": [3900],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLE.COM/BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      3900
+    ],
     "appStorePrice": 3900,
     "officialPrice": 3900,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "onedrive"],
+    "overlaps": [
+      "google_one",
+      "onedrive"
+    ],
     "advice": "本当に6TB必要ですか？不要なデータを整理すれば2TBプラン(¥1,300)に下げられるかも。",
     "alternatives": [
-      { "name": "iCloud+ 2TB", "price": 1300, "note": "データ整理で十分かも" }
-    ]
+      {
+        "name": "iCloud+ 2TB",
+        "price": 1300,
+        "note": "データ整理で十分かも"
+      }
+    ],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "onedrive",
     "service": "Microsoft OneDrive",
     "plan": "100GB",
-    "keywords": ["ONEDRIVE", "MICROSOFT ONEDRIVE"],
-    "amounts": [229],
+    "keywords": [
+      "ONEDRIVE",
+      "MICROSOFT ONEDRIVE"
+    ],
+    "amounts": [
+      229
+    ],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "icloud_2tb", "icloud_200gb", "dropbox"],
+    "overlaps": [
+      "google_one",
+      "icloud_2tb",
+      "icloud_200gb",
+      "dropbox"
+    ],
     "advice": "Microsoft 365に含まれる1TB OneDriveの方がコスパ良好。単体契約なら見直しを。",
     "alternatives": [
-      { "name": "Google One 100GB", "price": 250, "note": "ほぼ同額で安定" }
-    ]
+      {
+        "name": "Google One 100GB",
+        "price": 250,
+        "note": "ほぼ同額で安定"
+      }
+    ],
+    "cancelUrl": "https://account.microsoft.com/services"
   },
   {
     "id": "apple_music",
     "service": "Apple Music",
     "plan": "Individual",
-    "keywords": ["APPLE MUSIC", "APPLE COM BILL", "APPLECOMBILL"],
-    "amounts": [1080],
+    "keywords": [
+      "APPLE MUSIC",
+      "APPLE COM BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      1080
+    ],
     "appStorePrice": 1080,
     "officialPrice": 1080,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "youtube_premium"],
+    "overlaps": [
+      "spotify_premium",
+      "youtube_premium"
+    ],
     "advice": "Spotifyは公式サイトから月額¥980。YouTube Premiumなら広告なし動画も付きます。",
     "alternatives": [
-      { "name": "Spotify Premium (公式)", "price": 980, "note": "月¥100お得" }
-    ]
+      {
+        "name": "Spotify Premium (公式)",
+        "price": 980,
+        "note": "月¥100お得"
+      }
+    ],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "apple_tv_plus",
     "service": "Apple TV+",
     "plan": "",
-    "keywords": ["APPLE COM BILL", "APPLECOMBILL"],
-    "amounts": [900],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      900
+    ],
     "appStorePrice": 900,
     "officialPrice": 900,
     "category": "streaming",
@@ -106,28 +192,42 @@
     "overlaps": [],
     "advice": "Apple Oneバンドル(¥1,200)ならMusic+TV++Arcade+iCloud 50GBがセットでお得。",
     "alternatives": [
-      { "name": "Apple One Individual", "price": 1200, "note": "¥300増で Music+Arcade+iCloud 50GB付き" }
-    ]
+      {
+        "name": "Apple One Individual",
+        "price": 1200,
+        "note": "¥300増で Music+Arcade+iCloud 50GB付き"
+      }
+    ],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "apple_one_individual",
     "service": "Apple One",
     "plan": "Individual",
-    "keywords": ["APPLE COM BILL", "APPLECOMBILL"],
-    "amounts": [1200],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      1200
+    ],
     "appStorePrice": 1200,
     "officialPrice": 1200,
     "category": "bundle",
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "Apple Oneは4サービス込みでお得なバンドル。個別契約より割安です。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "netflix_standard",
     "service": "Netflix",
     "plan": "",
-    "keywords": ["NETFLIX", "NETFLIX.COM"],
+    "keywords": [
+      "NETFLIX",
+      "NETFLIX.COM"
+    ],
     "amounts": [],
     "appStorePrice": 1590,
     "officialPrice": 1490,
@@ -136,48 +236,90 @@
     "overlaps": [],
     "advice": "App Store経由なら月¥100割高。netflix.com から直接契約がお得。広告付きプラン(¥890)もあります。",
     "alternatives": [
-      { "name": "Netflix 広告付き", "price": 890, "note": "広告ありで月¥600以上お得" },
-      { "name": "Netflix 公式直接契約", "price": 1490, "note": "Apple税を回避" }
-    ]
+      {
+        "name": "Netflix 広告付き",
+        "price": 890,
+        "note": "広告ありで月¥600以上お得"
+      },
+      {
+        "name": "Netflix 公式直接契約",
+        "price": 1490,
+        "note": "Apple税を回避"
+      }
+    ],
+    "cancelUrl": "https://www.netflix.com/cancelplan"
   },
   {
     "id": "spotify_premium",
     "service": "Spotify",
     "plan": "Premium",
-    "keywords": ["SPOTIFY", "SPOTIFYPREMIUM"],
+    "keywords": [
+      "SPOTIFY",
+      "SPOTIFYPREMIUM"
+    ],
     "amounts": [],
     "appStorePrice": 1280,
     "officialPrice": 980,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["apple_music", "youtube_premium"],
+    "overlaps": [
+      "apple_music",
+      "youtube_premium"
+    ],
     "advice": "公式サイトから直接契約すれば月額¥980（¥300お得）。無料プランでも十分かも。",
     "alternatives": [
-      { "name": "Spotify 公式直接契約", "price": 980, "note": "月¥300お得" },
-      { "name": "Spotify 無料プラン", "price": 0, "note": "広告付きで無料" }
-    ]
+      {
+        "name": "Spotify 公式直接契約",
+        "price": 980,
+        "note": "月¥300お得"
+      },
+      {
+        "name": "Spotify 無料プラン",
+        "price": 0,
+        "note": "広告付きで無料"
+      }
+    ],
+    "cancelUrl": "https://www.spotify.com/jp/account/subscription/"
   },
   {
     "id": "youtube_premium",
     "service": "YouTube Premium",
     "plan": "",
-    "keywords": ["YOUTUBE PREMIUM", "YOUTUBEPREMIUM", "GOOGLE YOUTUBE", "GOOGLEYOUTUBE"],
+    "keywords": [
+      "YOUTUBE PREMIUM",
+      "YOUTUBEPREMIUM",
+      "GOOGLE YOUTUBE",
+      "GOOGLEYOUTUBE"
+    ],
     "amounts": [],
     "appStorePrice": 1550,
     "officialPrice": 1280,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "apple_music"],
+    "overlaps": [
+      "spotify_premium",
+      "apple_music"
+    ],
     "advice": "公式サイトなら月額¥1,280（¥270お得）。YouTube Musicも含まれるので音楽サブスクが不要に。",
     "alternatives": [
-      { "name": "YouTube Premium 公式", "price": 1280, "note": "Apple税を回避" }
-    ]
+      {
+        "name": "YouTube Premium 公式",
+        "price": 1280,
+        "note": "Apple税を回避"
+      }
+    ],
+    "cancelUrl": "https://www.youtube.com/paid_memberships"
   },
   {
     "id": "amazon_prime",
     "service": "Amazon Prime",
     "plan": "",
-    "keywords": ["AMAZON PRIME", "AMAZONPRIME", "AMZN PRIME", "AMAZON.CO.JP"],
+    "keywords": [
+      "AMAZON PRIME",
+      "AMAZONPRIME",
+      "AMZN PRIME",
+      "AMAZON.CO.JP"
+    ],
     "amounts": [],
     "appStorePrice": 600,
     "officialPrice": 600,
@@ -186,14 +328,23 @@
     "overlaps": [],
     "advice": "年払い(¥5,900/年=月¥492)にすると月額より年間¥1,300お得。",
     "alternatives": [
-      { "name": "Amazon Prime 年払い", "price": 492, "note": "月額換算で¥108お得" }
-    ]
+      {
+        "name": "Amazon Prime 年払い",
+        "price": 492,
+        "note": "月額換算で¥108お得"
+      }
+    ],
+    "cancelUrl": "https://www.amazon.co.jp/gp/primecentral"
   },
   {
     "id": "disney_plus",
     "service": "Disney+",
     "plan": "",
-    "keywords": ["DISNEY PLUS", "DISNEYPLUS", "DISNEY+"],
+    "keywords": [
+      "DISNEY PLUS",
+      "DISNEYPLUS",
+      "DISNEY+"
+    ],
     "amounts": [],
     "appStorePrice": 990,
     "officialPrice": 990,
@@ -202,14 +353,23 @@
     "overlaps": [],
     "advice": "年払い(¥9,900/年=月¥825)にすると2ヶ月分お得。",
     "alternatives": [
-      { "name": "Disney+ 年払い", "price": 825, "note": "月額換算で¥165お得" }
-    ]
+      {
+        "name": "Disney+ 年払い",
+        "price": 825,
+        "note": "月額換算で¥165お得"
+      }
+    ],
+    "cancelUrl": "https://www.disneyplus.com/ja-jp/account"
   },
   {
     "id": "chatgpt_plus",
     "service": "ChatGPT Plus",
     "plan": "",
-    "keywords": ["CHATGPT", "OPENAI", "CHATGPTSUBSCRIPTION"],
+    "keywords": [
+      "CHATGPT",
+      "OPENAI",
+      "CHATGPTSUBSCRIPTION"
+    ],
     "amounts": [],
     "appStorePrice": 3000,
     "officialPrice": 2800,
@@ -218,15 +378,28 @@
     "overlaps": [],
     "advice": "公式サイト(chat.openai.com)から直接契約すると月額$20(約¥2,800)。App Store経由は¥200割高。",
     "alternatives": [
-      { "name": "ChatGPT Plus 公式", "price": 2800, "note": "Apple税を回避" },
-      { "name": "Claude Pro", "price": 2800, "note": "Anthropic製AI、コーディングに強い" }
-    ]
+      {
+        "name": "ChatGPT Plus 公式",
+        "price": 2800,
+        "note": "Apple税を回避"
+      },
+      {
+        "name": "Claude Pro",
+        "price": 2800,
+        "note": "Anthropic製AI、コーディングに強い"
+      }
+    ],
+    "cancelUrl": "https://chat.openai.com/settings/subscription"
   },
   {
     "id": "adobe_cc",
     "service": "Adobe Creative Cloud",
     "plan": "",
-    "keywords": ["ADOBE", "ADOBECREATIVE", "ADOBECC"],
+    "keywords": [
+      "ADOBE",
+      "ADOBECREATIVE",
+      "ADOBECC"
+    ],
     "amounts": [],
     "appStorePrice": 6480,
     "officialPrice": 6480,
@@ -235,45 +408,79 @@
     "overlaps": [],
     "advice": "フォトプラン(Lightroom+Photoshop)は月額¥1,078。全アプリが不要なら大幅節約。Canvaで代替できることも。",
     "alternatives": [
-      { "name": "Adobe フォトプラン", "price": 1078, "note": "Lightroom+Photoshopのみ" },
-      { "name": "Canva Pro", "price": 1000, "note": "デザイン用途なら十分" }
-    ]
+      {
+        "name": "Adobe フォトプラン",
+        "price": 1078,
+        "note": "Lightroom+Photoshopのみ"
+      },
+      {
+        "name": "Canva Pro",
+        "price": 1000,
+        "note": "デザイン用途なら十分"
+      }
+    ],
+    "cancelUrl": "https://account.adobe.com/plans"
   },
   {
     "id": "microsoft_365",
     "service": "Microsoft 365",
     "plan": "",
-    "keywords": ["MICROSOFT 365", "MICROSOFT365", "MS 365"],
+    "keywords": [
+      "MICROSOFT 365",
+      "MICROSOFT365",
+      "MS 365"
+    ],
     "amounts": [],
     "appStorePrice": 1490,
     "officialPrice": 1490,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": ["google_one"],
+    "overlaps": [
+      "google_one"
+    ],
     "advice": "Google Workspace(無料)やLibreOffice(無料)で代替可能かも。OneDrive 1TBが必要なら維持。",
     "alternatives": [
-      { "name": "Google Workspace", "price": 0, "note": "無料で基本機能は十分" }
-    ]
+      {
+        "name": "Google Workspace",
+        "price": 0,
+        "note": "無料で基本機能は十分"
+      }
+    ],
+    "cancelUrl": "https://account.microsoft.com/services"
   },
   {
     "id": "google_one",
     "service": "Google One",
     "plan": "",
-    "keywords": ["GOOGLE ONE", "GOOGLEONE", "GOOGLE STORAGE"],
+    "keywords": [
+      "GOOGLE ONE",
+      "GOOGLEONE",
+      "GOOGLE STORAGE"
+    ],
     "amounts": [],
     "appStorePrice": 250,
     "officialPrice": 250,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["icloud_2tb", "icloud_200gb"],
+    "overlaps": [
+      "icloud_2tb",
+      "icloud_200gb"
+    ],
     "advice": "iCloudと併用していませんか？どちらか一方に統一すると節約に。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://one.google.com/about/plans"
   },
   {
     "id": "nuro_hikari",
     "service": "NURO光",
     "plan": "",
-    "keywords": ["NURO", "NURO光", "NUROヒカリ", "NUROご利用料金", "NURO光ご利用料金"],
+    "keywords": [
+      "NURO",
+      "NURO光",
+      "NUROヒカリ",
+      "NUROご利用料金",
+      "NURO光ご利用料金"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -282,16 +489,34 @@
     "overlaps": [],
     "advice": "NURO光は最大2Gbpsで業界最速クラス。2年契約プランなら月額¥5,200が基本ですが、キャンペーン価格で利用中ならお得です。契約更新時に値上がりしないか確認を。",
     "alternatives": [
-      { "name": "enひかり", "price": 4620, "note": "業界最安級・縛りなし" },
-      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応で高速" },
-      { "name": "楽天ひかり", "price": 4180, "note": "楽天ポイント還元あり" }
-    ]
+      {
+        "name": "enひかり",
+        "price": 4620,
+        "note": "業界最安級・縛りなし"
+      },
+      {
+        "name": "GMOとくとくBB光",
+        "price": 4818,
+        "note": "v6プラス対応で高速"
+      },
+      {
+        "name": "楽天ひかり",
+        "price": 4180,
+        "note": "楽天ポイント還元あり"
+      }
+    ],
+    "cancelUrl": "https://www.nuro.jp/support/"
   },
   {
     "id": "au_hikari",
     "service": "au ひかり",
     "plan": "",
-    "keywords": ["AUヒカリ", "AU光", "AUひかり", "KDDI"],
+    "keywords": [
+      "AUヒカリ",
+      "AU光",
+      "AUひかり",
+      "KDDI"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -300,15 +525,29 @@
     "overlaps": [],
     "advice": "auスマホとのセット割がない場合、GMOとくとくBB光やenひかりの方が安い場合があります。",
     "alternatives": [
-      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応" },
-      { "name": "enひかり", "price": 4620, "note": "縛りなし最安級" }
-    ]
+      {
+        "name": "GMOとくとくBB光",
+        "price": 4818,
+        "note": "v6プラス対応"
+      },
+      {
+        "name": "enひかり",
+        "price": 4620,
+        "note": "縛りなし最安級"
+      }
+    ],
+    "cancelUrl": "https://www.au.com/support/"
   },
   {
     "id": "softbank_hikari",
     "service": "SoftBank 光",
     "plan": "",
-    "keywords": ["SOFTBANK光", "SOFTBANKヒカリ", "ソフトバンク光", "SOFTBANK"],
+    "keywords": [
+      "SOFTBANK光",
+      "SOFTBANKヒカリ",
+      "ソフトバンク光",
+      "SOFTBANK"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -317,15 +556,29 @@
     "overlaps": [],
     "advice": "SoftBankスマホとのセット割がない場合、より安い光回線への乗り換えを検討。",
     "alternatives": [
-      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応" },
-      { "name": "enひかり", "price": 4620, "note": "縛りなし最安級" }
-    ]
+      {
+        "name": "GMOとくとくBB光",
+        "price": 4818,
+        "note": "v6プラス対応"
+      },
+      {
+        "name": "enひかり",
+        "price": 4620,
+        "note": "縛りなし最安級"
+      }
+    ],
+    "cancelUrl": "https://www.softbank.jp/internet/support/"
   },
   {
     "id": "docomo_hikari",
     "service": "ドコモ光",
     "plan": "",
-    "keywords": ["ドコモ光", "DOCOMO光", "DOCOMOヒカリ", "NTT DOCOMO"],
+    "keywords": [
+      "ドコモ光",
+      "DOCOMO光",
+      "DOCOMOヒカリ",
+      "NTT DOCOMO"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -334,15 +587,26 @@
     "overlaps": [],
     "advice": "ドコモスマホとのセット割がない場合、enひかり(¥4,620)やGMOとくとくBB光が安い。",
     "alternatives": [
-      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応" },
-      { "name": "enひかり", "price": 4620, "note": "縛りなし最安級" }
-    ]
+      {
+        "name": "GMOとくとくBB光",
+        "price": 4818,
+        "note": "v6プラス対応"
+      },
+      {
+        "name": "enひかり",
+        "price": 4620,
+        "note": "縛りなし最安級"
+      }
+    ],
+    "cancelUrl": "https://www.docomo.ne.jp/hikari/support/"
   },
   {
     "id": "hulu",
     "service": "Hulu",
     "plan": "",
-    "keywords": ["HULU"],
+    "keywords": [
+      "HULU"
+    ],
     "amounts": [],
     "appStorePrice": 1026,
     "officialPrice": 1026,
@@ -350,13 +614,18 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "日テレ系コンテンツが中心。Netflixと両方契約中なら、視聴頻度が低い方を解約検討。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.hulu.jp/account"
   },
   {
     "id": "u_next",
     "service": "U-NEXT",
     "plan": "",
-    "keywords": ["U-NEXT", "UNEXT", "ユーネクスト"],
+    "keywords": [
+      "U-NEXT",
+      "UNEXT",
+      "ユーネクスト"
+    ],
     "amounts": [],
     "appStorePrice": 2189,
     "officialPrice": 2189,
@@ -365,15 +634,27 @@
     "overlaps": [],
     "advice": "月額¥2,189は動画サブスク最高額級。毎月¥1,200ポイント付きですが、使い切れていますか？",
     "alternatives": [
-      { "name": "Netflix 広告付き", "price": 890, "note": "海外コンテンツ中心" },
-      { "name": "Amazon Prime Video", "price": 600, "note": "コスパ最強" }
-    ]
+      {
+        "name": "Netflix 広告付き",
+        "price": 890,
+        "note": "海外コンテンツ中心"
+      },
+      {
+        "name": "Amazon Prime Video",
+        "price": 600,
+        "note": "コスパ最強"
+      }
+    ],
+    "cancelUrl": "https://account.unext.jp/"
   },
   {
     "id": "dazn",
     "service": "DAZN",
     "plan": "",
-    "keywords": ["DAZN", "ダゾーン"],
+    "keywords": [
+      "DAZN",
+      "ダゾーン"
+    ],
     "amounts": [],
     "appStorePrice": 4200,
     "officialPrice": 3700,
@@ -382,15 +663,27 @@
     "overlaps": [],
     "advice": "年間プラン(¥30,000/年=月¥2,500)なら月額より大幅お得。App Store経由なら公式サイトが¥500/月安い。",
     "alternatives": [
-      { "name": "DAZN 年間プラン", "price": 2500, "note": "月額換算で¥1,200お得" },
-      { "name": "DAZN 公式直接契約", "price": 3700, "note": "Apple税を回避" }
-    ]
+      {
+        "name": "DAZN 年間プラン",
+        "price": 2500,
+        "note": "月額換算で¥1,200お得"
+      },
+      {
+        "name": "DAZN 公式直接契約",
+        "price": 3700,
+        "note": "Apple税を回避"
+      }
+    ],
+    "cancelUrl": "https://my.dazn.com/account"
   },
   {
     "id": "abema_premium",
     "service": "ABEMAプレミアム",
     "plan": "",
-    "keywords": ["ABEMA", "アベマ"],
+    "keywords": [
+      "ABEMA",
+      "アベマ"
+    ],
     "amounts": [],
     "appStorePrice": 960,
     "officialPrice": 960,
@@ -399,30 +692,49 @@
     "overlaps": [],
     "advice": "無料放送でも多くのコンテンツが視聴可能。見逃し配信だけなら無料で十分かも。",
     "alternatives": [
-      { "name": "ABEMA 無料プラン", "price": 0, "note": "広告付きで基本無料" }
-    ]
+      {
+        "name": "ABEMA 無料プラン",
+        "price": 0,
+        "note": "広告付きで基本無料"
+      }
+    ],
+    "cancelUrl": "https://abema.tv/account/setting"
   },
   {
     "id": "line_music",
     "service": "LINE MUSIC",
     "plan": "",
-    "keywords": ["LINE MUSIC", "LINEMUSIC"],
+    "keywords": [
+      "LINE MUSIC",
+      "LINEMUSIC"
+    ],
     "amounts": [],
     "appStorePrice": 1080,
     "officialPrice": 980,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "apple_music", "youtube_premium"],
+    "overlaps": [
+      "spotify_premium",
+      "apple_music",
+      "youtube_premium"
+    ],
     "advice": "公式サイトから月額¥980。LINEの着うた設定が不要ならSpotify(¥980)の方が曲数豊富。",
     "alternatives": [
-      { "name": "Spotify Premium", "price": 980, "note": "曲数最多級" }
-    ]
+      {
+        "name": "Spotify Premium",
+        "price": 980,
+        "note": "曲数最多級"
+      }
+    ],
+    "cancelUrl": "https://music.line.me/webapp/settings"
   },
   {
     "id": "notion",
     "service": "Notion",
     "plan": "",
-    "keywords": ["NOTION"],
+    "keywords": [
+      "NOTION"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -430,13 +742,16 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "個人利用なら無料プランで十分な場合が多い。チーム機能が不要なら見直しを。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.notion.so/my-account"
   },
   {
     "id": "canva_pro",
     "service": "Canva Pro",
     "plan": "",
-    "keywords": ["CANVA"],
+    "keywords": [
+      "CANVA"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -444,29 +759,43 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "無料プランでもテンプレート豊富。プレミアム素材を頻繁に使わないなら無料で十分。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.canva.com/settings/billing"
   },
   {
     "id": "dropbox",
     "service": "Dropbox",
     "plan": "",
-    "keywords": ["DROPBOX"],
+    "keywords": [
+      "DROPBOX"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "cloud_storage",
     "billingCycle": "monthly",
-    "overlaps": ["google_one", "icloud_2tb"],
+    "overlaps": [
+      "google_one",
+      "icloud_2tb"
+    ],
     "advice": "Google DriveやiCloudと重複していませんか？一つに統一すると節約に。",
     "alternatives": [
-      { "name": "Google One 100GB", "price": 250, "note": "安価なクラウド" }
-    ]
+      {
+        "name": "Google One 100GB",
+        "price": 250,
+        "note": "安価なクラウド"
+      }
+    ],
+    "cancelUrl": "https://www.dropbox.com/account/plan"
   },
   {
     "id": "claude_pro",
     "service": "Claude Pro",
     "plan": "",
-    "keywords": ["ANTHROPIC", "CLAUDE"],
+    "keywords": [
+      "ANTHROPIC",
+      "CLAUDE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -474,13 +803,16 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "ChatGPT Plusと両方契約中なら、用途に合った方に絞ると節約に。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://claude.ai/settings"
   },
   {
     "id": "github",
     "service": "GitHub",
     "plan": "",
-    "keywords": ["GITHUB"],
+    "keywords": [
+      "GITHUB"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -488,13 +820,17 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "個人開発なら無料プランで十分。プライベートリポジトリも無制限で使えます。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://github.com/settings/billing"
   },
   {
     "id": "nintendo_online",
     "service": "Nintendo Switch Online",
     "plan": "",
-    "keywords": ["NINTENDO", "ニンテンドー"],
+    "keywords": [
+      "NINTENDO",
+      "ニンテンドー"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -503,14 +839,24 @@
     "overlaps": [],
     "advice": "年払い(¥2,400/年=月¥200)が月額(¥306)より大幅お得。ファミリープランなら1人あたりさらに安く。",
     "alternatives": [
-      { "name": "年間プラン", "price": 200, "note": "月額換算で¥106お得" }
-    ]
+      {
+        "name": "年間プラン",
+        "price": 200,
+        "note": "月額換算で¥106お得"
+      }
+    ],
+    "cancelUrl": "https://ec.nintendo.com/my/membership"
   },
   {
     "id": "playstation_plus",
     "service": "PlayStation Plus",
     "plan": "",
-    "keywords": ["PLAYSTATION", "PS PLUS", "PSPLUS", "SIE"],
+    "keywords": [
+      "PLAYSTATION",
+      "PS PLUS",
+      "PSPLUS",
+      "SIE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -518,13 +864,17 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "年払いにすると月額より大幅お得。オンライン対戦をしないならEssentialで十分。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://store.playstation.com/ja-jp/category/subscriptions"
   },
   {
     "id": "rakuten_magazine",
     "service": "楽天マガジン",
     "plan": "",
-    "keywords": ["楽天マガジン", "RAKUTENMAGAZINE"],
+    "keywords": [
+      "楽天マガジン",
+      "RAKUTENMAGAZINE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -533,14 +883,23 @@
     "overlaps": [],
     "advice": "年払い(¥3,960/年=月¥330)が月額(¥418)より年間¥1,056お得。",
     "alternatives": [
-      { "name": "楽天マガジン年払い", "price": 330, "note": "月額換算で¥88お得" }
-    ]
+      {
+        "name": "楽天マガジン年払い",
+        "price": 330,
+        "note": "月額換算で¥88お得"
+      }
+    ],
+    "cancelUrl": "https://magazine.rakuten.co.jp/account/"
   },
   {
     "id": "yahoo_premium",
     "service": "Yahoo!プレミアム",
     "plan": "",
-    "keywords": ["YAHOO PREMIUM", "YAHOOプレミアム", "YAHOO!"],
+    "keywords": [
+      "YAHOO PREMIUM",
+      "YAHOOプレミアム",
+      "YAHOO!"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -548,13 +907,18 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "SoftBankユーザーなら無料特典で使えます。特典を使い切れていないなら解約検討を。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://premium.yahoo.co.jp/cancel/"
   },
   {
     "id": "kindle_unlimited",
     "service": "Kindle Unlimited",
     "plan": "",
-    "keywords": ["KINDLE UNLIMITED", "KINDLEUNLIMITED", "KINDLE"],
+    "keywords": [
+      "KINDLE UNLIMITED",
+      "KINDLEUNLIMITED",
+      "KINDLE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -562,13 +926,16 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "月に2冊以上読めば元が取れます。読書量が少ない月は一時解約も可能。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.amazon.co.jp/kindle-dbs/hz/subscribe/ku"
   },
   {
     "id": "audible",
     "service": "Audible",
     "plan": "",
-    "keywords": ["AUDIBLE"],
+    "keywords": [
+      "AUDIBLE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -576,13 +943,19 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "月1冊のクレジット制。聴き終わらないなら一時休会(最大3ヶ月)で節約を。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.audible.co.jp/account/overview"
   },
   {
     "id": "suno_ai",
     "service": "Suno AI",
     "plan": "",
-    "keywords": ["SUNO", "SUNOINC", "SUNO INC", "SUNO.AI"],
+    "keywords": [
+      "SUNO",
+      "SUNOINC",
+      "SUNO INC",
+      "SUNO.AI"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -591,30 +964,46 @@
     "overlaps": [],
     "advice": "AI音楽生成サービス。無料プランでも1日5曲生成可能。利用頻度が低いなら無料プランで十分かも。",
     "alternatives": [
-      { "name": "Udio", "price": 0, "note": "無料プランあり・高品質AI音楽" }
-    ]
+      {
+        "name": "Udio",
+        "price": 0,
+        "note": "無料プランあり・高品質AI音楽"
+      }
+    ],
+    "cancelUrl": "https://suno.com/account"
   },
   {
     "id": "udio",
     "service": "Udio",
     "plan": "",
-    "keywords": ["UDIO"],
+    "keywords": [
+      "UDIO"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": ["suno_ai"],
+    "overlaps": [
+      "suno_ai"
+    ],
     "advice": "AI音楽生成サービス。Sunoと両方契約中なら、どちらか一方に絞ると節約に。",
     "alternatives": [
-      { "name": "Suno AI", "price": 0, "note": "無料プランあり・人気AI音楽" }
-    ]
+      {
+        "name": "Suno AI",
+        "price": 0,
+        "note": "無料プランあり・人気AI音楽"
+      }
+    ],
+    "cancelUrl": "https://www.udio.com/settings"
   },
   {
     "id": "midjourney",
     "service": "Midjourney",
     "plan": "",
-    "keywords": ["MIDJOURNEY"],
+    "keywords": [
+      "MIDJOURNEY"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -622,13 +1011,17 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "AI画像生成サービス。年払いで月額20%オフ。利用頻度が低いなら月契約で必要な時だけ。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.midjourney.com/account/"
   },
   {
     "id": "cursor",
     "service": "Cursor",
     "plan": "",
-    "keywords": ["CURSOR", "ANYSPHERE"],
+    "keywords": [
+      "CURSOR",
+      "ANYSPHERE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -636,13 +1029,18 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "AIコーディングエディタ。年払いで$192/年($16/月)が月額$20より20%お得。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://cursor.sh/settings"
   },
   {
     "id": "d_anime_store",
     "service": "dアニメストア",
     "plan": "",
-    "keywords": ["Dアニメストア", "DANIME", "D ANIME"],
+    "keywords": [
+      "Dアニメストア",
+      "DANIME",
+      "D ANIME"
+    ],
     "amounts": [],
     "appStorePrice": 650,
     "officialPrice": 550,
@@ -651,14 +1049,22 @@
     "overlaps": [],
     "advice": "公式サイトから月額¥550。App Store経由は¥100割高。アニメ専門では最安級。",
     "alternatives": [
-      { "name": "dアニメストア 公式", "price": 550, "note": "Apple税を回避" }
-    ]
+      {
+        "name": "dアニメストア 公式",
+        "price": 550,
+        "note": "Apple税を回避"
+      }
+    ],
+    "cancelUrl": "https://animestore.docomo.ne.jp/animestore/tp_pc"
   },
   {
     "id": "lemino",
     "service": "Lemino",
     "plan": "",
-    "keywords": ["LEMINO", "レミノ"],
+    "keywords": [
+      "LEMINO",
+      "レミノ"
+    ],
     "amounts": [],
     "appStorePrice": 990,
     "officialPrice": 990,
@@ -667,14 +1073,22 @@
     "overlaps": [],
     "advice": "韓国ドラマ・日本ドラマに強い。無料コンテンツも多いので、有料でしか見られない作品があるか確認を。",
     "alternatives": [
-      { "name": "Lemino 無料プラン", "price": 0, "note": "広告付きで一部無料" }
-    ]
+      {
+        "name": "Lemino 無料プラン",
+        "price": 0,
+        "note": "広告付きで一部無料"
+      }
+    ],
+    "cancelUrl": "https://lemino.docomo.ne.jp/"
   },
   {
     "id": "wowow",
     "service": "WOWOW",
     "plan": "",
-    "keywords": ["WOWOW", "ワウワウ"],
+    "keywords": [
+      "WOWOW",
+      "ワウワウ"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 2530,
@@ -683,14 +1097,23 @@
     "overlaps": [],
     "advice": "月額¥2,530は高額。映画・スポーツの視聴頻度が少ないなら一時解約も選択肢。",
     "alternatives": [
-      { "name": "Netflix 広告付き", "price": 890, "note": "映画中心なら十分" }
-    ]
+      {
+        "name": "Netflix 広告付き",
+        "price": 890,
+        "note": "映画中心なら十分"
+      }
+    ],
+    "cancelUrl": "https://www.wowow.co.jp/support/cancel/"
   },
   {
     "id": "niconico_premium",
     "service": "ニコニコプレミアム",
     "plan": "",
-    "keywords": ["ニコニコ", "NICONICO", "DWANGO"],
+    "keywords": [
+      "ニコニコ",
+      "NICONICO",
+      "DWANGO"
+    ],
     "amounts": [],
     "appStorePrice": 720,
     "officialPrice": 550,
@@ -699,31 +1122,53 @@
     "overlaps": [],
     "advice": "公式サイトなら月額¥550。App Store経由は¥170割高。生放送を見ないなら無料で十分。",
     "alternatives": [
-      { "name": "ニコニコ 公式直接契約", "price": 550, "note": "Apple税を回避" },
-      { "name": "ニコニコ 無料プラン", "price": 0, "note": "広告付き" }
-    ]
+      {
+        "name": "ニコニコ 公式直接契約",
+        "price": 550,
+        "note": "Apple税を回避"
+      },
+      {
+        "name": "ニコニコ 無料プラン",
+        "price": 0,
+        "note": "広告付き"
+      }
+    ],
+    "cancelUrl": "https://premium.nicovideo.jp/"
   },
   {
     "id": "crunchyroll",
     "service": "Crunchyroll",
     "plan": "",
-    "keywords": ["CRUNCHYROLL", "クランチロール"],
+    "keywords": [
+      "CRUNCHYROLL",
+      "クランチロール"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": ["d_anime_store"],
+    "overlaps": [
+      "d_anime_store"
+    ],
     "advice": "海外アニメプラットフォーム。dアニメストア(¥550)と両方契約なら、国内作品はdアニメで十分かも。",
     "alternatives": [
-      { "name": "dアニメストア", "price": 550, "note": "国内アニメ最安級" }
-    ]
+      {
+        "name": "dアニメストア",
+        "price": 550,
+        "note": "国内アニメ最安級"
+      }
+    ],
+    "cancelUrl": "https://www.crunchyroll.com/account/subscription"
   },
   {
     "id": "telasa",
     "service": "TELASA",
     "plan": "",
-    "keywords": ["TELASA", "テラサ"],
+    "keywords": [
+      "TELASA",
+      "テラサ"
+    ],
     "amounts": [],
     "appStorePrice": 618,
     "officialPrice": 618,
@@ -732,14 +1177,23 @@
     "overlaps": [],
     "advice": "テレビ朝日系コンテンツ中心。見逃し配信はTVerで無料視聴可能。",
     "alternatives": [
-      { "name": "TVer", "price": 0, "note": "見逃し配信は無料" }
-    ]
+      {
+        "name": "TVer",
+        "price": 0,
+        "note": "見逃し配信は無料"
+      }
+    ],
+    "cancelUrl": "https://www.telasa.jp/mypage"
   },
   {
     "id": "fod_premium",
     "service": "FODプレミアム",
     "plan": "",
-    "keywords": ["FOD", "フジテレビ", "FUJITV"],
+    "keywords": [
+      "FOD",
+      "フジテレビ",
+      "FUJITV"
+    ],
     "amounts": [],
     "appStorePrice": 976,
     "officialPrice": 976,
@@ -748,15 +1202,26 @@
     "overlaps": [],
     "advice": "フジテレビ系コンテンツ中心。見逃し配信はTVerで無料視聴可能。",
     "alternatives": [
-      { "name": "TVer", "price": 0, "note": "見逃し配信は無料" }
-    ]
+      {
+        "name": "TVer",
+        "price": 0,
+        "note": "見逃し配信は無料"
+      }
+    ],
+    "cancelUrl": "https://fod.fujitv.co.jp/mypage/"
   },
   {
     "id": "apple_arcade",
     "service": "Apple Arcade",
     "plan": "",
-    "keywords": ["APPLE COM BILL", "APPLECOMBILL", "APPLE ARCADE"],
-    "amounts": [900],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLECOMBILL",
+      "APPLE ARCADE"
+    ],
+    "amounts": [
+      900
+    ],
     "appStorePrice": 900,
     "officialPrice": 900,
     "category": "gaming",
@@ -764,14 +1229,23 @@
     "overlaps": [],
     "advice": "Apple Oneバンドル(¥1,200)ならMusic+TV++Arcade+iCloud 50GBがセットでお得。",
     "alternatives": [
-      { "name": "Apple One Individual", "price": 1200, "note": "¥300増で Music+TV++iCloud付き" }
-    ]
+      {
+        "name": "Apple One Individual",
+        "price": 1200,
+        "note": "¥300増で Music+TV++iCloud付き"
+      }
+    ],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "xbox_game_pass",
     "service": "Xbox Game Pass",
     "plan": "",
-    "keywords": ["XBOX", "MICROSOFT XBOX", "GAME PASS"],
+    "keywords": [
+      "XBOX",
+      "MICROSOFT XBOX",
+      "GAME PASS"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -779,55 +1253,79 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "Core(月¥842)とUltimate(月¥1,450)の違いを確認。PCゲームだけならPC Game Pass(月¥850)で十分。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://account.microsoft.com/services"
   },
   {
     "id": "perplexity_pro",
     "service": "Perplexity Pro",
     "plan": "",
-    "keywords": ["PERPLEXITY"],
+    "keywords": [
+      "PERPLEXITY"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": ["chatgpt_plus"],
+    "overlaps": [
+      "chatgpt_plus"
+    ],
     "advice": "AI検索エンジン。ChatGPT Plusと両方契約中なら、用途が被っていないか確認を。年払いで$200/年($17/月)。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.perplexity.ai/settings"
   },
   {
     "id": "gemini_advanced",
     "service": "Gemini Advanced",
     "plan": "",
-    "keywords": ["GOOGLE ONE AI", "GOOGLE ONE", "GEMINI"],
-    "amounts": [2900],
+    "keywords": [
+      "GOOGLE ONE AI",
+      "GOOGLE ONE",
+      "GEMINI"
+    ],
+    "amounts": [
+      2900
+    ],
     "appStorePrice": 0,
     "officialPrice": 2900,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": ["chatgpt_plus"],
+    "overlaps": [
+      "chatgpt_plus"
+    ],
     "advice": "Google One AI Premium(月¥2,900)に含まれる。2TB Google Oneストレージ付き。ChatGPTと両方は不要かも。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://one.google.com/about/plans"
   },
   {
     "id": "copilot_pro",
     "service": "Microsoft Copilot Pro",
     "plan": "",
-    "keywords": ["COPILOT", "MICROSOFT COPILOT"],
+    "keywords": [
+      "COPILOT",
+      "MICROSOFT COPILOT"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": ["chatgpt_plus"],
+    "overlaps": [
+      "chatgpt_plus"
+    ],
     "advice": "Microsoft 365との連携が強み。Office製品を使わないならChatGPTの方が汎用性が高い。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://account.microsoft.com/services"
   },
   {
     "id": "one_password",
     "service": "1Password",
     "plan": "",
-    "keywords": ["1PASSWORD", "AGILEBITS"],
+    "keywords": [
+      "1PASSWORD",
+      "AGILEBITS"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -836,31 +1334,52 @@
     "overlaps": [],
     "advice": "iCloudキーチェーン(無料)やBitwarden(無料)で代替可能。家族利用ならファミリープランがお得。",
     "alternatives": [
-      { "name": "Bitwarden", "price": 0, "note": "無料で基本機能十分" }
-    ]
+      {
+        "name": "Bitwarden",
+        "price": 0,
+        "note": "無料で基本機能十分"
+      }
+    ],
+    "cancelUrl": "https://my.1password.com/settings/billing"
   },
   {
     "id": "evernote",
     "service": "Evernote",
     "plan": "",
-    "keywords": ["EVERNOTE"],
+    "keywords": [
+      "EVERNOTE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": ["notion"],
+    "overlaps": [
+      "notion"
+    ],
     "advice": "Notion(無料)やAppleメモ(無料)に移行するユーザーが増えています。乗り換え検討を。",
     "alternatives": [
-      { "name": "Notion", "price": 0, "note": "無料で高機能" },
-      { "name": "Apple メモ", "price": 0, "note": "iCloud同期・無料" }
-    ]
+      {
+        "name": "Notion",
+        "price": 0,
+        "note": "無料で高機能"
+      },
+      {
+        "name": "Apple メモ",
+        "price": 0,
+        "note": "iCloud同期・無料"
+      }
+    ],
+    "cancelUrl": "https://www.evernote.com/Settings.action"
   },
   {
     "id": "todoist",
     "service": "Todoist",
     "plan": "",
-    "keywords": ["TODOIST", "DOIST"],
+    "keywords": [
+      "TODOIST",
+      "DOIST"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -869,14 +1388,21 @@
     "overlaps": [],
     "advice": "無料プランでも5プロジェクトまで利用可能。タスク管理だけならAppleリマインダー(無料)で十分かも。",
     "alternatives": [
-      { "name": "Apple リマインダー", "price": 0, "note": "無料でiCloud同期" }
-    ]
+      {
+        "name": "Apple リマインダー",
+        "price": 0,
+        "note": "無料でiCloud同期"
+      }
+    ],
+    "cancelUrl": "https://todoist.com/app/settings/subscription"
   },
   {
     "id": "grammarly",
     "service": "Grammarly",
     "plan": "",
-    "keywords": ["GRAMMARLY"],
+    "keywords": [
+      "GRAMMARLY"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -885,14 +1411,21 @@
     "overlaps": [],
     "advice": "英文校正ツール。無料プランでも基本的な文法チェックは可能。ChatGPTでも英文校正は十分。",
     "alternatives": [
-      { "name": "Grammarly 無料プラン", "price": 0, "note": "基本文法チェック" }
-    ]
+      {
+        "name": "Grammarly 無料プラン",
+        "price": 0,
+        "note": "基本文法チェック"
+      }
+    ],
+    "cancelUrl": "https://account.grammarly.com/subscription"
   },
   {
     "id": "figma",
     "service": "Figma",
     "plan": "",
-    "keywords": ["FIGMA"],
+    "keywords": [
+      "FIGMA"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -901,14 +1434,21 @@
     "overlaps": [],
     "advice": "個人利用なら無料のStarterプランで3プロジェクトまで使えます。",
     "alternatives": [
-      { "name": "Figma Starter", "price": 0, "note": "3プロジェクトまで無料" }
-    ]
+      {
+        "name": "Figma Starter",
+        "price": 0,
+        "note": "3プロジェクトまで無料"
+      }
+    ],
+    "cancelUrl": "https://www.figma.com/settings"
   },
   {
     "id": "slack",
     "service": "Slack",
     "plan": "",
-    "keywords": ["SLACK"],
+    "keywords": [
+      "SLACK"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -917,14 +1457,23 @@
     "overlaps": [],
     "advice": "個人利用なら無料プランで十分。メッセージ履歴90日制限が問題なければ有料プランは不要。",
     "alternatives": [
-      { "name": "Discord", "price": 0, "note": "無料で履歴無制限" }
-    ]
+      {
+        "name": "Discord",
+        "price": 0,
+        "note": "無料で履歴無制限"
+      }
+    ],
+    "cancelUrl": "https://slack.com/intl/ja-jp/help/articles/203138250"
   },
   {
     "id": "nikkei_digital",
     "service": "日経電子版",
     "plan": "",
-    "keywords": ["日経", "NIKKEI", "日本経済新聞"],
+    "keywords": [
+      "日経",
+      "NIKKEI",
+      "日本経済新聞"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 4277,
@@ -933,46 +1482,75 @@
     "overlaps": [],
     "advice": "月額¥4,277は高額。NewsPicks(月¥1,700)で代替可能な場合も。無料記事数で足りるか確認を。",
     "alternatives": [
-      { "name": "NewsPicks", "price": 1700, "note": "経済ニュース＋オリジナルコンテンツ" }
-    ]
+      {
+        "name": "NewsPicks",
+        "price": 1700,
+        "note": "経済ニュース＋オリジナルコンテンツ"
+      }
+    ],
+    "cancelUrl": "https://regist.nikkei.com/ds/setup/deactivate.do"
   },
   {
     "id": "newspicks",
     "service": "NewsPicks",
     "plan": "",
-    "keywords": ["NEWSPICKS", "ニューズピックス"],
+    "keywords": [
+      "NEWSPICKS",
+      "ニューズピックス"
+    ],
     "amounts": [],
     "appStorePrice": 1700,
     "officialPrice": 1700,
     "category": "media",
     "billingCycle": "monthly",
-    "overlaps": ["nikkei_digital"],
+    "overlaps": [
+      "nikkei_digital"
+    ],
     "advice": "日経電子版と両方契約なら重複あり。無料記事も多いので解約検討を。年払いで月¥1,250相当。",
     "alternatives": [
-      { "name": "NewsPicks 年払い", "price": 1250, "note": "月額換算で¥450お得" }
-    ]
+      {
+        "name": "NewsPicks 年払い",
+        "price": 1250,
+        "note": "月額換算で¥450お得"
+      }
+    ],
+    "cancelUrl": "https://newspicks.com/settings/account"
   },
   {
     "id": "d_magazine",
     "service": "dマガジン",
     "plan": "",
-    "keywords": ["Dマガジン", "DMAGAZINE"],
+    "keywords": [
+      "Dマガジン",
+      "DMAGAZINE"
+    ],
     "amounts": [],
     "appStorePrice": 580,
     "officialPrice": 580,
     "category": "media",
     "billingCycle": "monthly",
-    "overlaps": ["rakuten_magazine"],
+    "overlaps": [
+      "rakuten_magazine"
+    ],
     "advice": "楽天マガジンと両方契約なら一方に統一を。楽天マガジン年払い(月¥330)の方が安い。",
     "alternatives": [
-      { "name": "楽天マガジン 年払い", "price": 330, "note": "月¥250安い" }
-    ]
+      {
+        "name": "楽天マガジン 年払い",
+        "price": 330,
+        "note": "月¥250安い"
+      }
+    ],
+    "cancelUrl": "https://dmagazine.docomo.ne.jp/"
   },
   {
     "id": "nordvpn",
     "service": "NordVPN",
     "plan": "",
-    "keywords": ["NORDVPN", "NORD VPN", "NORDSEC"],
+    "keywords": [
+      "NORDVPN",
+      "NORD VPN",
+      "NORDSEC"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -980,13 +1558,17 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "2年プランが月額換算で最安。月額契約は割高。無料VPNは個人情報リスクがあるので注意。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://my.nordaccount.com/dashboard/"
   },
   {
     "id": "norton_360",
     "service": "Norton 360",
     "plan": "",
-    "keywords": ["NORTON", "ノートン"],
+    "keywords": [
+      "NORTON",
+      "ノートン"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -995,30 +1577,49 @@
     "overlaps": [],
     "advice": "Windows Defender(無料)で十分な場合も。Macユーザーならセキュリティソフトの必要性が低い場合も。",
     "alternatives": [
-      { "name": "Windows Defender", "price": 0, "note": "Windows標準で基本十分" }
-    ]
+      {
+        "name": "Windows Defender",
+        "price": 0,
+        "note": "Windows標準で基本十分"
+      }
+    ],
+    "cancelUrl": "https://my.norton.com/extspa/subscriptions"
   },
   {
     "id": "mcafee",
     "service": "McAfee",
     "plan": "",
-    "keywords": ["MCAFEE", "マカフィー"],
+    "keywords": [
+      "MCAFEE",
+      "マカフィー"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "security",
     "billingCycle": "yearly",
-    "overlaps": ["norton_360"],
+    "overlaps": [
+      "norton_360"
+    ],
     "advice": "Nortonと両方契約は完全に無駄。Windows Defender(無料)で十分なケースも多い。",
     "alternatives": [
-      { "name": "Windows Defender", "price": 0, "note": "Windows標準で基本十分" }
-    ]
+      {
+        "name": "Windows Defender",
+        "price": 0,
+        "note": "Windows標準で基本十分"
+      }
+    ],
+    "cancelUrl": "https://home.mcafee.com/root/subscription.aspx"
   },
   {
     "id": "pairs",
     "service": "Pairs",
     "plan": "",
-    "keywords": ["PAIRS", "ペアーズ", "EUREKA"],
+    "keywords": [
+      "PAIRS",
+      "ペアーズ",
+      "EUREKA"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1026,33 +1627,46 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "App Store経由は公式より割高。公式サイトから契約すると月額が安くなります。長期プランで月額大幅割引。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://pairs.lv/"
   },
   {
     "id": "tinder",
     "service": "Tinder",
     "plan": "",
-    "keywords": ["TINDER", "ティンダー", "MATCH GROUP"],
+    "keywords": [
+      "TINDER",
+      "ティンダー",
+      "MATCH GROUP"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "dating",
     "billingCycle": "monthly",
-    "overlaps": ["pairs"],
+    "overlaps": [
+      "pairs"
+    ],
     "advice": "複数のマッチングアプリを並行契約していませんか？一つに絞ると大幅節約に。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://tinder.com/settings"
   },
   {
     "id": "with_dating",
     "service": "with",
     "plan": "",
-    "keywords": ["WITH"],
+    "keywords": [
+      "WITH"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "dating",
     "billingCycle": "monthly",
-    "overlaps": ["pairs", "tinder"],
+    "overlaps": [
+      "pairs",
+      "tinder"
+    ],
     "advice": "複数のマッチングアプリを並行利用は高コスト。一つに集中した方が効果的。",
     "alternatives": []
   },
@@ -1060,13 +1674,20 @@
     "id": "tapple",
     "service": "タップル",
     "plan": "",
-    "keywords": ["TAPPLE", "タップル"],
+    "keywords": [
+      "TAPPLE",
+      "タップル"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "dating",
     "billingCycle": "monthly",
-    "overlaps": ["pairs", "tinder", "with_dating"],
+    "overlaps": [
+      "pairs",
+      "tinder",
+      "with_dating"
+    ],
     "advice": "複数のマッチングアプリ同時契約は月額1万円超えも。一つに集中がおすすめ。",
     "alternatives": []
   },
@@ -1074,8 +1695,14 @@
     "id": "ahamo",
     "service": "ahamo",
     "plan": "",
-    "keywords": ["AHAMO", "アハモ", "NTT DOCOMO"],
-    "amounts": [2970],
+    "keywords": [
+      "AHAMO",
+      "アハモ",
+      "NTT DOCOMO"
+    ],
+    "amounts": [
+      2970
+    ],
     "appStorePrice": 0,
     "officialPrice": 2970,
     "category": "mobile",
@@ -1083,15 +1710,27 @@
     "overlaps": [],
     "advice": "20GB/月¥2,970。データ使用量が少ないなら格安SIM(月¥1,000以下)への乗り換えで大幅節約。",
     "alternatives": [
-      { "name": "povo 3GB", "price": 990, "note": "使う分だけトッピング" },
-      { "name": "日本通信SIM 合理的プラン", "price": 290, "note": "1GB/月¥290〜" }
+      {
+        "name": "povo 3GB",
+        "price": 990,
+        "note": "使う分だけトッピング"
+      },
+      {
+        "name": "日本通信SIM 合理的プラン",
+        "price": 290,
+        "note": "1GB/月¥290〜"
+      }
     ]
   },
   {
     "id": "povo",
     "service": "povo 2.0",
     "plan": "",
-    "keywords": ["POVO", "ポヴォ", "KDDI"],
+    "keywords": [
+      "POVO",
+      "ポヴォ",
+      "KDDI"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1105,7 +1744,10 @@
     "id": "linemo",
     "service": "LINEMO",
     "plan": "",
-    "keywords": ["LINEMO", "ラインモ"],
+    "keywords": [
+      "LINEMO",
+      "ラインモ"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1119,7 +1761,11 @@
     "id": "rakuten_mobile",
     "service": "楽天モバイル",
     "plan": "",
-    "keywords": ["楽天モバイル", "RAKUTENMOBILE", "楽天コミュニケーションズ"],
+    "keywords": [
+      "楽天モバイル",
+      "RAKUTENMOBILE",
+      "楽天コミュニケーションズ"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1133,7 +1779,11 @@
     "id": "uq_mobile",
     "service": "UQ mobile",
     "plan": "",
-    "keywords": ["UQ MOBILE", "UQモバイル", "UQMOBILE"],
+    "keywords": [
+      "UQ MOBILE",
+      "UQモバイル",
+      "UQMOBILE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1147,7 +1797,11 @@
     "id": "ymobile",
     "service": "Y!mobile",
     "plan": "",
-    "keywords": ["YMOBILE", "ワイモバイル", "Y!MOBILE"],
+    "keywords": [
+      "YMOBILE",
+      "ワイモバイル",
+      "Y!MOBILE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1156,14 +1810,21 @@
     "overlaps": [],
     "advice": "家族割引で2回線目以降が月¥1,188割引。一人利用ならLINEMOの方が安い場合も。",
     "alternatives": [
-      { "name": "LINEMO ミニプラン", "price": 990, "note": "3GB・LINEギガフリー" }
+      {
+        "name": "LINEMO ミニプラン",
+        "price": 990,
+        "note": "3GB・LINEギガフリー"
+      }
     ]
   },
   {
     "id": "iijmio",
     "service": "IIJmio",
     "plan": "",
-    "keywords": ["IIJMIO", "IIJ"],
+    "keywords": [
+      "IIJMIO",
+      "IIJ"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1177,7 +1838,10 @@
     "id": "mineo",
     "service": "mineo",
     "plan": "",
-    "keywords": ["MINEO", "マイネオ"],
+    "keywords": [
+      "MINEO",
+      "マイネオ"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1191,7 +1855,10 @@
     "id": "nifmo",
     "service": "NifMo",
     "plan": "",
-    "keywords": ["NIFMO", "NIFTY"],
+    "keywords": [
+      "NIFMO",
+      "NIFTY"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1200,47 +1867,82 @@
     "overlaps": [],
     "advice": "@nifty光とセット割あり。単体利用なら他の格安SIMの方が安い場合も。",
     "alternatives": [
-      { "name": "IIJmio 2GB", "price": 850, "note": "業界最安級" }
+      {
+        "name": "IIJmio 2GB",
+        "price": 850,
+        "note": "業界最安級"
+      }
     ]
   },
   {
     "id": "disney_plus_premium",
     "service": "Disney+ Premium",
     "plan": "Premium",
-    "keywords": ["DISNEY PLUS", "DISNEYPLUS", "DISNEY+"],
-    "amounts": [1320],
+    "keywords": [
+      "DISNEY PLUS",
+      "DISNEYPLUS",
+      "DISNEY+"
+    ],
+    "amounts": [
+      1320
+    ],
     "appStorePrice": 1320,
     "officialPrice": 1320,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": ["disney_plus"],
+    "overlaps": [
+      "disney_plus"
+    ],
     "advice": "4K/HDR/Dolby Atmos対応。スタンダードプラン(¥990)との差額は¥330。4K対応TVがないならスタンダードで十分。",
     "alternatives": [
-      { "name": "Disney+ スタンダード", "price": 990, "note": "フルHDで¥330安い" }
-    ]
+      {
+        "name": "Disney+ スタンダード",
+        "price": 990,
+        "note": "フルHDで¥330安い"
+      }
+    ],
+    "cancelUrl": "https://www.disneyplus.com/ja-jp/account"
   },
   {
     "id": "amazon_music_unlimited",
     "service": "Amazon Music Unlimited",
     "plan": "",
-    "keywords": ["AMAZON MUSIC", "AMAZONMUSIC"],
+    "keywords": [
+      "AMAZON MUSIC",
+      "AMAZONMUSIC"
+    ],
     "amounts": [],
     "appStorePrice": 1080,
     "officialPrice": 1080,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "apple_music", "youtube_premium"],
+    "overlaps": [
+      "spotify_premium",
+      "apple_music",
+      "youtube_premium"
+    ],
     "advice": "Prime会員なら月額¥980。他の音楽サブスクと重複していないか確認を。",
     "alternatives": [
-      { "name": "Amazon Music Prime", "price": 0, "note": "Prime会員なら追加料金なし" }
-    ]
+      {
+        "name": "Amazon Music Prime",
+        "price": 0,
+        "note": "Prime会員なら追加料金なし"
+      }
+    ],
+    "cancelUrl": "https://www.amazon.co.jp/music/settings"
   },
   {
     "id": "apple_fitness_plus",
     "service": "Apple Fitness+",
     "plan": "",
-    "keywords": ["APPLE COM BILL", "APPLECOMBILL", "APPLE FITNESS"],
-    "amounts": [1200],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLECOMBILL",
+      "APPLE FITNESS"
+    ],
+    "amounts": [
+      1200
+    ],
     "appStorePrice": 1200,
     "officialPrice": 1200,
     "category": "health",
@@ -1248,14 +1950,21 @@
     "overlaps": [],
     "advice": "Apple Watchが必要。YouTubeの無料フィットネス動画で代替できる場合も。年払い¥9,800(月¥817)がお得。",
     "alternatives": [
-      { "name": "YouTube フィットネス動画", "price": 0, "note": "無料で豊富" }
-    ]
+      {
+        "name": "YouTube フィットネス動画",
+        "price": 0,
+        "note": "無料で豊富"
+      }
+    ],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "strava",
     "service": "Strava",
     "plan": "",
-    "keywords": ["STRAVA"],
+    "keywords": [
+      "STRAVA"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1264,14 +1973,23 @@
     "overlaps": [],
     "advice": "無料プランでもGPS記録・ルート表示は可能。セグメント分析が不要なら無料で十分。",
     "alternatives": [
-      { "name": "Strava 無料プラン", "price": 0, "note": "基本記録は無料" }
-    ]
+      {
+        "name": "Strava 無料プラン",
+        "price": 0,
+        "note": "基本記録は無料"
+      }
+    ],
+    "cancelUrl": "https://www.strava.com/settings/subscription"
   },
   {
     "id": "money_forward",
     "service": "マネーフォワード ME",
     "plan": "",
-    "keywords": ["MONEYFORWARD", "マネーフォワード", "MONEY FORWARD"],
+    "keywords": [
+      "MONEYFORWARD",
+      "マネーフォワード",
+      "MONEY FORWARD"
+    ],
     "amounts": [],
     "appStorePrice": 500,
     "officialPrice": 500,
@@ -1280,30 +1998,49 @@
     "overlaps": [],
     "advice": "家計簿アプリ。無料プランでも4口座まで連携可能。有料は一括更新・グラフ機能が追加。年払い¥5,300(月¥442)がお得。",
     "alternatives": [
-      { "name": "マネーフォワード 無料プラン", "price": 0, "note": "4口座まで無料" }
-    ]
+      {
+        "name": "マネーフォワード 無料プラン",
+        "price": 0,
+        "note": "4口座まで無料"
+      }
+    ],
+    "cancelUrl": "https://moneyforward.com/users/edit"
   },
   {
     "id": "zaim",
     "service": "Zaim",
     "plan": "",
-    "keywords": ["ZAIM", "ザイム"],
+    "keywords": [
+      "ZAIM",
+      "ザイム"
+    ],
     "amounts": [],
     "appStorePrice": 480,
     "officialPrice": 480,
     "category": "finance",
     "billingCycle": "monthly",
-    "overlaps": ["money_forward"],
+    "overlaps": [
+      "money_forward"
+    ],
     "advice": "マネーフォワードと両方契約なら一つに統一を。無料プランでも基本機能は利用可能。",
     "alternatives": [
-      { "name": "Zaim 無料プラン", "price": 0, "note": "基本無料" }
-    ]
+      {
+        "name": "Zaim 無料プラン",
+        "price": 0,
+        "note": "基本無料"
+      }
+    ],
+    "cancelUrl": "https://zaim.net/home/setting"
   },
   {
     "id": "line_stamp_premium",
     "service": "LINEスタンプ プレミアム",
     "plan": "",
-    "keywords": ["LINE STAMP", "LINEスタンプ", "LINE STORE"],
+    "keywords": [
+      "LINE STAMP",
+      "LINEスタンプ",
+      "LINE STORE"
+    ],
     "amounts": [],
     "appStorePrice": 480,
     "officialPrice": 240,
@@ -1312,14 +2049,21 @@
     "overlaps": [],
     "advice": "公式サイトから月額¥240。App Store経由は倍額！気に入ったスタンプは個別購入の方が長期的にお得かも。",
     "alternatives": [
-      { "name": "LINEスタンプ プレミアム 公式", "price": 240, "note": "Apple税を回避で半額" }
-    ]
+      {
+        "name": "LINEスタンプ プレミアム 公式",
+        "price": 240,
+        "note": "Apple税を回避で半額"
+      }
+    ],
+    "cancelUrl": "https://store.line.me/stickershop/subscription"
   },
   {
     "id": "duolingo_plus",
     "service": "Duolingo Plus",
     "plan": "",
-    "keywords": ["DUOLINGO"],
+    "keywords": [
+      "DUOLINGO"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1328,14 +2072,23 @@
     "overlaps": [],
     "advice": "無料プランでも学習は可能（広告付き）。年払いで月額大幅割引。ファミリープランなら1人あたり安い。",
     "alternatives": [
-      { "name": "Duolingo 無料プラン", "price": 0, "note": "広告付きで基本無料" }
-    ]
+      {
+        "name": "Duolingo 無料プラン",
+        "price": 0,
+        "note": "広告付きで基本無料"
+      }
+    ],
+    "cancelUrl": "https://www.duolingo.com/settings/account"
   },
   {
     "id": "studysapuri",
     "service": "スタディサプリ",
     "plan": "",
-    "keywords": ["スタディサプリ", "STUDYSAPURI", "RECRUIT"],
+    "keywords": [
+      "スタディサプリ",
+      "STUDYSAPURI",
+      "RECRUIT"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1349,53 +2102,86 @@
     "id": "spotify_duo",
     "service": "Spotify Duo",
     "plan": "Duo",
-    "keywords": ["SPOTIFY"],
-    "amounts": [1280],
+    "keywords": [
+      "SPOTIFY"
+    ],
+    "amounts": [
+      1280
+    ],
     "appStorePrice": 1580,
     "officialPrice": 1280,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["apple_music"],
+    "overlaps": [
+      "apple_music"
+    ],
     "advice": "同居パートナーと2人で使えるプラン。1人あたり¥640でPremiumより安い。公式サイトで¥1,280。",
     "alternatives": [
-      { "name": "Spotify Duo 公式", "price": 1280, "note": "Apple税を回避" }
-    ]
+      {
+        "name": "Spotify Duo 公式",
+        "price": 1280,
+        "note": "Apple税を回避"
+      }
+    ],
+    "cancelUrl": "https://www.spotify.com/jp/account/subscription/"
   },
   {
     "id": "spotify_family",
     "service": "Spotify Family",
     "plan": "Family",
-    "keywords": ["SPOTIFY"],
-    "amounts": [1580],
+    "keywords": [
+      "SPOTIFY"
+    ],
+    "amounts": [
+      1580
+    ],
     "appStorePrice": 1980,
     "officialPrice": 1580,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["apple_music"],
+    "overlaps": [
+      "apple_music"
+    ],
     "advice": "最大6人まで。家族で使えば1人あたり¥263。2人以上で使うならDuoよりお得。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.spotify.com/jp/account/subscription/"
   },
   {
     "id": "youtube_music",
     "service": "YouTube Music Premium",
     "plan": "",
-    "keywords": ["YOUTUBE MUSIC", "YOUTUBEMUSIC", "GOOGLE YOUTUBE"],
+    "keywords": [
+      "YOUTUBE MUSIC",
+      "YOUTUBEMUSIC",
+      "GOOGLE YOUTUBE"
+    ],
     "amounts": [],
     "appStorePrice": 1280,
     "officialPrice": 1080,
     "category": "music",
     "billingCycle": "monthly",
-    "overlaps": ["spotify_premium", "apple_music"],
+    "overlaps": [
+      "spotify_premium",
+      "apple_music"
+    ],
     "advice": "YouTube Premiumに含まれる。音楽だけならYouTube Music単体(¥1,080)で十分。公式サイトから契約がお得。",
     "alternatives": [
-      { "name": "Spotify Premium", "price": 980, "note": "月¥100安い" }
-    ]
+      {
+        "name": "Spotify Premium",
+        "price": 980,
+        "note": "月¥100安い"
+      }
+    ],
+    "cancelUrl": "https://www.youtube.com/paid_memberships"
   },
   {
     "id": "tiktok_live",
     "service": "TikTok LIVE",
     "plan": "",
-    "keywords": ["TIKTOK", "BYTEDANCE"],
+    "keywords": [
+      "TIKTOK",
+      "BYTEDANCE"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1409,7 +2195,10 @@
     "id": "pixiv_premium",
     "service": "pixiv Premium",
     "plan": "",
-    "keywords": ["PIXIV", "ピクシブ"],
+    "keywords": [
+      "PIXIV",
+      "ピクシブ"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1418,30 +2207,48 @@
     "overlaps": [],
     "advice": "無料でも基本機能は利用可能。人気順検索や広告非表示が不要なら無料で十分。",
     "alternatives": [
-      { "name": "pixiv 無料プラン", "price": 0, "note": "基本無料" }
-    ]
+      {
+        "name": "pixiv 無料プラン",
+        "price": 0,
+        "note": "基本無料"
+      }
+    ],
+    "cancelUrl": "https://www.pixiv.net/premium/cancel"
   },
   {
     "id": "chatwork",
     "service": "Chatwork",
     "plan": "",
-    "keywords": ["CHATWORK", "チャットワーク"],
+    "keywords": [
+      "CHATWORK",
+      "チャットワーク"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": ["slack"],
+    "overlaps": [
+      "slack"
+    ],
     "advice": "Slackと両方契約なら一つに統一を。無料プランでも5グループチャットまで利用可能。",
     "alternatives": [
-      { "name": "Slack 無料プラン", "price": 0, "note": "90日履歴で基本無料" }
-    ]
+      {
+        "name": "Slack 無料プラン",
+        "price": 0,
+        "note": "90日履歴で基本無料"
+      }
+    ],
+    "cancelUrl": "https://www.chatwork.com/service/packages/chatwork/payment_info.php"
   },
   {
     "id": "freee",
     "service": "freee",
     "plan": "",
-    "keywords": ["FREEE", "フリー"],
+    "keywords": [
+      "FREEE",
+      "フリー"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1449,13 +2256,17 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "確定申告に必要な月だけ契約する方法も。年払いで月額2ヶ月分お得。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://app.secure.freee.co.jp/settings/my_plan"
   },
   {
     "id": "rakuten_tv",
     "service": "Rakuten TV",
     "plan": "",
-    "keywords": ["RAKUTEN TV", "楽天TV"],
+    "keywords": [
+      "RAKUTEN TV",
+      "楽天TV"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1464,72 +2275,109 @@
     "overlaps": [],
     "advice": "楽天経済圏以外のユーザーには割高。他の動画サブスクと比較検討を。",
     "alternatives": [
-      { "name": "Amazon Prime Video", "price": 600, "note": "コスパ最強" }
-    ]
+      {
+        "name": "Amazon Prime Video",
+        "price": 600,
+        "note": "コスパ最強"
+      }
+    ],
+    "cancelUrl": "https://tv.rakuten.co.jp/mypage/"
   },
   {
     "id": "vpn_express",
     "service": "ExpressVPN",
     "plan": "",
-    "keywords": ["EXPRESSVPN", "EXPRESS VPN"],
+    "keywords": [
+      "EXPRESSVPN",
+      "EXPRESS VPN"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "security",
     "billingCycle": "monthly",
-    "overlaps": ["nordvpn"],
+    "overlaps": [
+      "nordvpn"
+    ],
     "advice": "NordVPNと両方契約は不要。2年プランが月額換算で最安。月額契約は割高。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.expressvpn.com/subscriptions"
   },
   {
     "id": "surfshark",
     "service": "Surfshark",
     "plan": "",
-    "keywords": ["SURFSHARK"],
+    "keywords": [
+      "SURFSHARK"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "security",
     "billingCycle": "monthly",
-    "overlaps": ["nordvpn", "vpn_express"],
+    "overlaps": [
+      "nordvpn",
+      "vpn_express"
+    ],
     "advice": "デバイス無制限が強み。他のVPNと重複していないか確認を。2年プランが最安。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://my.surfshark.com/"
   },
   {
     "id": "eset",
     "service": "ESET",
     "plan": "",
-    "keywords": ["ESET"],
+    "keywords": [
+      "ESET"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "security",
     "billingCycle": "yearly",
-    "overlaps": ["norton_360", "mcafee"],
+    "overlaps": [
+      "norton_360",
+      "mcafee"
+    ],
     "advice": "軽量で人気のセキュリティソフト。他のセキュリティソフトと重複契約は無駄。",
     "alternatives": [
-      { "name": "Windows Defender", "price": 0, "note": "Windows標準で基本十分" }
+      {
+        "name": "Windows Defender",
+        "price": 0,
+        "note": "Windows標準で基本十分"
+      }
     ]
   },
   {
     "id": "apple_one_family",
     "service": "Apple One",
     "plan": "Family",
-    "keywords": ["APPLE COM BILL", "APPLECOMBILL"],
-    "amounts": [1980],
+    "keywords": [
+      "APPLE COM BILL",
+      "APPLECOMBILL"
+    ],
+    "amounts": [
+      1980
+    ],
     "appStorePrice": 1980,
     "officialPrice": 1980,
     "category": "bundle",
     "billingCycle": "monthly",
-    "overlaps": ["apple_one_individual"],
+    "overlaps": [
+      "apple_one_individual"
+    ],
     "advice": "家族6人まで共有可能。Apple Music/TV+/Arcade/iCloud 200GBのセット。個別契約より大幅お得。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://support.apple.com/ja-jp/108052"
   },
   {
     "id": "meiji_yasuda_mimamori",
     "service": "明治安田みまもり",
     "plan": "",
-    "keywords": ["明治安田", "MEIJIYASUDA"],
+    "keywords": [
+      "明治安田",
+      "MEIJIYASUDA"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1543,7 +2391,10 @@
     "id": "secom",
     "service": "SECOM",
     "plan": "",
-    "keywords": ["SECOM", "セコム"],
+    "keywords": [
+      "SECOM",
+      "セコム"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1557,13 +2408,18 @@
     "id": "alsok",
     "service": "ALSOK",
     "plan": "",
-    "keywords": ["ALSOK", "アルソック"],
+    "keywords": [
+      "ALSOK",
+      "アルソック"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
     "category": "security_home",
     "billingCycle": "monthly",
-    "overlaps": ["secom"],
+    "overlaps": [
+      "secom"
+    ],
     "advice": "SECOMと両方契約は完全に無駄。一つに統一を。",
     "alternatives": []
   },
@@ -1571,7 +2427,11 @@
     "id": "coop_deli",
     "service": "コープデリ",
     "plan": "",
-    "keywords": ["コープ", "COOP", "生協"],
+    "keywords": [
+      "コープ",
+      "COOP",
+      "生協"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,
@@ -1585,7 +2445,10 @@
     "id": "oisix",
     "service": "Oisix",
     "plan": "",
-    "keywords": ["OISIX", "オイシックス"],
+    "keywords": [
+      "OISIX",
+      "オイシックス"
+    ],
     "amounts": [],
     "appStorePrice": 0,
     "officialPrice": 0,

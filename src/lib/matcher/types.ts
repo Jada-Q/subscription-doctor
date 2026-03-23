@@ -11,6 +11,7 @@ export interface ServiceRule {
   overlaps: string[];
   advice: string; // optimization tip in Japanese
   alternatives: Alternative[]; // cheaper/better alternatives
+  cancelUrl?: string; // direct link to official cancellation page
 }
 
 export interface Alternative {
