@@ -1668,7 +1668,8 @@
       "tinder"
     ],
     "advice": "複数のマッチングアプリを並行利用は高コスト。一つに集中した方が効果的。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://with.is/"
   },
   {
     "id": "tapple",
@@ -1689,7 +1690,8 @@
       "with_dating"
     ],
     "advice": "複数のマッチングアプリ同時契約は月額1万円超えも。一つに集中がおすすめ。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://tapple.me/"
   },
   {
     "id": "ahamo",
@@ -1720,7 +1722,8 @@
         "price": 290,
         "note": "1GB/月¥290〜"
       }
-    ]
+    ],
+    "cancelUrl": "https://ahamo.com/support/"
   },
   {
     "id": "povo",
@@ -1738,7 +1741,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "基本料¥0でトッピング制。使い方次第で最安。180日以内にトッピング購入が必要。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://povo.jp/support/"
   },
   {
     "id": "linemo",
@@ -1755,7 +1759,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "ミニプラン3GB/月¥990。LINEギガフリーが強み。LINE通話/ビデオ通話が多い人に最適。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.linemo.jp/support/"
   },
   {
     "id": "rakuten_mobile",
@@ -1773,7 +1778,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "3GBまで月¥1,078、20GBまで¥2,178、無制限¥3,278。楽天エリアの電波状況を確認。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://network.mobile.rakuten.co.jp/support/"
   },
   {
     "id": "uq_mobile",
@@ -1791,7 +1797,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "au回線で安定。自宅セット割やau PAYカードお支払い割で月¥990〜。割引条件を確認。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.uqwimax.jp/mobile/support/"
   },
   {
     "id": "ymobile",
@@ -1815,7 +1822,8 @@
         "price": 990,
         "note": "3GB・LINEギガフリー"
       }
-    ]
+    ],
+    "cancelUrl": "https://www.ymobile.jp/support/"
   },
   {
     "id": "iijmio",
@@ -1832,7 +1840,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "格安SIM老舗で安定。2GB/月¥850は業界最安級。データシェアも可能。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.iijmio.jp/member/"
   },
   {
     "id": "mineo",
@@ -1849,7 +1858,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "マイそく(最大1.5Mbps使い放題/月¥990)はライトユーザーに最適。パケット放題Plusも人気。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://my.mineo.jp/"
   },
   {
     "id": "nifmo",
@@ -1872,7 +1882,8 @@
         "price": 850,
         "note": "業界最安級"
       }
-    ]
+    ],
+    "cancelUrl": "https://csoption.nifty.com/"
   },
   {
     "id": "disney_plus_premium",
@@ -2096,7 +2107,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "12ヶ月パック(月¥1,815)が月額(¥2,178)より年間¥4,356お得。受験シーズン以外は休会も選択肢。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://studysapuri.jp/member/"
   },
   {
     "id": "spotify_duo",
@@ -2189,7 +2201,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "TikTokのサブスクリプション型ギフト。自動更新をオフにしていない場合、意図せず課金が続いている可能性。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://support.tiktok.com/"
   },
   {
     "id": "pixiv_premium",
@@ -2346,7 +2359,8 @@
         "price": 0,
         "note": "Windows標準で基本十分"
       }
-    ]
+    ],
+    "cancelUrl": "https://my.eset.com/"
   },
   {
     "id": "apple_one_family",
@@ -2385,7 +2399,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "見守り系サブスクは複数契約に注意。スマホのGPS共有(無料)で代替できる場合も。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.meijiyasuda.co.jp/"
   },
   {
     "id": "secom",
@@ -2402,7 +2417,8 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "ホームセキュリティ。スマートロック+防犯カメラ(一括購入)で月額費用なしに切り替えも選択肢。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.secom.co.jp/support/"
   },
   {
     "id": "alsok",
@@ -2421,7 +2437,8 @@
       "secom"
     ],
     "advice": "SECOMと両方契約は完全に無駄。一つに統一を。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.alsok.co.jp/"
   },
   {
     "id": "coop_deli",
@@ -2439,7 +2456,8 @@
     "billingCycle": "weekly",
     "overlaps": [],
     "advice": "配達手数料が毎週かかります。まとめ買いで頻度を減らすか、スーパーとの併用で最適化を。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.coopnet.or.jp/"
   },
   {
     "id": "oisix",
@@ -2456,6 +2474,7 @@
     "billingCycle": "monthly",
     "overlaps": [],
     "advice": "ミールキットは便利ですが割高。自炊と組み合わせて頻度を調整すると節約に。",
-    "alternatives": []
+    "alternatives": [],
+    "cancelUrl": "https://www.oisix.com/OtameshiTouroku.lp.g6--top--top-shinki_domo_a__html.htm"
   }
 ]
