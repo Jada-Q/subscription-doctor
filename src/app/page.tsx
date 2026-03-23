@@ -5,13 +5,21 @@ import { recognizeImage } from "@/lib/ocr";
 import type { OcrResult } from "@/lib/ocr";
 import { parseTransactions } from "@/lib/parser";
 import type { ParsedTransaction } from "@/lib/parser";
-import { matchTransactions, detectOverlaps, categorizeMerchant } from "@/lib/matcher";
-import type { MatchedTransaction } from "@/lib/matcher";
-import { generateReport, gradeLabel } from "@/lib/report";
+import { matchTransactions, detectOverlaps } from "@/lib/matcher";
+import { generateReport } from "@/lib/report";
 import type { Report } from "@/lib/report";
 import { generateShareCard } from "@/lib/report/share";
 import { generateDemoResult } from "@/lib/demo";
 import { checkRateLimit, recordScan } from "@/lib/rate-limit";
+import { trackEvent } from "@/lib/analytics";
+import {
+  ScoreCard,
+  SummaryCard,
+  FeedbackSection,
+  FeatureCard,
+  SubscriptionList,
+  UnmatchedTransactions,
+} from "@/components";
 
 type Step = "upload" | "processing" | "result";
 
@@ -68,6 +76,11 @@ export default function HomePage() {
   const imageUrlRef = useRef<string | null>(null);
   const processingRef = useRef(false);
 
+  // Track page view once
+  useEffect(() => {
+    trackEvent("page_view");
+  }, []);
+
   const processImages = useCallback(
     async (files: File[]) => {
       // Prevent double-processing (iOS Safari can fire onChange twice)
@@ -83,6 +96,7 @@ export default function HomePage() {
         return;
       }
 
+      trackEvent("upload_start", { imageCount: files.length });
       setStep("processing");
       setError(null);
       if (imageUrlRef.current) URL.revokeObjectURL(imageUrlRef.current);
@@ -112,6 +126,7 @@ export default function HomePage() {
             Math.max(1, allOcrResults.reduce((sum, o) => sum + o.lines.length, 0)),
         };
         setOcrResult(mergedOcr);
+        trackEvent("ocr_complete", { lines: mergedOcr.lines.length, duration: mergedOcr.duration });
 
         // Step 2: Parse transactions
         setStatus("テキスト構造化中...");
@@ -131,6 +146,7 @@ export default function HomePage() {
         setReport(rpt);
 
         recordScan();
+        trackEvent("result_view", { matched: rpt.matchedCount, score: rpt.score });
         // Persist result so iOS Safari page reloads can restore it
         saveResult({ ocrResult: mergedOcr, transactions: txs, report: rpt });
         setStatus("");
@@ -182,10 +198,12 @@ export default function HomePage() {
     setReport(demo.report);
     setIsDemo(true);
     setStep("result");
+    trackEvent("demo_click");
   }, []);
 
   const handleShare = useCallback(async () => {
     if (!report) return;
+    trackEvent("share_click");
     const dataUrl = generateShareCard(report);
 
     // Try native share (mobile)
@@ -283,6 +301,33 @@ export default function HomePage() {
               />
             </div>
 
+            {/* FAQ */}
+            <section>
+              <h2 className="font-bold text-lg mb-3">よくある質問</h2>
+              <div className="space-y-3">
+                <FaqItem
+                  q="データは安全ですか？"
+                  a="はい。画像の解析はすべてブラウザ内で完結します。サーバーへのアップロードは一切ありません。通信が発生しないため、個人情報が外部に漏れるリスクはゼロです。"
+                />
+                <FaqItem
+                  q="Apple税とは何ですか？"
+                  a="App Store経由でサブスクに加入すると、Appleの手数料（15〜30%）が上乗せされた価格になります。公式サイトから直接契約すれば、同じサービスをより安く利用できます。"
+                />
+                <FaqItem
+                  q="どのカード会社に対応していますか？"
+                  a="楽天カード・三井住友カード・JCBなど主要カード明細に対応。それ以外のカードでも、スクリーンショットから読み取れる形式であれば診断可能です。"
+                />
+                <FaqItem
+                  q="対応しているサブスクは？"
+                  a="Netflix, Spotify, YouTube Premium, iCloud, Apple Music, Amazon Prime, ChatGPT Plus, Adobe CC, NURO光 など36種類以上のサービスを自動識別します。"
+                />
+                <FaqItem
+                  q="無料で使えますか？"
+                  a="はい、完全無料です。アカウント登録も不要で、すぐにご利用いただけます。"
+                />
+              </div>
+            </section>
+
             {/* Privacy Note */}
             <div className="text-center text-xs text-gray-400 space-y-1">
               <p>OCR処理はすべてブラウザ内で完結。画像はサーバーに送信されません。</p>
@@ -316,10 +361,8 @@ export default function HomePage() {
               </div>
             )}
 
-            {/* Score */}
             <ScoreCard report={report} />
 
-            {/* Summary Stats */}
             <div className="grid grid-cols-3 gap-3">
               <SummaryCard
                 label="月額合計"
@@ -407,114 +450,8 @@ export default function HomePage() {
               </section>
             )}
 
-            {/* Matched Subscriptions with Advice */}
-            {report.allTransactions.filter((m) => m.matchedService).length > 0 && (
-              <section>
-                <h2 className="font-bold text-lg mb-2">検出されたサブスク</h2>
-                <div className="space-y-3">
-                  {report.allTransactions
-                    .filter((m) => m.matchedService)
-                    .map((item: MatchedTransaction, i: number) => (
-                      <div key={i} className="border rounded-lg overflow-hidden">
-                        <div className="flex justify-between items-center p-3">
-                          <div>
-                            <div className="font-medium">{item.matchedService}</div>
-                            <div className="text-xs text-gray-500">
-                              {item.date !== "unknown" && <span>{item.date}</span>}
-                              {item.matchedRule?.category && (
-                                <span>{item.date !== "unknown" ? " ・ " : ""}{categoryLabel(item.matchedRule.category)}</span>
-                              )}
-                            </div>
-                          </div>
-                          <div className="font-medium">
-                            ¥{item.amount.toLocaleString()}
-                          </div>
-                        </div>
-                        {/* Advice */}
-                        {item.matchedRule?.advice && (
-                          <div className="px-3 pb-3">
-                            <div className="p-2 bg-blue-50 rounded text-xs text-blue-800">
-                              <span className="font-medium">💡 </span>
-                              {item.matchedRule.advice}
-                            </div>
-                            {(() => {
-                              const cheaperAlts = (item.matchedRule?.alternatives ?? []).filter(
-                                (alt) => alt.price > 0 && alt.price < item.amount
-                              );
-                              if (cheaperAlts.length > 0) {
-                                return (
-                                  <div className="mt-1.5 space-y-1">
-                                    {cheaperAlts.map((alt, j) => (
-                                      <div key={j} className="flex justify-between text-xs text-gray-600 px-1">
-                                        <span>{alt.name} <span className="text-gray-400">({alt.note})</span></span>
-                                        <span className="text-green-600 font-medium">
-                                          ¥{alt.price.toLocaleString()}/月
-                                        </span>
-                                      </div>
-                                    ))}
-                                  </div>
-                                );
-                              }
-                              if ((item.matchedRule?.alternatives ?? []).length > 0) {
-                                return (
-                                  <div className="mt-1.5 text-xs text-green-700 px-1 font-medium">
-                                    現在の料金は他社と比べてお得です
-                                  </div>
-                                );
-                              }
-                              return null;
-                            })()}
-                          </div>
-                        )}
-                      </div>
-                    ))}
-                </div>
-                {/* Subscription Total */}
-                {(() => {
-                  const matched = report.allTransactions.filter((m) => m.matchedService);
-                  const total = matched.reduce((sum, m) => sum + m.amount, 0);
-                  return (
-                    <div className="mt-3 flex justify-between items-center p-3 bg-gray-50 rounded-lg font-medium">
-                      <span>サブスク月額合計（{matched.length}件）</span>
-                      <span className="text-lg">¥{total.toLocaleString()}/月</span>
-                    </div>
-                  );
-                })()}
-              </section>
-            )}
-
-            {/* Unmatched Transactions */}
-            {report.allTransactions.filter((m) => !m.matchedService).length > 0 && (
-              <details className="text-sm">
-                <summary className="cursor-pointer text-gray-500 hover:text-gray-700 font-medium">
-                  その他の取引（{report.allTransactions.filter((m) => !m.matchedService).length}件）
-                </summary>
-                <div className="mt-2 space-y-1">
-                  {report.allTransactions
-                    .filter((m) => !m.matchedService)
-                    .map((item: MatchedTransaction, i: number) => {
-                      const merchantCat = categorizeMerchant(item.description);
-                      return (
-                        <div
-                          key={i}
-                          className="flex justify-between items-center p-2 text-gray-500"
-                        >
-                          <div>
-                            <span>{item.description}</span>
-                            {item.date !== "unknown" && (
-                              <span className="text-xs ml-2">{item.date}</span>
-                            )}
-                            {merchantCat && (
-                              <span className="text-xs ml-2 text-gray-400">・{merchantCat}</span>
-                            )}
-                          </div>
-                          <span>¥{item.amount.toLocaleString()}</span>
-                        </div>
-                      );
-                    })}
-                </div>
-              </details>
-            )}
+            <SubscriptionList report={report} />
+            <UnmatchedTransactions report={report} />
 
             {/* OCR Details */}
             <details className="text-sm">
@@ -532,7 +469,8 @@ export default function HomePage() {
               </div>
             </details>
 
-            {/* Disclaimer */}
+            <FeedbackSection />
+
             <p className="text-xs text-gray-400 text-center">
               ※ 本サービスの提案は参考情報です。契約変更・解約は自己責任でお願いします。
             </p>
@@ -571,103 +509,13 @@ export default function HomePage() {
   );
 }
 
-function ScoreCard({ report }: { report: Report }) {
-  const gradeColors = {
-    green: { bg: "bg-green-50", border: "border-green-200", text: "text-green-600", ring: "stroke-green-500" },
-    yellow: { bg: "bg-yellow-50", border: "border-yellow-200", text: "text-yellow-600", ring: "stroke-yellow-500" },
-    red: { bg: "bg-red-50", border: "border-red-200", text: "text-red-600", ring: "stroke-red-500" },
-  };
-  const colors = gradeColors[report.grade];
-  const circumference = 2 * Math.PI * 45;
-  const offset = circumference - (report.score / 100) * circumference;
-
+function FaqItem({ q, a }: { q: string; a: string }) {
   return (
-    <div className={`p-6 rounded-xl border ${colors.bg} ${colors.border} text-center`}>
-      <div className="inline-block relative">
-        <svg width="120" height="120" className="-rotate-90">
-          <circle cx="60" cy="60" r="45" fill="none" stroke="#e5e7eb" strokeWidth="8" />
-          <circle
-            cx="60" cy="60" r="45" fill="none"
-            className={colors.ring}
-            strokeWidth="8"
-            strokeDasharray={circumference}
-            strokeDashoffset={offset}
-            strokeLinecap="round"
-          />
-        </svg>
-        <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className={`text-3xl font-bold ${colors.text}`}>{report.score}</span>
-          <span className="text-xs text-gray-500">/ 100</span>
-        </div>
-      </div>
-      <div className={`mt-2 text-lg font-bold ${colors.text}`}>
-        {gradeLabel(report.grade)}
-      </div>
-      <div className="text-sm text-gray-500 mt-1">
-        {report.matchedCount}件のサブスクを識別
-      </div>
-    </div>
-  );
-}
-
-function SummaryCard({
-  label,
-  value,
-  highlight,
-}: {
-  label: string;
-  value: string;
-  highlight?: boolean;
-}) {
-  return (
-    <div
-      className={`p-3 rounded-lg text-center ${highlight ? "bg-red-50" : "bg-gray-50"}`}
-    >
-      <div className="text-xs text-gray-500">{label}</div>
-      <div
-        className={`text-lg font-bold ${highlight ? "text-red-600" : ""}`}
-      >
-        {value}
-      </div>
-    </div>
-  );
-}
-
-function categoryLabel(category: string): string {
-  const labels: Record<string, string> = {
-    cloud_storage: "クラウド",
-    streaming: "動画配信",
-    music: "音楽",
-    shopping: "ショッピング",
-    ai_tools: "AI",
-    productivity: "生産性",
-    internet: "インターネット",
-    gaming: "ゲーム",
-    media: "メディア",
-    developer: "開発",
-    bundle: "バンドル",
-  };
-  return labels[category] || category;
-}
-
-function FeatureCard({
-  title,
-  description,
-  color,
-}: {
-  title: string;
-  description: string;
-  color: "red" | "amber" | "blue";
-}) {
-  const colorMap = {
-    red: "border-l-red-400 bg-red-50/50",
-    amber: "border-l-amber-400 bg-amber-50/50",
-    blue: "border-l-blue-400 bg-blue-50/50",
-  };
-  return (
-    <div className={`p-3 rounded-lg border-l-4 ${colorMap[color]}`}>
-      <div className="font-medium text-sm">{title}</div>
-      <div className="text-xs text-gray-500 mt-0.5">{description}</div>
-    </div>
+    <details className="group">
+      <summary className="cursor-pointer font-medium text-sm text-gray-700 hover:text-gray-900">
+        {q}
+      </summary>
+      <p className="mt-1 text-sm text-gray-500 pl-4">{a}</p>
+    </details>
   );
 }

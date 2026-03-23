@@ -13,6 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://subscription-doctor.vercel.app"),
   title: "サブスク診断 — Subscription Doctor",
   description:
     "クレジットカード明細のスクリーンショットからApple税・重複サブスクを検出。36種類のサービスに対応。データはブラウザ内で処理、サーバー送信なし。",
@@ -33,7 +34,7 @@ export const metadata: Metadata = {
     siteName: "サブスク診断",
   },
   twitter: {
-    card: "summary",
+    card: "summary_large_image",
     title: "サブスク診断 — 隠れた無駄を見つけよう",
     description:
       "クレジットカード明細からApple税・重複サブスクを自動検出。ブラウザ内完結でプライバシー安全。",

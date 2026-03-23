@@ -110,13 +110,20 @@ export function generateShareCard(report: Report): string {
     ctx.fillText("無駄なし！最適化されています", CARD_WIDTH / 2, statsY + 36);
   }
 
-  // Footer
+  // Footer with APP URL
+  ctx.font = "bold 14px sans-serif";
+  ctx.fillStyle = "#3b82f6";
+  ctx.fillText(
+    "🔍 subscription-doctor.vercel.app",
+    CARD_WIDTH / 2,
+    CARD_HEIGHT - 32
+  );
   ctx.font = "12px sans-serif";
   ctx.fillStyle = "#9ca3af";
   ctx.fillText(
-    "サブスク診断 — subscription-doctor.vercel.app",
+    "無料でサブスクの無駄を診断しよう",
     CARD_WIDTH / 2,
-    CARD_HEIGHT - 16
+    CARD_HEIGHT - 14
   );
 
   return canvas.toDataURL("image/png");
