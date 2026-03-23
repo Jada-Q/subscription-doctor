@@ -5,10 +5,60 @@ import rulesData from "../../data/rules.json";
 const rules: ServiceRule[] = rulesData as ServiceRule[];
 
 /**
- * Normalize string for matching: uppercase, remove spaces
+ * Normalize string for matching: uppercase, remove spaces and punctuation
  */
 function normalizeForMatch(str: string): string {
   return str.toUpperCase().replace(/[\s.,-]/g, "");
+}
+
+/**
+ * Find all rules whose keyword matches the description.
+ */
+function findKeywordMatches(
+  descNorm: string,
+  matchType: "exact" | "partial"
+): ServiceRule[] {
+  const matches: ServiceRule[] = [];
+  for (const rule of rules) {
+    for (const keyword of rule.keywords) {
+      const kwNorm = normalizeForMatch(keyword);
+      if (matchType === "exact" && descNorm === kwNorm) {
+        matches.push(rule);
+        break;
+      }
+      if (
+        matchType === "partial" &&
+        (descNorm.includes(kwNorm) || kwNorm.includes(descNorm))
+      ) {
+        matches.push(rule);
+        break;
+      }
+    }
+  }
+  return matches;
+}
+
+/**
+ * From a list of candidate rules, pick the best match using amount disambiguation.
+ * If multiple rules share the same keyword (e.g. "APPLE COM BILL"),
+ * prefer the one whose `amounts` array includes the transaction amount.
+ */
+function disambiguateByAmount(
+  candidates: ServiceRule[],
+  amount: number
+): ServiceRule {
+  // First: check for exact amount match
+  const amountMatch = candidates.find(
+    (r) => r.amounts.length > 0 && r.amounts.includes(amount)
+  );
+  if (amountMatch) return amountMatch;
+
+  // Second: prefer rules with no amounts constraint (generic match)
+  const generic = candidates.find((r) => r.amounts.length === 0);
+  if (generic) return generic;
+
+  // Fallback: first candidate
+  return candidates[0];
 }
 
 /**
@@ -18,23 +68,17 @@ function matchTransaction(tx: ParsedTransaction): MatchedTransaction {
   const descNorm = normalizeForMatch(tx.description);
 
   // Try exact keyword match first
-  for (const rule of rules) {
-    for (const keyword of rule.keywords) {
-      const kwNorm = normalizeForMatch(keyword);
-      if (descNorm === kwNorm) {
-        return buildMatch(tx, rule, "keyword_exact");
-      }
-    }
+  const exactMatches = findKeywordMatches(descNorm, "exact");
+  if (exactMatches.length > 0) {
+    const rule = disambiguateByAmount(exactMatches, tx.amount);
+    return buildMatch(tx, rule, "keyword_exact");
   }
 
-  // Try partial keyword match (keyword contained in description or vice versa)
-  for (const rule of rules) {
-    for (const keyword of rule.keywords) {
-      const kwNorm = normalizeForMatch(keyword);
-      if (descNorm.includes(kwNorm) || kwNorm.includes(descNorm)) {
-        return buildMatch(tx, rule, "keyword_partial");
-      }
-    }
+  // Try partial keyword match
+  const partialMatches = findKeywordMatches(descNorm, "partial");
+  if (partialMatches.length > 0) {
+    const rule = disambiguateByAmount(partialMatches, tx.amount);
+    return buildMatch(tx, rule, "keyword_partial");
   }
 
   // Unmatched
@@ -61,7 +105,7 @@ function buildMatch(
     date: tx.date,
     description: tx.description,
     amount: tx.amount,
-    matchedService: rule.service,
+    matchedService: `${rule.service}${rule.plan ? ` (${rule.plan})` : ""}`,
     matchedRule: rule,
     matchType,
     appleTaxAmount: appleTax > 0 ? appleTax : 0,

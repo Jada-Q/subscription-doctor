@@ -3,7 +3,7 @@ import { normalizeText, removeNumberCommas } from "./normalize";
 
 /**
  * Extract date from a text line.
- * Handles: 01/15, 2026/01/15, 26/01/15, 01-15, 0115
+ * Handles: 01/15, 2026/01/15, 26/01/15, 01-15, 0115, 01月15日, 01.15
  */
 function extractDate(text: string): string | null {
   // YY/MM/DD or YYYY/MM/DD
@@ -13,6 +13,18 @@ function extractDate(text: string): string | null {
   // MM/DD
   const shortSlash = text.match(/(\d{1,2}\/\d{1,2})/);
   if (shortSlash) return shortSlash[1];
+
+  // MM月DD日 (Japanese format)
+  const jpDate = text.match(/(\d{1,2})月(\d{1,2})日/);
+  if (jpDate) return `${jpDate[1]}/${jpDate[2]}`;
+
+  // MM-DD or YYYY-MM-DD
+  const dashDate = text.match(/(\d{1,2})-(\d{1,2})(?!\d)/);
+  if (dashDate) return `${dashDate[1]}/${dashDate[2]}`;
+
+  // MM.DD (dot separator)
+  const dotDate = text.match(/(\d{1,2})\.(\d{1,2})(?!\d)/);
+  if (dotDate) return `${dotDate[1]}/${dotDate[2]}`;
 
   // MMDD at start of line (PaddleOCR sometimes strips slash)
   const mmdd = text.match(/^(\d{2})(\d{2})\s/);
@@ -44,27 +56,50 @@ function extractAmount(text: string): number | null {
 }
 
 /**
+ * Format a number as a comma-separated string: 4033 → "4,033"
+ */
+function formatWithCommas(n: number): string {
+  return n.toLocaleString("en-US");
+}
+
+/**
  * Extract service description from a line after removing date and amount.
  */
 function extractDescription(text: string, date: string | null, amount: number | null): string {
   let desc = text;
 
-  // Remove date part
+  // Remove date part (slash format and original Japanese format)
   if (date) {
-    desc = desc.replace(date, "").replace(date.replace("/", ""), "");
+    // Remove the canonical MM/DD form
+    desc = desc.replace(date, "");
+    // Remove MMDD (no slash)
+    desc = desc.replace(date.replace("/", ""), "");
+    // Remove MM月DD日 form if present
+    const dateParts = date.split("/");
+    if (dateParts.length === 2) {
+      desc = desc.replace(`${dateParts[0]}月${dateParts[1]}日`, "");
+    }
   }
 
-  // Remove amount part (with yen symbols, commas)
+  // Remove amount part (with yen symbols, commas, various formats)
   if (amount !== null) {
     const amountStr = amount.toString();
-    desc = desc.replace(new RegExp(`¥\\s*[\\d,]*${amountStr}`), "");
-    desc = desc.replace(new RegExp(`\\b${amountStr}\\b\\s*円?`), "");
+    const amountWithCommas = formatWithCommas(amount);
+    // ¥1,300 or ¥1300
+    desc = desc.replace(new RegExp(`¥\\s*${amountWithCommas.replace(/,/g, ",?")}`), "");
+    desc = desc.replace(new RegExp(`¥\\s*${amountStr}`), "");
+    // 1,300円 or 1300円 or standalone 1,300 or 1300
+    desc = desc.replace(new RegExp(`${amountWithCommas.replace(/,/g, ",?")}\\s*円?`), "");
+    // Standalone number (word boundary) — avoid removing numbers inside store names
+    desc = desc.replace(new RegExp(`(^|\\s)${amountStr}\\s*円?(\\s|$)`), "$1$2");
   }
 
   // Remove common suffixes that aren't part of service name
   desc = desc.replace(/ご本人/g, "");
   desc = desc.replace(/ご家族/g, "");
   desc = desc.replace(/[¥円]/g, "");
+  // Remove trailing/leading hyphens and dots left over
+  desc = desc.replace(/^[\s\-・.]+|[\s\-・.]+$/g, "");
 
   return desc.trim();
 }

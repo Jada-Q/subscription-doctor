@@ -7,6 +7,11 @@ import { parseTransactions } from "@/lib/parser";
 import type { ParsedTransaction } from "@/lib/parser";
 import { matchTransactions, detectOverlaps } from "@/lib/matcher";
 import type { MatchedTransaction } from "@/lib/matcher";
+import { generateReport, gradeLabel } from "@/lib/report";
+import type { Report } from "@/lib/report";
+import { generateShareCard } from "@/lib/report/share";
+import { generateDemoResult } from "@/lib/demo";
+import { checkRateLimit, recordScan } from "@/lib/rate-limit";
 
 type Step = "upload" | "processing" | "result";
 
@@ -16,12 +21,20 @@ export default function HomePage() {
   const [imageUrl, setImageUrl] = useState<string | null>(null);
   const [ocrResult, setOcrResult] = useState<OcrResult | null>(null);
   const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
-  const [matched, setMatched] = useState<MatchedTransaction[]>([]);
-  const [overlaps, setOverlaps] = useState<MatchedTransaction[][]>([]);
+  const [report, setReport] = useState<Report | null>(null);
+  const [isDemo, setIsDemo] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   const processImage = useCallback(
     async (file: File) => {
+      // Rate limit check
+      const limit = checkRateLimit();
+      if (!limit.allowed) {
+        const mins = Math.ceil(limit.retryAfterMs / 60000);
+        setStatus(`利用制限に達しました。${mins}分後にお試しください。`);
+        return;
+      }
+
       setStep("processing");
       if (imageUrl) URL.revokeObjectURL(imageUrl);
       setImageUrl(URL.createObjectURL(file));
@@ -42,12 +55,16 @@ export default function HomePage() {
         // Step 3: Match against rules
         setStatus("サービス照合中...");
         const matchedTxs = matchTransactions(txs);
-        setMatched(matchedTxs);
 
         // Step 4: Detect overlaps
         const overlapGroups = detectOverlaps(matchedTxs);
-        setOverlaps(overlapGroups);
 
+        // Step 5: Generate report
+        setStatus("レポート生成中...");
+        const rpt = generateReport(matchedTxs, overlapGroups);
+        setReport(rpt);
+
+        recordScan();
         setStatus("");
         setStep("result");
       } catch (e) {
@@ -72,15 +89,50 @@ export default function HomePage() {
     setImageUrl(null);
     setOcrResult(null);
     setTransactions([]);
-    setMatched([]);
-    setOverlaps([]);
+    setReport(null);
+    setIsDemo(false);
     setStep("upload");
     setStatus("");
   }, [imageUrl]);
 
-  const appleTaxItems = matched.filter((m) => m.appleTaxAmount > 0);
-  const totalMonthly = matched.reduce((sum, m) => sum + m.amount, 0);
-  const totalAppleTax = appleTaxItems.reduce((sum, m) => sum + m.appleTaxAmount, 0);
+  const runDemo = useCallback(() => {
+    const demo = generateDemoResult();
+    setOcrResult(demo.ocrResult);
+    setTransactions(demo.transactions);
+    setReport(demo.report);
+    setIsDemo(true);
+    setStep("result");
+  }, []);
+
+  const handleShare = useCallback(async () => {
+    if (!report) return;
+    const dataUrl = generateShareCard(report);
+
+    // Try native share (mobile)
+    if (navigator.share && navigator.canShare) {
+      try {
+        const blob = await fetch(dataUrl).then((r) => r.blob());
+        const file = new File([blob], "subscription-doctor.png", {
+          type: "image/png",
+        });
+        if (navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            title: "サブスク診断結果",
+            files: [file],
+          });
+          return;
+        }
+      } catch {
+        // Fall through to download
+      }
+    }
+
+    // Fallback: download
+    const link = document.createElement("a");
+    link.download = "subscription-doctor.png";
+    link.href = dataUrl;
+    link.click();
+  }, [report]);
 
   return (
     <div className="flex-1 flex flex-col">
@@ -103,8 +155,10 @@ export default function HomePage() {
               <p className="text-sm text-gray-500 mb-4">
                 JPG / PNG 対応 — データはブラウザ内で処理され、サーバーに送信されません
               </p>
-              <label className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg text-lg cursor-pointer hover:bg-blue-700 active:bg-blue-800"
-                style={{ WebkitAppearance: "none", touchAction: "manipulation" }}>
+              <label
+                className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg text-lg cursor-pointer hover:bg-blue-700 active:bg-blue-800"
+                style={{ WebkitAppearance: "none", touchAction: "manipulation" }}
+              >
                 画像を選択
                 <input
                   type="file"
@@ -114,6 +168,14 @@ export default function HomePage() {
                 />
               </label>
             </div>
+            <button
+              type="button"
+              onClick={runDemo}
+              className="mt-4 text-sm text-blue-600 underline hover:text-blue-800"
+              style={{ touchAction: "manipulation" }}
+            >
+              デモで試してみる
+            </button>
             {status && (
               <p className="mt-4 text-red-600 text-sm">{status}</p>
             )}
@@ -136,27 +198,52 @@ export default function HomePage() {
           </div>
         )}
 
-        {step === "result" && (
+        {step === "result" && report && (
           <div className="mt-4 space-y-6">
-            {/* Summary */}
+            {/* Demo Banner */}
+            {isDemo && (
+              <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg text-center text-sm text-blue-800">
+                これはデモデータです。実際の明細をアップロードして診断してみましょう。
+              </div>
+            )}
+
+            {/* Score */}
+            <ScoreCard report={report} />
+
+            {/* Summary Stats */}
             <div className="grid grid-cols-3 gap-3">
               <SummaryCard
                 label="月額合計"
-                value={`¥${totalMonthly.toLocaleString()}`}
+                value={`¥${report.totalMonthly.toLocaleString()}`}
               />
               <SummaryCard
                 label="Apple税"
-                value={`¥${totalAppleTax.toLocaleString()}`}
-                highlight={totalAppleTax > 0}
+                value={`¥${report.appleTaxTotal.toLocaleString()}`}
+                highlight={report.appleTaxTotal > 0}
               />
               <SummaryCard
                 label="検出サービス"
-                value={`${matched.filter((m) => m.matchedService).length}件`}
+                value={`${report.matchedCount}件`}
               />
             </div>
 
+            {/* Savings */}
+            {report.savingsAnnual > 0 && (
+              <div className="p-4 bg-gradient-to-r from-red-50 to-orange-50 rounded-xl border border-red-100">
+                <div className="text-center">
+                  <div className="text-sm text-gray-600">年間節約可能額</div>
+                  <div className="text-3xl font-bold text-red-600 mt-1">
+                    ¥{report.savingsAnnual.toLocaleString()}
+                  </div>
+                  <div className="text-xs text-gray-500 mt-1">
+                    (月額 ¥{report.savingsMonthly.toLocaleString()})
+                  </div>
+                </div>
+              </div>
+            )}
+
             {/* Apple Tax */}
-            {appleTaxItems.length > 0 && (
+            {report.appleTaxItems.length > 0 && (
               <section>
                 <h2 className="font-bold text-lg mb-2 text-red-600">
                   Apple税が検出されました
@@ -164,7 +251,7 @@ export default function HomePage() {
                 <p className="text-sm text-gray-600 mb-3">
                   App Store 経由の課金は公式サイトより割高です。公式サイトから直接契約すると節約できます。
                 </p>
-                {appleTaxItems.map((item, i) => (
+                {report.appleTaxItems.map((item, i) => (
                   <div
                     key={i}
                     className="flex justify-between items-center p-3 bg-red-50 rounded-lg mb-2"
@@ -181,19 +268,16 @@ export default function HomePage() {
                     </div>
                   </div>
                 ))}
-                <div className="text-right font-bold text-red-600">
-                  年間節約可能額: ¥{(totalAppleTax * 12).toLocaleString()}
-                </div>
               </section>
             )}
 
             {/* Overlaps */}
-            {overlaps.length > 0 && (
+            {report.overlaps.length > 0 && (
               <section>
                 <h2 className="font-bold text-lg mb-2 text-amber-600">
                   重複サブスクリプション
                 </h2>
-                {overlaps.map((group, i) => (
+                {report.overlaps.map((group, i) => (
                   <div
                     key={i}
                     className="p-3 bg-amber-50 rounded-lg mb-2"
@@ -214,41 +298,41 @@ export default function HomePage() {
               </section>
             )}
 
-            {/* All Matched Transactions */}
+            {/* All Transactions */}
             <section>
               <h2 className="font-bold text-lg mb-2">検出されたサブスク</h2>
               <div className="space-y-2">
-                {matched.map((item, i) => (
-                  <div
-                    key={i}
-                    className="flex justify-between items-center p-3 border rounded-lg"
-                  >
-                    <div>
+                {report.allTransactions.map((item: MatchedTransaction, i: number) => (
+                    <div
+                      key={i}
+                      className="flex justify-between items-center p-3 border rounded-lg"
+                    >
+                      <div>
+                        <div className="font-medium">
+                          {item.matchedService || item.description}
+                        </div>
+                        <div className="text-xs text-gray-500">
+                          {item.date} ・{" "}
+                          <span
+                            className={
+                              item.matchType === "unmatched"
+                                ? "text-gray-400"
+                                : "text-green-600"
+                            }
+                          >
+                            {item.matchType === "unmatched"
+                              ? "未識別"
+                              : item.matchType === "keyword_exact"
+                                ? "完全一致"
+                                : "部分一致"}
+                          </span>
+                        </div>
+                      </div>
                       <div className="font-medium">
-                        {item.matchedService || item.description}
-                      </div>
-                      <div className="text-xs text-gray-500">
-                        {item.date} ・{" "}
-                        <span
-                          className={
-                            item.matchType === "unmatched"
-                              ? "text-gray-400"
-                              : "text-green-600"
-                          }
-                        >
-                          {item.matchType === "unmatched"
-                            ? "未識別"
-                            : item.matchType === "keyword_exact"
-                              ? "完全一致"
-                              : "部分一致"}
-                        </span>
+                        ¥{item.amount.toLocaleString()}
                       </div>
                     </div>
-                    <div className="font-medium">
-                      ¥{item.amount.toLocaleString()}
-                    </div>
-                  </div>
-                ))}
+                  ))}
               </div>
             </section>
 
@@ -268,17 +352,75 @@ export default function HomePage() {
               </div>
             </details>
 
-            <button
-              type="button"
-              onClick={reset}
-              className="w-full py-3 border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50"
-              style={{ touchAction: "manipulation" }}
-            >
-              もう一度診断する
-            </button>
+            {/* Action Buttons */}
+            <div className="space-y-3">
+              <button
+                type="button"
+                onClick={handleShare}
+                className="w-full py-3 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 active:bg-blue-800"
+                style={{ touchAction: "manipulation" }}
+              >
+                結果を共有する
+              </button>
+              <button
+                type="button"
+                onClick={reset}
+                className="w-full py-3 border-2 border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50"
+                style={{ touchAction: "manipulation" }}
+              >
+                もう一度診断する
+              </button>
+            </div>
           </div>
         )}
       </main>
+
+      <footer className="border-t px-4 py-3 text-center text-xs text-gray-400">
+        <a href="/privacy" className="hover:text-gray-600 underline">
+          プライバシーポリシー
+        </a>
+        <span className="mx-2">・</span>
+        データはブラウザ内で処理され、サーバーに送信されません
+      </footer>
+    </div>
+  );
+}
+
+function ScoreCard({ report }: { report: Report }) {
+  const gradeColors = {
+    green: { bg: "bg-green-50", border: "border-green-200", text: "text-green-600", ring: "stroke-green-500" },
+    yellow: { bg: "bg-yellow-50", border: "border-yellow-200", text: "text-yellow-600", ring: "stroke-yellow-500" },
+    red: { bg: "bg-red-50", border: "border-red-200", text: "text-red-600", ring: "stroke-red-500" },
+  };
+  const colors = gradeColors[report.grade];
+  const circumference = 2 * Math.PI * 45;
+  const offset = circumference - (report.score / 100) * circumference;
+
+  return (
+    <div className={`p-6 rounded-xl border ${colors.bg} ${colors.border} text-center`}>
+      <div className="inline-block relative">
+        <svg width="120" height="120" className="-rotate-90">
+          <circle cx="60" cy="60" r="45" fill="none" stroke="#e5e7eb" strokeWidth="8" />
+          <circle
+            cx="60" cy="60" r="45" fill="none"
+            className={colors.ring}
+            strokeWidth="8"
+            strokeDasharray={circumference}
+            strokeDashoffset={offset}
+            strokeLinecap="round"
+          />
+        </svg>
+        <div className="absolute inset-0 flex flex-col items-center justify-center">
+          <span className={`text-3xl font-bold ${colors.text}`}>{report.score}</span>
+          <span className="text-xs text-gray-500">/ 100</span>
+        </div>
+      </div>
+      <div className={`mt-2 text-lg font-bold ${colors.text}`}>
+        {gradeLabel(report.grade)}
+      </div>
+      <div className="text-sm text-gray-500 mt-1">
+        {report.totalCount}件のサブスクを検出（{report.matchedCount}件識別済み）
+      </div>
     </div>
   );
 }

@@ -3,6 +3,7 @@ export interface ServiceRule {
   service: string;
   plan: string;
   keywords: string[];
+  amounts: number[]; // known amounts for disambiguation (empty = match any)
   appStorePrice: number;
   officialPrice: number;
   category: string;
