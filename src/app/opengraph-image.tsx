@@ -92,7 +92,7 @@ export default function OgImage() {
               fontWeight: 600,
             }}
           >
-            36+サービス対応
+            100+サービス対応
           </div>
         </div>
 
