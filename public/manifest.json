@@ -1,0 +1,16 @@
+{
+  "name": "サブスク診断",
+  "short_name": "サブスク診断",
+  "description": "クレジットカード明細からサブスクの無駄を見つけます",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2563eb",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

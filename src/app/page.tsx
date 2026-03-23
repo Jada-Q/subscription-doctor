@@ -464,7 +464,7 @@ function ScoreCard({ report }: { report: Report }) {
         {gradeLabel(report.grade)}
       </div>
       <div className="text-sm text-gray-500 mt-1">
-        {report.totalCount}件のサブスクを検出（{report.matchedCount}件識別済み）
+        {report.matchedCount}件のサブスクを識別
       </div>
     </div>
   );
