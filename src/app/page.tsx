@@ -411,6 +411,17 @@ export default function HomePage() {
                       </div>
                     ))}
                 </div>
+                {/* Subscription Total */}
+                {(() => {
+                  const matched = report.allTransactions.filter((m) => m.matchedService);
+                  const total = matched.reduce((sum, m) => sum + m.amount, 0);
+                  return (
+                    <div className="mt-3 flex justify-between items-center p-3 bg-gray-50 rounded-lg font-medium">
+                      <span>サブスク月額合計（{matched.length}件）</span>
+                      <span className="text-lg">¥{total.toLocaleString()}/月</span>
+                    </div>
+                  );
+                })()}
               </section>
             )}
 
