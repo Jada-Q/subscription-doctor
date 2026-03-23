@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useRef, useCallback } from "react";
+import { useState, useRef, useCallback, useEffect } from "react";
 import { recognizeImage } from "@/lib/ocr";
 import type { OcrResult } from "@/lib/ocr";
 import { parseTransactions } from "@/lib/parser";
@@ -15,13 +15,53 @@ import { checkRateLimit, recordScan } from "@/lib/rate-limit";
 
 type Step = "upload" | "processing" | "result";
 
+// Persist/restore result via sessionStorage to survive iOS Safari page reloads
+const SESSION_KEY = "subsc-doctor-result";
+
+function saveResult(data: {
+  ocrResult: OcrResult;
+  transactions: ParsedTransaction[];
+  report: Report;
+}) {
+  try {
+    sessionStorage.setItem(SESSION_KEY, JSON.stringify(data));
+  } catch {
+    // ignore quota errors
+  }
+}
+
+function loadResult(): {
+  ocrResult: OcrResult;
+  transactions: ParsedTransaction[];
+  report: Report;
+} | null {
+  try {
+    const raw = sessionStorage.getItem(SESSION_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch {
+    // ignore
+  }
+  return null;
+}
+
+function clearResult() {
+  try {
+    sessionStorage.removeItem(SESSION_KEY);
+  } catch {
+    // ignore
+  }
+}
+
 export default function HomePage() {
-  const [step, setStep] = useState<Step>("upload");
+  // Restore from sessionStorage if iOS Safari reloaded the page
+  const restored = typeof window !== "undefined" ? loadResult() : null;
+
+  const [step, setStep] = useState<Step>(restored ? "result" : "upload");
   const [status, setStatus] = useState("");
   const [imageUrl, setImageUrl] = useState<string | null>(null);
-  const [ocrResult, setOcrResult] = useState<OcrResult | null>(null);
-  const [transactions, setTransactions] = useState<ParsedTransaction[]>([]);
-  const [report, setReport] = useState<Report | null>(null);
+  const [ocrResult, setOcrResult] = useState<OcrResult | null>(restored?.ocrResult ?? null);
+  const [transactions, setTransactions] = useState<ParsedTransaction[]>(restored?.transactions ?? []);
+  const [report, setReport] = useState<Report | null>(restored?.report ?? null);
   const [isDemo, setIsDemo] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -91,6 +131,8 @@ export default function HomePage() {
         setReport(rpt);
 
         recordScan();
+        // Persist result so iOS Safari page reloads can restore it
+        saveResult({ ocrResult: mergedOcr, transactions: txs, report: rpt });
         setStatus("");
         setStep("result");
       } catch (e) {
@@ -130,6 +172,7 @@ export default function HomePage() {
     setError(null);
     setStep("upload");
     setStatus("");
+    clearResult();
   }, []);
 
   const runDemo = useCallback(() => {
