@@ -4,9 +4,11 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "node scripts/download-models.mjs && next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "postinstall": "node scripts/download-models.mjs",
+    "download-models": "node scripts/download-models.mjs"
   },
   "dependencies": {
     "@sentry/nextjs": "^10.45.0",
