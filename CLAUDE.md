@@ -16,7 +16,11 @@ npm run lint         # ESLint
 
 The build script runs `scripts/download-models.mjs` before `next build`. This downloads PaddleOCR ONNX models and WASM files to `public/models/`. These files are gitignored and must be downloaded on each fresh environment (CI, Vercel).
 
-`npm test` should produce **12 test files, 102 tests, all passing**. If any test fails, do not commit.
+`npm test` should produce **14 test files, 120 tests, all passing**. If any test fails, do not commit.
+
+## Deploy Checklist
+
+Before merging a PR: `npm test` 全绿 → `npm run lint` 無エラー → `npm run build` 成功。All imported files must be `git add`ed (Vercel will fail with `module-not-found` otherwise).
 
 ## Code Conventions
 
