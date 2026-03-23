@@ -21,7 +21,9 @@ export function generateReport(
     (sum, m) => sum + m.appleTaxAmount,
     0
   );
-  const totalMonthly = matched.reduce((sum, m) => sum + m.amount, 0);
+  const totalMonthly = matched
+    .filter((m) => m.matchedService)
+    .reduce((sum, m) => sum + m.amount, 0);
   const matchedCount = matched.filter((m) => m.matchedService).length;
   const unmatchedCount = matched.length - matchedCount;
 
@@ -40,12 +42,12 @@ export function generateReport(
   const savingsMonthly = appleTaxTotal + overlapSavings;
   const savingsAnnual = savingsMonthly * 12;
 
-  // Score calculation
+  // Score calculation — only penalize actionable items, not unmatched
   let score = 100;
   score -= appleTaxItems.length * 5;
   score -= overlaps.length * 10;
   score -= Math.floor(appleTaxTotal / 500);
-  score -= unmatchedCount * 2;
+  // Don't penalize unmatched items — they're usually not subscriptions
   score = Math.max(0, Math.min(100, score));
 
   const grade = scoreToGrade(score);

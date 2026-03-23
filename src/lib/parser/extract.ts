@@ -3,14 +3,14 @@ import { normalizeText, removeNumberCommas } from "./normalize";
 
 /**
  * Extract date from a text line.
- * Handles: 01/15, 2026/01/15, 26/01/15, 01-15, 0115, 01月15日, 01.15
+ * Handles many Japanese credit card date formats.
  */
 function extractDate(text: string): string | null {
-  // YY/MM/DD or YYYY/MM/DD
+  // YYYY/MM/DD or YY/MM/DD
   const fullMatch = text.match(/(\d{2,4}\/\d{1,2}\/\d{1,2})/);
   if (fullMatch) return fullMatch[1];
 
-  // MM/DD
+  // MM/DD (anywhere in text)
   const shortSlash = text.match(/(\d{1,2}\/\d{1,2})/);
   if (shortSlash) return shortSlash[1];
 
@@ -18,7 +18,7 @@ function extractDate(text: string): string | null {
   const jpDate = text.match(/(\d{1,2})月(\d{1,2})日/);
   if (jpDate) return `${jpDate[1]}/${jpDate[2]}`;
 
-  // MM-DD or YYYY-MM-DD
+  // MM-DD
   const dashDate = text.match(/(\d{1,2})-(\d{1,2})(?!\d)/);
   if (dashDate) return `${dashDate[1]}/${dashDate[2]}`;
 
@@ -27,8 +27,18 @@ function extractDate(text: string): string | null {
   if (dotDate) return `${dotDate[1]}/${dotDate[2]}`;
 
   // MMDD at start of line (PaddleOCR sometimes strips slash)
-  const mmdd = text.match(/^(\d{2})(\d{2})\s/);
-  if (mmdd) return `${mmdd[1]}/${mmdd[2]}`;
+  const mmddStart = text.match(/^(\d{2})(\d{2})\s/);
+  if (mmddStart) return `${mmddStart[1]}/${mmddStart[2]}`;
+
+  // MMDD anywhere followed by space + Japanese text (common OCR output)
+  const mmddAnywhere = text.match(/(\d{2})(\d{2})\s+[A-Za-z\u3000-\u9fff]/);
+  if (mmddAnywhere) {
+    const m = parseInt(mmddAnywhere[1], 10);
+    const d = parseInt(mmddAnywhere[2], 10);
+    if (m >= 1 && m <= 12 && d >= 1 && d <= 31) {
+      return `${mmddAnywhere[1]}/${mmddAnywhere[2]}`;
+    }
+  }
 
   return null;
 }
@@ -70,11 +80,8 @@ function extractDescription(text: string, date: string | null, amount: number | 
 
   // Remove date part (slash format and original Japanese format)
   if (date) {
-    // Remove the canonical MM/DD form
     desc = desc.replace(date, "");
-    // Remove MMDD (no slash)
     desc = desc.replace(date.replace("/", ""), "");
-    // Remove MM月DD日 form if present
     const dateParts = date.split("/");
     if (dateParts.length === 2) {
       desc = desc.replace(`${dateParts[0]}月${dateParts[1]}日`, "");
@@ -85,12 +92,9 @@ function extractDescription(text: string, date: string | null, amount: number | 
   if (amount !== null) {
     const amountStr = amount.toString();
     const amountWithCommas = formatWithCommas(amount);
-    // ¥1,300 or ¥1300
     desc = desc.replace(new RegExp(`¥\\s*${amountWithCommas.replace(/,/g, ",?")}`), "");
     desc = desc.replace(new RegExp(`¥\\s*${amountStr}`), "");
-    // 1,300円 or 1300円 or standalone 1,300 or 1300
     desc = desc.replace(new RegExp(`${amountWithCommas.replace(/,/g, ",?")}\\s*円?`), "");
-    // Standalone number (word boundary) — avoid removing numbers inside store names
     desc = desc.replace(new RegExp(`(^|\\s)${amountStr}\\s*円?(\\s|$)`), "$1$2");
   }
 
@@ -98,7 +102,6 @@ function extractDescription(text: string, date: string | null, amount: number | 
   desc = desc.replace(/ご本人/g, "");
   desc = desc.replace(/ご家族/g, "");
   desc = desc.replace(/[¥円]/g, "");
-  // Remove trailing/leading hyphens and dots left over
   desc = desc.replace(/^[\s\-・.]+|[\s\-・.]+$/g, "");
 
   return desc.trim();
@@ -121,7 +124,30 @@ const SKIP_PATTERNS = [
   /^お引落し/, // direct debit info
   /^お振替/, // transfer info
   /^(前月|今月|翌月)/, // month reference headers
+  /ご利用可能額/, // available credit
+  /お支払い日/, // payment date
+  /締め日/, // closing date
+  /^(新規|繰越|小計)/, // subtotal headers
 ];
+
+/**
+ * Patterns that indicate a line is likely a subscription/recurring charge
+ * (used to tag transactions, not to filter)
+ */
+const SUBSCRIPTION_INDICATORS = [
+  /月額/, /利用料/, /料金/, /会費/, /定額/,
+  /SUBSCRIPTION/, /PREMIUM/, /PLUS/, /PRO/i,
+  /\.COM/, /\.CO\.JP/, /\.IO/,
+  /BILL/,
+];
+
+/**
+ * Check if a description looks like a subscription/recurring charge
+ */
+function isLikelySubscription(description: string, rawLine: string): boolean {
+  const upper = rawLine.toUpperCase();
+  return SUBSCRIPTION_INDICATORS.some((p) => p.test(upper) || p.test(description));
+}
 
 /**
  * Parse OCR lines into structured transactions.
@@ -159,6 +185,7 @@ export function parseTransactions(
       description,
       amount,
       rawLine: line,
+      isLikelySubscription: isLikelySubscription(description, line),
     });
   }
 

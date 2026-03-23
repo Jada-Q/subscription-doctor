@@ -298,43 +298,60 @@ export default function HomePage() {
               </section>
             )}
 
-            {/* All Transactions */}
-            <section>
-              <h2 className="font-bold text-lg mb-2">検出されたサブスク</h2>
-              <div className="space-y-2">
-                {report.allTransactions.map((item: MatchedTransaction, i: number) => (
-                    <div
-                      key={i}
-                      className="flex justify-between items-center p-3 border rounded-lg"
-                    >
-                      <div>
+            {/* Matched Subscriptions */}
+            {report.allTransactions.filter((m) => m.matchedService).length > 0 && (
+              <section>
+                <h2 className="font-bold text-lg mb-2">検出されたサブスク</h2>
+                <div className="space-y-2">
+                  {report.allTransactions
+                    .filter((m) => m.matchedService)
+                    .map((item: MatchedTransaction, i: number) => (
+                      <div
+                        key={i}
+                        className="flex justify-between items-center p-3 border rounded-lg"
+                      >
+                        <div>
+                          <div className="font-medium">{item.matchedService}</div>
+                          <div className="text-xs text-gray-500">
+                            {item.date} ・{" "}
+                            <span className="text-green-600">
+                              {item.matchType === "keyword_exact" ? "完全一致" : "部分一致"}
+                            </span>
+                          </div>
+                        </div>
                         <div className="font-medium">
-                          {item.matchedService || item.description}
-                        </div>
-                        <div className="text-xs text-gray-500">
-                          {item.date} ・{" "}
-                          <span
-                            className={
-                              item.matchType === "unmatched"
-                                ? "text-gray-400"
-                                : "text-green-600"
-                            }
-                          >
-                            {item.matchType === "unmatched"
-                              ? "未識別"
-                              : item.matchType === "keyword_exact"
-                                ? "完全一致"
-                                : "部分一致"}
-                          </span>
+                          ¥{item.amount.toLocaleString()}
                         </div>
                       </div>
-                      <div className="font-medium">
-                        ¥{item.amount.toLocaleString()}
+                    ))}
+                </div>
+              </section>
+            )}
+
+            {/* Unmatched Transactions */}
+            {report.allTransactions.filter((m) => !m.matchedService).length > 0 && (
+              <details className="text-sm">
+                <summary className="cursor-pointer text-gray-500 hover:text-gray-700 font-medium">
+                  その他の取引（{report.allTransactions.filter((m) => !m.matchedService).length}件）
+                </summary>
+                <div className="mt-2 space-y-1">
+                  {report.allTransactions
+                    .filter((m) => !m.matchedService)
+                    .map((item: MatchedTransaction, i: number) => (
+                      <div
+                        key={i}
+                        className="flex justify-between items-center p-2 text-gray-500"
+                      >
+                        <div>
+                          <span>{item.description}</span>
+                          <span className="text-xs ml-2">{item.date}</span>
+                        </div>
+                        <span>¥{item.amount.toLocaleString()}</span>
                       </div>
-                    </div>
-                  ))}
-              </div>
-            </section>
+                    ))}
+                </div>
+              </details>
+            )}
 
             {/* OCR Details */}
             <details className="text-sm">

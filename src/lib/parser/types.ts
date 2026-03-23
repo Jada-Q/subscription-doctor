@@ -3,6 +3,7 @@ export interface ParsedTransaction {
   description: string; // raw service name from OCR
   amount: number; // JPY amount
   rawLine: string; // original OCR line for debugging
+  isLikelySubscription?: boolean; // true if line has subscription-indicating keywords
 }
 
 export type CardIssuer = "rakuten" | "smbc" | "jcb" | "generic";
