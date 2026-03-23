@@ -107,3 +107,5 @@ Each rule has: `id`, `keywords[]`, `amounts[]` (for disambiguation, empty = matc
 - **Inline styles on TabNavigator/page shell**: Tailwind classes were unreliable in this context
 - **CSP allows `unsafe-inline` and `unsafe-eval`**: Required for ONNX Runtime WASM execution
 - **Dev server HSTS caveat**: `next.config.ts` skips HSTS and `upgrade-insecure-requests` in development mode (`isDev` flag). If the browser cached HSTS from a previous session, use a different port or `127.0.0.1` instead of `localhost`.
+- **Rate limit is client-side only**: `src/lib/rate-limit.ts` uses localStorage — clearing browser data bypasses it. Acceptable for Alpha.
+- **Privacy page missing GitHub repo link**: "GitHubリポジトリのIssue" text has no actual URL.
