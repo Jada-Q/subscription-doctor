@@ -71,7 +71,8 @@
     "billingCycle": "monthly",
     "overlaps": [
       "google_one",
-      "onedrive"
+      "onedrive",
+      "dropbox"
     ],
     "advice": "Google One 2TBは月額¥1,300で同額。写真バックアップだけならGoogle Photosの無料枠(15GB)も活用を。",
     "alternatives": [
@@ -132,7 +133,9 @@
       "google_one",
       "icloud_2tb",
       "icloud_200gb",
-      "dropbox"
+      "dropbox",
+      "icloud_50gb",
+      "icloud_6tb"
     ],
     "advice": "Microsoft 365に含まれる1TB OneDriveの方がコスパ良好。単体契約なら見直しを。",
     "alternatives": [
@@ -162,7 +165,12 @@
     "billingCycle": "monthly",
     "overlaps": [
       "spotify_premium",
-      "youtube_premium"
+      "youtube_premium",
+      "line_music",
+      "amazon_music_unlimited",
+      "spotify_duo",
+      "spotify_family",
+      "youtube_music"
     ],
     "advice": "Spotifyは公式サイトから月額¥980。YouTube Premiumなら広告なし動画も付きます。",
     "alternatives": [
@@ -215,7 +223,9 @@
     "officialPrice": 1200,
     "category": "bundle",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "apple_one_family"
+    ],
     "advice": "Apple Oneは4サービス込みでお得なバンドル。個別契約より割安です。",
     "alternatives": [],
     "cancelUrl": "https://support.apple.com/ja-jp/108052"
@@ -264,7 +274,12 @@
     "billingCycle": "monthly",
     "overlaps": [
       "apple_music",
-      "youtube_premium"
+      "youtube_premium",
+      "line_music",
+      "amazon_music_unlimited",
+      "youtube_music",
+      "spotify_duo",
+      "spotify_family"
     ],
     "advice": "公式サイトから直接契約すれば月額¥980（¥300お得）。無料プランでも十分かも。",
     "alternatives": [
@@ -298,7 +313,12 @@
     "billingCycle": "monthly",
     "overlaps": [
       "spotify_premium",
-      "apple_music"
+      "apple_music",
+      "line_music",
+      "amazon_music_unlimited",
+      "spotify_duo",
+      "spotify_family",
+      "youtube_music"
     ],
     "advice": "公式サイトなら月額¥1,280（¥270お得）。YouTube Musicも含まれるので音楽サブスクが不要に。",
     "alternatives": [
@@ -350,7 +370,9 @@
     "officialPrice": 990,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "disney_plus_premium"
+    ],
     "advice": "年払い(¥9,900/年=月¥825)にすると2ヶ月分お得。",
     "alternatives": [
       {
@@ -375,7 +397,11 @@
     "officialPrice": 2800,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "perplexity_pro",
+      "gemini_advanced",
+      "copilot_pro"
+    ],
     "advice": "公式サイト(chat.openai.com)から直接契約すると月額$20(約¥2,800)。App Store経由は¥200割高。",
     "alternatives": [
       {
@@ -464,7 +490,12 @@
     "billingCycle": "monthly",
     "overlaps": [
       "icloud_2tb",
-      "icloud_200gb"
+      "icloud_200gb",
+      "icloud_50gb",
+      "icloud_6tb",
+      "onedrive",
+      "microsoft_365",
+      "dropbox"
     ],
     "advice": "iCloudと併用していませんか？どちらか一方に統一すると節約に。",
     "alternatives": [],
@@ -716,7 +747,11 @@
     "overlaps": [
       "spotify_premium",
       "apple_music",
-      "youtube_premium"
+      "youtube_premium",
+      "amazon_music_unlimited",
+      "spotify_duo",
+      "spotify_family",
+      "youtube_music"
     ],
     "advice": "公式サイトから月額¥980。LINEの着うた設定が不要ならSpotify(¥980)の方が曲数豊富。",
     "alternatives": [
@@ -740,7 +775,9 @@
     "officialPrice": 0,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "evernote"
+    ],
     "advice": "個人利用なら無料プランで十分な場合が多い。チーム機能が不要なら見直しを。",
     "alternatives": [],
     "cancelUrl": "https://www.notion.so/my-account"
@@ -776,7 +813,8 @@
     "billingCycle": "monthly",
     "overlaps": [
       "google_one",
-      "icloud_2tb"
+      "icloud_2tb",
+      "onedrive"
     ],
     "advice": "Google DriveやiCloudと重複していませんか？一つに統一すると節約に。",
     "alternatives": [
@@ -880,7 +918,9 @@
     "officialPrice": 0,
     "category": "media",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "d_magazine"
+    ],
     "advice": "年払い(¥3,960/年=月¥330)が月額(¥418)より年間¥1,056お得。",
     "alternatives": [
       {
@@ -961,7 +1001,9 @@
     "officialPrice": 0,
     "category": "ai_tools",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "udio"
+    ],
     "advice": "AI音楽生成サービス。無料プランでも1日5曲生成可能。利用頻度が低いなら無料プランで十分かも。",
     "alternatives": [
       {
@@ -1046,7 +1088,9 @@
     "officialPrice": 550,
     "category": "streaming",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "crunchyroll"
+    ],
     "advice": "公式サイトから月額¥550。App Store経由は¥100割高。アニメ専門では最安級。",
     "alternatives": [
       {
@@ -1454,7 +1498,9 @@
     "officialPrice": 0,
     "category": "productivity",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "chatwork"
+    ],
     "advice": "個人利用なら無料プランで十分。メッセージ履歴90日制限が問題なければ有料プランは不要。",
     "alternatives": [
       {
@@ -1479,7 +1525,9 @@
     "officialPrice": 4277,
     "category": "media",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "newspicks"
+    ],
     "advice": "月額¥4,277は高額。NewsPicks(月¥1,700)で代替可能な場合も。無料記事数で足りるか確認を。",
     "alternatives": [
       {
@@ -1556,7 +1604,10 @@
     "officialPrice": 0,
     "category": "security",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "vpn_express",
+      "surfshark"
+    ],
     "advice": "2年プランが月額換算で最安。月額契約は割高。無料VPNは個人情報リスクがあるので注意。",
     "alternatives": [],
     "cancelUrl": "https://my.nordaccount.com/dashboard/"
@@ -1574,7 +1625,10 @@
     "officialPrice": 0,
     "category": "security",
     "billingCycle": "yearly",
-    "overlaps": [],
+    "overlaps": [
+      "mcafee",
+      "eset"
+    ],
     "advice": "Windows Defender(無料)で十分な場合も。Macユーザーならセキュリティソフトの必要性が低い場合も。",
     "alternatives": [
       {
@@ -1599,7 +1653,8 @@
     "category": "security",
     "billingCycle": "yearly",
     "overlaps": [
-      "norton_360"
+      "norton_360",
+      "eset"
     ],
     "advice": "Nortonと両方契約は完全に無駄。Windows Defender(無料)で十分なケースも多い。",
     "alternatives": [
@@ -1625,7 +1680,11 @@
     "officialPrice": 0,
     "category": "dating",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "tinder",
+      "with_dating",
+      "tapple"
+    ],
     "advice": "App Store経由は公式より割高。公式サイトから契約すると月額が安くなります。長期プランで月額大幅割引。",
     "alternatives": [],
     "cancelUrl": "https://pairs.lv/"
@@ -1645,7 +1704,9 @@
     "category": "dating",
     "billingCycle": "monthly",
     "overlaps": [
-      "pairs"
+      "pairs",
+      "with_dating",
+      "tapple"
     ],
     "advice": "複数のマッチングアプリを並行契約していませんか？一つに絞ると大幅節約に。",
     "alternatives": [],
@@ -1665,7 +1726,8 @@
     "billingCycle": "monthly",
     "overlaps": [
       "pairs",
-      "tinder"
+      "tinder",
+      "tapple"
     ],
     "advice": "複数のマッチングアプリを並行利用は高コスト。一つに集中した方が効果的。",
     "alternatives": [],
@@ -1930,7 +1992,11 @@
     "overlaps": [
       "spotify_premium",
       "apple_music",
-      "youtube_premium"
+      "youtube_premium",
+      "line_music",
+      "spotify_duo",
+      "spotify_family",
+      "youtube_music"
     ],
     "advice": "Prime会員なら月額¥980。他の音楽サブスクと重複していないか確認を。",
     "alternatives": [
@@ -2006,7 +2072,9 @@
     "officialPrice": 500,
     "category": "finance",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "zaim"
+    ],
     "advice": "家計簿アプリ。無料プランでも4口座まで連携可能。有料は一括更新・グラフ機能が追加。年払い¥5,300(月¥442)がお得。",
     "alternatives": [
       {
@@ -2125,7 +2193,13 @@
     "category": "music",
     "billingCycle": "monthly",
     "overlaps": [
-      "apple_music"
+      "apple_music",
+      "spotify_premium",
+      "youtube_premium",
+      "line_music",
+      "amazon_music_unlimited",
+      "spotify_family",
+      "youtube_music"
     ],
     "advice": "同居パートナーと2人で使えるプラン。1人あたり¥640でPremiumより安い。公式サイトで¥1,280。",
     "alternatives": [
@@ -2152,7 +2226,13 @@
     "category": "music",
     "billingCycle": "monthly",
     "overlaps": [
-      "apple_music"
+      "apple_music",
+      "spotify_premium",
+      "youtube_premium",
+      "line_music",
+      "amazon_music_unlimited",
+      "spotify_duo",
+      "youtube_music"
     ],
     "advice": "最大6人まで。家族で使えば1人あたり¥263。2人以上で使うならDuoよりお得。",
     "alternatives": [],
@@ -2174,7 +2254,12 @@
     "billingCycle": "monthly",
     "overlaps": [
       "spotify_premium",
-      "apple_music"
+      "apple_music",
+      "youtube_premium",
+      "line_music",
+      "amazon_music_unlimited",
+      "spotify_duo",
+      "spotify_family"
     ],
     "advice": "YouTube Premiumに含まれる。音楽だけならYouTube Music単体(¥1,080)で十分。公式サイトから契約がお得。",
     "alternatives": [
@@ -2310,7 +2395,8 @@
     "category": "security",
     "billingCycle": "monthly",
     "overlaps": [
-      "nordvpn"
+      "nordvpn",
+      "surfshark"
     ],
     "advice": "NordVPNと両方契約は不要。2年プランが月額換算で最安。月額契約は割高。",
     "alternatives": [],
@@ -2415,7 +2501,9 @@
     "officialPrice": 0,
     "category": "security_home",
     "billingCycle": "monthly",
-    "overlaps": [],
+    "overlaps": [
+      "alsok"
+    ],
     "advice": "ホームセキュリティ。スマートロック+防犯カメラ(一括購入)で月額費用なしに切り替えも選択肢。",
     "alternatives": [],
     "cancelUrl": "https://www.secom.co.jp/support/"
