@@ -118,4 +118,10 @@ Each rule has: `id`, `keywords[]`, `amounts[]` (for disambiguation, empty = matc
 - **CSP allows `unsafe-inline` and `unsafe-eval`**: Required for ONNX Runtime WASM execution
 - **Dev server HSTS caveat**: `next.config.ts` skips HSTS and `upgrade-insecure-requests` in development mode (`isDev` flag). If the browser cached HSTS from a previous session, use a different port or `127.0.0.1` instead of `localhost`.
 - **Rate limit is client-side only**: `src/lib/rate-limit.ts` uses localStorage — clearing browser data bypasses it. Acceptable for Alpha.
-- **Privacy page missing GitHub repo link**: "GitHubリポジトリのIssue" text has no actual URL.
+
+## Common Pitfalls (from SPIKE_RESULT.md)
+
+- **OCR dictionary empty line**: `ppocrv5_dict.txt` line 1 is an empty CTC blank token. Never `filter()` it out — causes character corruption.
+- **Turbopack dev mode + iOS Safari**: Does NOT work. Must test with `next build && next start` on physical iOS devices.
+- **PaddleOCR drops spaces**: Service names appear as `APPLECOMBILL` instead of `APPLE COM BILL`. Handled via partial keyword matching in `match.ts:normalizeForMatch`.
+- **WASM threading**: Must set `ort.env.wasm.numThreads = 1` for iOS Safari compatibility.
