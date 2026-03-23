@@ -10,33 +10,67 @@ function extractDate(text: string): string | null {
   const fullMatch = text.match(/(\d{2,4}\/\d{1,2}\/\d{1,2})/);
   if (fullMatch) return fullMatch[1];
 
-  // MM/DD (anywhere in text)
-  const shortSlash = text.match(/(\d{1,2}\/\d{1,2})/);
-  if (shortSlash) return shortSlash[1];
+  // YYYY-MM-DD or YYYY.MM.DD (ISO-like)
+  const isoDate = text.match(/(\d{4})[-.](\d{1,2})[-.](\d{1,2})/);
+  if (isoDate) return `${isoDate[1]}/${isoDate[2]}/${isoDate[3]}`;
+
+  // MM/DD (anywhere in text, allow spaces around slash)
+  const shortSlash = text.match(/(\d{1,2})\s*\/\s*(\d{1,2})/);
+  if (shortSlash) return `${shortSlash[1]}/${shortSlash[2]}`;
 
   // MM月DD日 (Japanese format)
   const jpDate = text.match(/(\d{1,2})月(\d{1,2})日/);
   if (jpDate) return `${jpDate[1]}/${jpDate[2]}`;
 
-  // MM-DD
-  const dashDate = text.match(/(\d{1,2})-(\d{1,2})(?!\d)/);
+  // YYYY年MM月DD日
+  const jpFullDate = text.match(/(\d{4})年(\d{1,2})月(\d{1,2})日/);
+  if (jpFullDate) return `${jpFullDate[1]}/${jpFullDate[2]}/${jpFullDate[3]}`;
+
+  // MM-DD (not part of longer number)
+  const dashDate = text.match(/(?<!\d)(\d{1,2})-(\d{1,2})(?!\d)/);
   if (dashDate) return `${dashDate[1]}/${dashDate[2]}`;
 
-  // MM.DD (dot separator)
-  const dotDate = text.match(/(\d{1,2})\.(\d{1,2})(?!\d)/);
+  // MM.DD (dot separator, not part of longer number)
+  const dotDate = text.match(/(?<!\d)(\d{1,2})\.(\d{1,2})(?!\d)/);
   if (dotDate) return `${dotDate[1]}/${dotDate[2]}`;
 
   // MMDD at start of line (PaddleOCR sometimes strips slash)
   const mmddStart = text.match(/^(\d{2})(\d{2})\s/);
-  if (mmddStart) return `${mmddStart[1]}/${mmddStart[2]}`;
+  if (mmddStart) {
+    const m = parseInt(mmddStart[1], 10);
+    const d = parseInt(mmddStart[2], 10);
+    if (m >= 1 && m <= 12 && d >= 1 && d <= 31) {
+      return `${mmddStart[1]}/${mmddStart[2]}`;
+    }
+  }
 
-  // MMDD anywhere followed by space + Japanese text (common OCR output)
-  const mmddAnywhere = text.match(/(\d{2})(\d{2})\s+[A-Za-z\u3000-\u9fff]/);
+  // MMDD anywhere followed by space + text (common OCR output)
+  const mmddAnywhere = text.match(/(?<!\d)(\d{2})(\d{2})\s+[A-Za-z\u3000-\u9fff]/);
   if (mmddAnywhere) {
     const m = parseInt(mmddAnywhere[1], 10);
     const d = parseInt(mmddAnywhere[2], 10);
     if (m >= 1 && m <= 12 && d >= 1 && d <= 31) {
       return `${mmddAnywhere[1]}/${mmddAnywhere[2]}`;
+    }
+  }
+
+  // Two separate numbers at start: "02 15 ..." (OCR may add space instead of slash)
+  const spaceDate = text.match(/^(\d{1,2})\s+(\d{1,2})\s+/);
+  if (spaceDate) {
+    const m = parseInt(spaceDate[1], 10);
+    const d = parseInt(spaceDate[2], 10);
+    if (m >= 1 && m <= 12 && d >= 1 && d <= 31) {
+      return `${spaceDate[1]}/${spaceDate[2]}`;
+    }
+  }
+
+  // Standalone 4-digit date line: "0215" (no other text)
+  const standalone = text.match(/^(\d{4})$/);
+  if (standalone) {
+    const m = parseInt(standalone[1].slice(0, 2), 10);
+    const d = parseInt(standalone[1].slice(2, 4), 10);
+    if (m >= 1 && m <= 12 && d >= 1 && d <= 31) {
+      return `${standalone[1].slice(0, 2)}/${standalone[1].slice(2, 4)}`;
     }
   }
 
@@ -153,6 +187,20 @@ function isLikelySubscription(description: string, rawLine: string): boolean {
  * Parse OCR lines into structured transactions.
  * Filters out header/footer/payment-method lines and extracts date, description, amount.
  */
+/**
+ * Check if a line is only a date (possibly with whitespace).
+ */
+function isDateOnlyLine(line: string): boolean {
+  const trimmed = line.trim();
+  // Pure date formats: "02/15", "2026/02/15", "0215", "02-15", "2月15日"
+  return /^\d{1,2}\/\d{1,2}$/.test(trimmed) ||
+    /^\d{2,4}\/\d{1,2}\/\d{1,2}$/.test(trimmed) ||
+    /^\d{4}$/.test(trimmed) ||
+    /^\d{1,2}-\d{1,2}$/.test(trimmed) ||
+    /^\d{1,2}月\d{1,2}日$/.test(trimmed) ||
+    /^\d{1,2}\s+\d{1,2}$/.test(trimmed);
+}
+
 export function parseTransactions(
   ocrText: string,
   _issuer: CardIssuer = "generic"
@@ -161,7 +209,9 @@ export function parseTransactions(
   const transactions: ParsedTransaction[] = [];
   let lastDate: string | null = null;
 
-  for (const line of lines) {
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
     // Skip non-transaction lines
     if (SKIP_PATTERNS.some((p) => p.test(line))) continue;
 
@@ -170,6 +220,9 @@ export function parseTransactions(
 
     // Track last seen date for lines that have amount but no date
     if (date) lastDate = date;
+
+    // Date-only line: just update lastDate, don't try to create a transaction
+    if (date && !amount && isDateOnlyLine(line)) continue;
 
     // A transaction line needs an amount > 0
     if (!amount || amount === 0) continue;

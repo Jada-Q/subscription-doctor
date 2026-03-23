@@ -25,8 +25,8 @@ export default function HomePage() {
   const [isDemo, setIsDemo] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
-  const processImage = useCallback(
-    async (file: File) => {
+  const processImages = useCallback(
+    async (files: File[]) => {
       // Rate limit check
       const limit = checkRateLimit();
       if (!limit.allowed) {
@@ -37,19 +37,34 @@ export default function HomePage() {
 
       setStep("processing");
       if (imageUrl) URL.revokeObjectURL(imageUrl);
-      setImageUrl(URL.createObjectURL(file));
+      setImageUrl(URL.createObjectURL(files[0]));
 
       try {
-        // Step 1: OCR
-        setStatus("OCR 処理中...");
         const canvas = canvasRef.current;
         if (!canvas) throw new Error("Canvas not available");
-        const ocr = await recognizeImage(file, canvas, setStatus);
-        setOcrResult(ocr);
+
+        // OCR each image and merge results
+        const allOcrResults: OcrResult[] = [];
+        for (let i = 0; i < files.length; i++) {
+          setStatus(`OCR 処理中... (${i + 1}/${files.length})`);
+          const ocr = await recognizeImage(files[i], canvas, setStatus);
+          allOcrResults.push(ocr);
+        }
+
+        // Merge OCR results
+        const mergedOcr: OcrResult = {
+          text: allOcrResults.map((o) => o.text).join("\n"),
+          lines: allOcrResults.flatMap((o) => o.lines),
+          duration: allOcrResults.reduce((sum, o) => sum + o.duration, 0),
+          avgConfidence:
+            allOcrResults.reduce((sum, o) => sum + o.avgConfidence * o.lines.length, 0) /
+            Math.max(1, allOcrResults.reduce((sum, o) => sum + o.lines.length, 0)),
+        };
+        setOcrResult(mergedOcr);
 
         // Step 2: Parse transactions
         setStatus("テキスト構造化中...");
-        const txs = parseTransactions(ocr.text);
+        const txs = parseTransactions(mergedOcr.text);
         setTransactions(txs);
 
         // Step 3: Match against rules
@@ -78,10 +93,12 @@ export default function HomePage() {
 
   const handleFileChange = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
-      const file = e.target.files?.[0];
-      if (file) processImage(file);
+      const fileList = e.target.files;
+      if (!fileList || fileList.length === 0) return;
+      const files = Array.from(fileList);
+      processImages(files);
     },
-    [processImage]
+    [processImages]
   );
 
   const reset = useCallback(() => {
@@ -154,7 +171,7 @@ export default function HomePage() {
                 クレジットカード明細のスクリーンショットをアップロード
               </p>
               <p className="text-sm text-gray-500 mb-4">
-                JPG / PNG 対応 — データはブラウザ内で処理され、サーバーに送信されません
+                JPG / PNG 対応・複数枚同時アップロード可 — データはブラウザ内で処理され、サーバーに送信されません
               </p>
               <label
                 className="inline-block px-6 py-3 bg-blue-600 text-white rounded-lg text-lg cursor-pointer hover:bg-blue-700 active:bg-blue-800"
@@ -164,6 +181,7 @@ export default function HomePage() {
                 <input
                   type="file"
                   accept="image/png,image/jpeg,image/webp"
+                  multiple
                   onChange={handleFileChange}
                   className="hidden"
                 />
@@ -361,20 +379,33 @@ export default function HomePage() {
                               <span className="font-medium">💡 </span>
                               {item.matchedRule.advice}
                             </div>
-                            {item.matchedRule.alternatives && item.matchedRule.alternatives.length > 0 && (
-                              <div className="mt-1.5 space-y-1">
-                                {item.matchedRule.alternatives.map((alt, j) => (
-                                  <div key={j} className="flex justify-between text-xs text-gray-600 px-1">
-                                    <span>{alt.name} <span className="text-gray-400">({alt.note})</span></span>
-                                    {alt.price > 0 && (
-                                      <span className={alt.price < item.amount ? "text-green-600 font-medium" : ""}>
-                                        ¥{alt.price.toLocaleString()}/月
-                                      </span>
-                                    )}
+                            {(() => {
+                              const cheaperAlts = (item.matchedRule?.alternatives ?? []).filter(
+                                (alt) => alt.price > 0 && alt.price < item.amount
+                              );
+                              if (cheaperAlts.length > 0) {
+                                return (
+                                  <div className="mt-1.5 space-y-1">
+                                    {cheaperAlts.map((alt, j) => (
+                                      <div key={j} className="flex justify-between text-xs text-gray-600 px-1">
+                                        <span>{alt.name} <span className="text-gray-400">({alt.note})</span></span>
+                                        <span className="text-green-600 font-medium">
+                                          ¥{alt.price.toLocaleString()}/月
+                                        </span>
+                                      </div>
+                                    ))}
                                   </div>
-                                ))}
-                              </div>
-                            )}
+                                );
+                              }
+                              if ((item.matchedRule?.alternatives ?? []).length > 0) {
+                                return (
+                                  <div className="mt-1.5 text-xs text-green-700 px-1 font-medium">
+                                    現在の料金は他社と比べてお得です
+                                  </div>
+                                );
+                              }
+                              return null;
+                            })()}
                           </div>
                         )}
                       </div>
@@ -399,7 +430,9 @@ export default function HomePage() {
                       >
                         <div>
                           <span>{item.description}</span>
-                          <span className="text-xs ml-2">{item.date}</span>
+                          {item.date !== "unknown" && (
+                            <span className="text-xs ml-2">{item.date}</span>
+                          )}
                         </div>
                         <span>¥{item.amount.toLocaleString()}</span>
                       </div>
@@ -414,7 +447,7 @@ export default function HomePage() {
                 OCR 詳細（{ocrResult?.lines.length}行 / {ocrResult?.duration}ms / 信頼度{((ocrResult?.avgConfidence ?? 0) * 100).toFixed(0)}%）
               </summary>
               <pre className="mt-2 p-3 bg-gray-50 rounded text-xs overflow-auto max-h-48 whitespace-pre-wrap">
-                {ocrResult?.text}
+                {ocrResult?.text.split("\n").map((line, i) => `${String(i + 1).padStart(3)}| ${line}`).join("\n")}
               </pre>
               <div className="mt-2">
                 <strong>構造化結果 ({transactions.length}件):</strong>

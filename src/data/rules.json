@@ -267,10 +267,10 @@
     "category": "internet",
     "billingCycle": "monthly",
     "overlaps": [],
-    "advice": "NURO光は最大2Gbpsで高速ですが、GMOとくとくBB光(¥4,818)やenひかり(¥4,620)など、より安い光回線もあります。速度が十分なら乗り換え検討を。",
+    "advice": "NURO光は最大2Gbpsで業界最速クラス。2年契約プランなら月額¥5,200が基本ですが、キャンペーン価格で利用中ならお得です。契約更新時に値上がりしないか確認を。",
     "alternatives": [
-      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応で高速" },
       { "name": "enひかり", "price": 4620, "note": "業界最安級・縛りなし" },
+      { "name": "GMOとくとくBB光", "price": 4818, "note": "v6プラス対応で高速" },
       { "name": "楽天ひかり", "price": 4180, "note": "楽天ポイント還元あり" }
     ]
   },
