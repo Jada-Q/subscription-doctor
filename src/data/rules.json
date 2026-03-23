@@ -389,7 +389,7 @@
         "note": "Anthropic製AI、コーディングに強い"
       }
     ],
-    "cancelUrl": "https://chat.openai.com/settings/subscription"
+    "cancelUrl": "https://chatgpt.com/#settings/subscription"
   },
   {
     "id": "adobe_cc",
@@ -615,7 +615,7 @@
     "overlaps": [],
     "advice": "日テレ系コンテンツが中心。Netflixと両方契約中なら、視聴頻度が低い方を解約検討。",
     "alternatives": [],
-    "cancelUrl": "https://www.hulu.jp/account"
+    "cancelUrl": "https://account.hulu.jp/"
   },
   {
     "id": "u_next",
@@ -845,7 +845,7 @@
         "note": "月額換算で¥106お得"
       }
     ],
-    "cancelUrl": "https://ec.nintendo.com/my/membership"
+    "cancelUrl": "https://ec.nintendo.com/my/membership_service"
   },
   {
     "id": "playstation_plus",
@@ -865,7 +865,7 @@
     "overlaps": [],
     "advice": "年払いにすると月額より大幅お得。オンライン対戦をしないならEssentialで十分。",
     "alternatives": [],
-    "cancelUrl": "https://store.playstation.com/ja-jp/category/subscriptions"
+    "cancelUrl": "https://management.account.sony.com/"
   },
   {
     "id": "rakuten_magazine",
