@@ -45,7 +45,14 @@ export async function getOcrService() {
 }
 
 /**
- * Extract pixel data from a File via canvas.
+ * Max dimension for OCR input. Images larger than this are scaled down
+ * to reduce memory usage (critical for iOS Safari) and speed up OCR.
+ * 1600px is enough for credit card statement text to remain readable.
+ */
+const MAX_DIMENSION = 1600;
+
+/**
+ * Extract pixel data from a File via canvas, resizing large images.
  */
 export function fileToImageInput(
   file: File,
@@ -54,15 +61,23 @@ export function fileToImageInput(
   return new Promise((resolve, reject) => {
     const img = document.createElement("img");
     img.onload = () => {
-      canvas.width = img.width;
-      canvas.height = img.height;
+      // Scale down if larger than MAX_DIMENSION
+      let { width, height } = img;
+      if (width > MAX_DIMENSION || height > MAX_DIMENSION) {
+        const scale = MAX_DIMENSION / Math.max(width, height);
+        width = Math.round(width * scale);
+        height = Math.round(height * scale);
+      }
+
+      canvas.width = width;
+      canvas.height = height;
       const ctx = canvas.getContext("2d");
       if (!ctx) return reject(new Error("Canvas context not available"));
-      ctx.drawImage(img, 0, 0);
-      const imageData = ctx.getImageData(0, 0, img.width, img.height);
+      ctx.drawImage(img, 0, 0, width, height);
+      const imageData = ctx.getImageData(0, 0, width, height);
       resolve({
-        width: img.width,
-        height: img.height,
+        width,
+        height,
         data: new Uint8Array(imageData.data.buffer),
       });
       URL.revokeObjectURL(img.src);
