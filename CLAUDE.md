@@ -4,6 +4,10 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 @AGENTS.md
 
+## Current Status
+
+Alpha live at subscription-doctor.vercel.app. 104 subscription rules, 2 features (診断 + 支払い), 15+ test files / 125+ tests passing.
+
 ## Commands
 
 ```bash
