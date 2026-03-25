@@ -1,127 +1,129 @@
 # CLAUDE.md
 
-This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
-
 @AGENTS.md
 
-## Current Status
+## Project Overview
 
-Alpha live at subscription-doctor.vercel.app. 104 subscription rules, 2 features (診断 + 支払い), 15+ test files / 125+ tests passing.
+Subscription Doctor（サブスク診断） — 日本市場向けプライバシーファースト订阅审计工具。用户上传信用卡账单截图，浏览器端 OCR 识别 → 匹配订阅规则 → 检测苹果税/重复订阅 → 生成健康报告。**所有处理在浏览器本地完成，数据不离开设备。**
+
+- **Live**: subscription-doctor.vercel.app
+- **Status**: Alpha (v0.2.0) — 104 规则, 2 功能 (診断 + 支払い), 15 test files / 129 tests passing
 
 ## Commands
 
 ```bash
-npm run build        # Downloads OCR models + next build (Turbopack)
-npm run dev          # Next.js dev server
+npm run dev          # Next.js dev server (Turbopack)
+npm run build        # Downloads OCR models + next build
 npm test             # vitest run (all tests)
-npx vitest run src/lib/parser/extract.test.ts  # Single test file
+npx vitest run <file>  # Single test file
 npm run lint         # ESLint
 ```
 
-The build script runs `scripts/download-models.mjs` before `next build`. This downloads PaddleOCR ONNX models and WASM files to `public/models/`. These files are gitignored and must be downloaded on each fresh environment (CI, Vercel).
+## Tech Stack
 
-`npm test` should produce **15 test files, 129 tests, all passing**. If any test fails, do not commit.
-
-## Deploy / PR Checklist
-
-Before merging a PR:
-1. `npm test` 全绿
-2. `npm run lint` 無エラー（src/ 内の error = 0）
-3. `npm run build` 成功
-4. All imported files must be `git add`ed (Vercel will fail with `module-not-found` otherwise)
-5. No `console.log`残留 in committed code
-6. Japanese UI text reviewed for natural phrasing
-
-## Code Conventions
-
-- **Test files**: Colocated with source as `*.test.ts`. Core logic (`src/lib/`, `src/features/*/lib/`) must have tests. UI components do not require tests.
-- **Feature modules**: New features go in `src/features/<name>/` with their own `index.ts`, page component, `lib/`, and `data/` as needed.
-- **Shared components**: Reusable UI goes in `src/components/` and must be re-exported from `src/components/index.ts`.
-- **All new files must be `git add`ed before pushing** — the Vercel build will fail with module-not-found if any imported file is untracked.
-- **Inline styles on layout-critical elements** (TabNavigator, page shell): Tailwind classes have been unreliable here, use `style={{}}` instead.
-- **Japanese UI text**: All user-facing strings are in Japanese. Advice, labels, and error messages must be written in natural Japanese.
-
-## Environment Variables
-
-All env vars are **optional** for the core MVP. The app runs fully without any `.env.local`.
-
-| Variable | Required | Purpose |
-|----------|----------|---------|
-| `NEXT_PUBLIC_SENTRY_DSN` | No | Client-side error monitoring |
-| `SENTRY_DSN` | No | Server-side error monitoring |
-| `SENTRY_ORG` / `SENTRY_PROJECT` | No | Sentry source map upload (CI only) |
-| `SENTRY_AUTH_TOKEN` | No | Sentry source map upload (CI only) |
-| `GEMINI_API_KEY` | No | v1.1 AI fallback for unmatched services |
-| `NEXT_PUBLIC_SUPABASE_URL` | No | v1.1 future feature |
-
-If `SENTRY_AUTH_TOKEN` is missing, source map upload is silently disabled (`sourcemaps.disable` in next.config.ts).
-
-## Error Handling Conventions
-
-- **localStorage/sessionStorage**: `try-catch` with silent ignore (quota errors are unrecoverable)
-- **OCR / core pipeline errors**: Catch → `setError(msg)` to show user-visible error message
-- **Optional services (Sentry, Analytics)**: Silent fallback — never block core functionality
-- **Rule**: Never `catch { console.log() }` alone — either show to user or silently ignore with a reason
-
-## Known Issues / Tech Debt
-
-- **Affiliate URLs are placeholders**: `affiliateUrl` in `data/templates.ts` currently points to official card issuer websites, not ASP tracking links (A8.net / もしもアフィリエイト). Requires ASP account registration to replace.
-- **AI Fallback not implemented**: Planned Gemini-based identification for unmatched transactions (`GEMINI_API_KEY`). Would be the first server-side API route.
-- **`next/dynamic` breaks page shell SSR**: Do NOT use `dynamic()` imports in `page.tsx` — the wrapper div and TabNavigator will not render in SSR output, leaving only the feature page content visible.
-- **cancelUrl accuracy**: URLs point to official account/cancel pages but services may restructure their URLs. Some point to support landing pages rather than direct cancel buttons.
-
-## Architecture
-
-Japanese-language privacy-first app that analyzes credit card statement screenshots to detect subscription waste. **All processing happens in-browser** — no data leaves the client.
-
-### Tech Stack
 - Next.js 16 (App Router, Turbopack), React 19, TypeScript strict, Tailwind CSS 4
 - PaddleOCR via ONNX Runtime WebAssembly (browser-side OCR)
-- Sentry for error monitoring, Vercel for hosting
+- Sentry error monitoring, Vercel hosting
 - Path alias: `@/*` → `./src/*`
 
-### Two Features (Tab Navigation)
-- **診断 (Doctor)**: `src/features/subscription-doctor/` — OCR-based subscription analysis
-- **支払い (Payment)**: `src/features/payment-calculator/` — credit card reward optimizer
+## Project Structure
 
-`src/app/page.tsx` is a thin shell with `TabNavigator` and direct imports (not dynamic — SSR breaks with `next/dynamic` here).
+```
+src/
+├── app/                          # Next.js App Router pages
+│   ├── page.tsx                  # Main shell + TabNavigator (直接 import, 不用 next/dynamic)
+│   ├── privacy/page.tsx          # プライバシーポリシー
+│   ├── layout.tsx, globals.css   # Layout + global styles
+│   └── spike/ocr/               # OCR spike test page (dev only)
+├── features/
+│   ├── subscription-doctor/      # 診断機能 — OCR 订阅分析
+│   └── payment-calculator/       # 支払い機能 — 信用卡回馈计算
+├── components/                   # Shared UI components (re-export from index.ts)
+├── lib/
+│   ├── ocr/                      # PaddleOCR engine singleton
+│   ├── parser/                   # OCR text → structured transactions
+│   ├── matcher/                  # Transaction → rule matching + overlap detection
+│   ├── report/                   # Score calculation + share card
+│   ├── demo/                     # Demo mode mock data
+│   ├── rate-limit.ts             # Client-side rate limiting
+│   └── analytics.ts              # Analytics helpers
+└── data/
+    └── rules.json                # 104 subscription rules (核心数据资产)
+```
 
-### Data Pipeline (Subscription Doctor)
+## Data Pipeline (Subscription Doctor)
 
 ```
 Image → OCR → Parse → Match → Overlap Detection → Report
 ```
 
-1. **OCR** (`src/lib/ocr/engine.ts`): PaddleOCR singleton, images scaled to max 1600px (iOS memory), models from `public/models/`
-2. **Parse** (`src/lib/parser/extract.ts`): Extracts date/description/amount from OCR text. Handles Japanese date formats, full-width characters, retroactive date assignment
-3. **Match** (`src/lib/matcher/match.ts`): Matches against `src/data/rules.json` (100+ services). Exact keyword match → partial match → unmatched. Disambiguates by amount when keywords overlap (e.g., "APPLE COM BILL" for different iCloud plans)
-4. **Overlap** (`src/lib/matcher/match.ts:detectOverlaps`): Finds duplicate services using bidirectional `overlaps[]` arrays in rules
-5. **Report** (`src/lib/report/score.ts`): Score 0-100, Apple tax detection (appStorePrice - officialPrice), savings calculation
+1. **OCR** (`src/lib/ocr/engine.ts`): PaddleOCR singleton, images scaled to max 1600px
+2. **Parse** (`src/lib/parser/extract.ts`): Date/description/amount extraction, Japanese date handling, full-width normalization
+3. **Match** (`src/lib/matcher/match.ts`): Keyword match against rules.json, amount disambiguation
+4. **Overlap** (`src/lib/matcher/match.ts:detectOverlaps`): Bidirectional overlap detection
+5. **Report** (`src/lib/report/score.ts`): Score 0-100, Apple tax detection, savings calculation
 
-### Rules Database (`src/data/rules.json`)
+## Rules Database (`src/data/rules.json`)
 
-Each rule has: `id`, `keywords[]`, `amounts[]` (for disambiguation, empty = match any), `appStorePrice`, `officialPrice`, `category`, `overlaps[]`, `advice`, `alternatives[]`, `cancelUrl`. When adding rules:
-- Keywords must match how the merchant appears on credit card statements (uppercase, no spaces)
-- `overlaps` must be bidirectional (if A overlaps B, B must overlap A)
-- `alternatives[].price` must be less than the service price (validated)
+Each rule: `id`, `keywords[]`, `amounts[]`, `appStorePrice`, `officialPrice`, `category`, `overlaps[]`, `advice`, `alternatives[]`, `cancelUrl`
 
-### Payment Calculator
+When adding rules:
+- Keywords must match credit card statement format (uppercase, no spaces)
+- `overlaps` must be bidirectional (A→B and B→A)
+- `alternatives[].price` must be less than service price
 
-`src/features/payment-calculator/lib/calculate.ts`: Ranks credit cards by cashback. Priority: active campaign rate > category rate > base rate. Card templates in `data/templates.ts`, user selections persisted in localStorage.
+## Code Conventions
 
-### Key Constraints
-- **No server-side processing**: Everything runs client-side for privacy. No API routes for user data.
-- **iOS Safari**: sessionStorage for state persistence (survives page reloads during OCR), 1600px max image dimension for WASM memory
-- **OCR models are gitignored**: `public/models/*.onnx`, `*.wasm`, `*.mjs`, `*.txt` — downloaded at build time
-- **`serverExternalPackages: ["onnxruntime-web"]`** in next.config.ts is required
-- **Inline styles on TabNavigator/page shell**: Tailwind classes were unreliable in this context
-- **CSP allows `unsafe-inline` and `unsafe-eval`**: Required for ONNX Runtime WASM execution
-- **Dev server HSTS caveat**: `next.config.ts` skips HSTS and `upgrade-insecure-requests` in development mode (`isDev` flag). If the browser cached HSTS from a previous session, use a different port or `127.0.0.1` instead of `localhost`.
-- **Rate limit is client-side only**: `src/lib/rate-limit.ts` uses localStorage — clearing browser data bypasses it. Acceptable for Alpha.
+- **Tests**: Colocated as `*.test.ts`. Core logic (`src/lib/`, `src/features/*/lib/`) must have tests. UI components do not require tests.
+- **Feature modules**: `src/features/<name>/` with `index.ts`, page component, `lib/`, `data/`
+- **Shared components**: `src/components/`, re-export from `src/components/index.ts`
+- **Japanese UI**: All user-facing text in natural Japanese
+- **Inline styles on TabNavigator/page shell**: Tailwind was unreliable here, use `style={{}}`
+- **No `console.log`** in committed code
+- **All new files must be `git add`ed** — Vercel build fails with module-not-found otherwise
 
-## Common Pitfalls (from SPIKE_RESULT.md)
+## Environment Variables
 
-- **OCR dictionary empty line**: `ppocrv5_dict.txt` line 1 is an empty CTC blank token. Never `filter()` it out — causes character corruption.
-- **Turbopack dev mode + iOS Safari**: Does NOT work. Must test with `next build && next start` on physical iOS devices.
-- **PaddleOCR drops spaces**: Service names appear as `APPLECOMBILL` instead of `APPLE COM BILL`. Handled via partial keyword matching in `match.ts:normalizeForMatch`.
-- **WASM threading**: Must set `ort.env.wasm.numThreads = 1` for iOS Safari compatibility.
+All optional for MVP. App runs fully without `.env.local`. See `.env.local.example`.
+
+| Variable | Purpose |
+|----------|---------|
+| `NEXT_PUBLIC_SENTRY_DSN` | Client-side error monitoring |
+| `SENTRY_DSN` / `SENTRY_ORG` / `SENTRY_PROJECT` / `SENTRY_AUTH_TOKEN` | Server-side Sentry + source maps |
+| `GEMINI_API_KEY` / `GEMINI_MODEL_ID` | v1.1 AI fallback (not yet implemented) |
+| `NEXT_PUBLIC_SUPABASE_URL` / `NEXT_PUBLIC_SUPABASE_ANON_KEY` | v1.1 future feature |
+
+## Critical Constraints
+
+- **No server-side user data processing** — everything client-side for privacy
+- **iOS Safari**: `numThreads = 1` for WASM, max 1600px image, sessionStorage for state persistence
+- **OCR models are gitignored**: `public/models/` — downloaded at build time via `scripts/download-models.mjs`
+- **`serverExternalPackages: ["onnxruntime-web"]`** required in next.config.ts
+- **CSP allows `unsafe-inline` + `unsafe-eval`** — required for ONNX Runtime WASM
+- **DO NOT use `next/dynamic`** in `page.tsx` — breaks SSR for page shell and TabNavigator
+- **Dev HSTS caveat**: next.config.ts skips HSTS in dev mode. If browser cached HSTS, use different port or `127.0.0.1`
+- **OCR dictionary**: `ppocrv5_dict.txt` line 1 is empty CTC blank token — never filter it out
+- **Turbopack dev + iOS Safari**: Does NOT work. Must `next build && next start` for iOS testing
+
+## PR / Deploy Checklist
+
+1. `npm test` — all 129 tests green
+2. `npm run lint` — zero errors
+3. `npm run build` — success
+4. All imported files `git add`ed
+5. No `console.log` residue
+6. Japanese UI text reviewed for natural phrasing
+
+## Error Handling
+
+- localStorage/sessionStorage: `try-catch` with silent ignore
+- OCR/pipeline errors: Catch → `setError(msg)` for user-visible message
+- Optional services (Sentry, Analytics): Silent fallback, never block core
+- Never `catch { console.log() }` alone
+
+## Known Tech Debt
+
+- Affiliate URLs are placeholders (need ASP account registration)
+- AI Fallback not implemented (planned Gemini-based for unmatched transactions)
+- cancelUrl accuracy may degrade as services restructure URLs
+- Rate limit is client-side only (localStorage-based, bypassable)
