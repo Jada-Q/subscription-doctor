@@ -60,8 +60,9 @@ Image(s) → OCR (per card) → Parse (per card with cardIndex) → Match → Ov
 1. **OCR** (`src/lib/ocr/engine.ts`): PaddleOCR singleton, images scaled to max 1600px
 2. **Parse** (`src/lib/parser/extract.ts`): Date/description/amount extraction, Japanese date handling, full-width normalization
 3. **Match** (`src/lib/matcher/match.ts`): Keyword match against rules.json, amount disambiguation
-4. **Overlap** (`src/lib/matcher/match.ts:detectOverlaps`): Bidirectional overlap detection
-5. **Report** (`src/lib/report/score.ts`): Score 0-100, Apple tax detection, savings calculation
+4. **Overlap** (`src/lib/matcher/match.ts:detectOverlaps`): Bidirectional overlap detection (different services, same category)
+5. **Cross-Card Duplicates** (`src/lib/matcher/match.ts:detectCrossCardDuplicates`): Same service on multiple cards
+6. **Report** (`src/lib/report/score.ts`): Score 0-100, Apple tax / overlap / cross-card penalties, savings calculation
 
 ## Rules Database (`src/data/rules.json`)
 
