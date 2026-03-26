@@ -7,7 +7,7 @@
 Subscription Doctor（サブスク診断） — 日本市場向けプライバシーファースト订阅审计工具。用户上传信用卡账单截图，浏览器端 OCR 识别 → 匹配订阅规则 → 检测苹果税/重复订阅 → 生成健康报告。**所有处理在浏览器本地完成，数据不离开设备。**
 
 - **Live**: subscription-doctor.vercel.app
-- **Status**: Alpha (v0.2.0) — 104 规则, 2 功能 (診断 + 支払い), 15 test files / 129 tests passing
+- **Status**: Alpha (v0.3.0) — 104 规则, 2 功能 (診断 + 支払い), 15 test files / 147 tests passing
 
 ## Commands
 
