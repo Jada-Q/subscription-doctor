@@ -54,7 +54,7 @@ src/
 ## Data Pipeline (Subscription Doctor)
 
 ```
-Image → OCR → Parse → Match → Overlap Detection → Report
+Image(s) → OCR (per card) → Parse (per card with cardIndex) → Match → Overlap Detection + Cross-Card Duplicate Detection → Report
 ```
 
 1. **OCR** (`src/lib/ocr/engine.ts`): PaddleOCR singleton, images scaled to max 1600px
