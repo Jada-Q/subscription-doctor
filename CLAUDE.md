@@ -108,7 +108,7 @@ All optional for MVP. App runs fully without `.env.local`. See `.env.local.examp
 
 ## PR / Deploy Checklist
 
-1. `npm test` — all 129 tests green
+1. `npm test` — all 147 tests green
 2. `npm run lint` — zero errors
 3. `npm run build` — success
 4. All imported files `git add`ed
