@@ -203,7 +203,8 @@ function isDateOnlyLine(line: string): boolean {
 
 export function parseTransactions(
   ocrText: string,
-  _issuer: CardIssuer = "generic"
+  _issuer: CardIssuer = "generic",
+  cardIndex?: number
 ): ParsedTransaction[] {
   const lines = ocrText.split("\n").map(normalizeText).filter(Boolean);
   const transactions: ParsedTransaction[] = [];
@@ -247,6 +248,7 @@ export function parseTransactions(
       amount,
       rawLine: line,
       isLikelySubscription: isLikelySubscription(description, line),
+      ...(cardIndex !== undefined && { cardIndex }),
     });
   }
 

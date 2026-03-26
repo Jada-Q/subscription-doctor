@@ -30,4 +30,5 @@ export interface MatchedTransaction {
   appleTaxAmount: number; // appStorePrice - officialPrice, 0 if no tax
   billingCycle: "monthly" | "yearly" | "weekly" | "unknown";
   rawLine: string;
+  cardIndex?: number; // 0-based index of source card (multi-card mode)
 }

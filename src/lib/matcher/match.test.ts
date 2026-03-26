@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { matchTransactions, detectOverlaps } from "./match";
+import { matchTransactions, detectOverlaps, detectCrossCardDuplicates } from "./match";
 import type { ParsedTransaction } from "../parser/types";
 
 function makeTx(overrides: Partial<ParsedTransaction> = {}): ParsedTransaction {
@@ -98,5 +98,85 @@ describe("detectOverlaps", () => {
     const matched = matchTransactions(txs);
     const overlaps = detectOverlaps(matched);
     expect(overlaps).toHaveLength(0);
+  });
+});
+
+describe("detectCrossCardDuplicates", () => {
+  it("detects same service on different cards", () => {
+    const txs = [
+      makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 0 }),
+      makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 1 }),
+    ];
+    const matched = matchTransactions(txs);
+    const dups = detectCrossCardDuplicates(matched);
+    expect(dups).toHaveLength(1);
+    expect(dups[0].instances).toHaveLength(2);
+    expect(dups[0].savingsMonthly).toBe(1590);
+  });
+
+  it("does not flag same service on same card", () => {
+    const txs = [
+      makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 0 }),
+      makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 0 }),
+    ];
+    const matched = matchTransactions(txs);
+    const dups = detectCrossCardDuplicates(matched);
+    expect(dups).toHaveLength(0);
+  });
+
+  it("ignores unmatched transactions", () => {
+    const txs = [
+      makeTx({ description: "RANDOM SHOP", cardIndex: 0 }),
+      makeTx({ description: "RANDOM SHOP", cardIndex: 1 }),
+    ];
+    const matched = matchTransactions(txs);
+    const dups = detectCrossCardDuplicates(matched);
+    expect(dups).toHaveLength(0);
+  });
+
+  it("returns empty when no cardIndex set", () => {
+    const txs = [
+      makeTx({ description: "NETFLIX", amount: 1590 }),
+      makeTx({ description: "NETFLIX", amount: 1590 }),
+    ];
+    const matched = matchTransactions(txs);
+    const dups = detectCrossCardDuplicates(matched);
+    expect(dups).toHaveLength(0);
+  });
+
+  it("detects multiple duplicate services", () => {
+    const txs = [
+      makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 0 }),
+      makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 1 }),
+      makeTx({ description: "SPOTIFY", amount: 980, cardIndex: 0 }),
+      makeTx({ description: "SPOTIFY", amount: 980, cardIndex: 1 }),
+    ];
+    const matched = matchTransactions(txs);
+    const dups = detectCrossCardDuplicates(matched);
+    expect(dups).toHaveLength(2);
+  });
+
+  it("keeps cheapest instance in savings calculation", () => {
+    const txs = [
+      makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 0 }),
+      makeTx({ description: "NETFLIX", amount: 790, cardIndex: 1 }),
+    ];
+    const matched = matchTransactions(txs);
+    const dups = detectCrossCardDuplicates(matched);
+    expect(dups).toHaveLength(1);
+    expect(dups[0].savingsMonthly).toBe(1590); // drop the expensive one
+    expect(dups[0].totalMonthly).toBe(2380);
+  });
+
+  it("passes through cardIndex on matched transactions", () => {
+    const txs = [makeTx({ description: "NETFLIX", amount: 1590, cardIndex: 3 })];
+    const matched = matchTransactions(txs);
+    expect(matched[0].cardIndex).toBe(3);
+  });
+
+  it("passes through cardIndex on unmatched transactions", () => {
+    const txs = [makeTx({ description: "RANDOM UNKNOWN SHOP", cardIndex: 2 })];
+    const matched = matchTransactions(txs);
+    expect(matched[0].cardIndex).toBe(2);
   });
 });

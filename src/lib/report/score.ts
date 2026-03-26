@@ -1,5 +1,5 @@
 import type { MatchedTransaction } from "../matcher/types";
-import type { Report, Grade } from "./types";
+import type { Report, Grade, CrossCardDuplicate } from "./types";
 
 /**
  * Generate a health report from matched transactions and overlap groups.
@@ -9,12 +9,13 @@ import type { Report, Grade } from "./types";
  * - Deduct 5 points per Apple tax item (paying more than necessary)
  * - Deduct 10 points per overlap group (duplicate services)
  * - Deduct 1 point per ¥500 of monthly Apple tax
- * - Deduct 2 points per unmatched item (potential untracked subscription)
+ * - Deduct 15 points per cross-card duplicate (same service on multiple cards)
  * - Floor at 0
  */
 export function generateReport(
   matched: MatchedTransaction[],
-  overlaps: MatchedTransaction[][]
+  overlaps: MatchedTransaction[][],
+  crossCardDuplicates: CrossCardDuplicate[] = []
 ): Report {
   const appleTaxItems = matched.filter((m) => m.appleTaxAmount > 0);
   const appleTaxTotal = appleTaxItems.reduce(
@@ -31,23 +32,33 @@ export function generateReport(
   let overlapSavings = 0;
   for (const group of overlaps) {
     if (group.length < 2) continue;
-    // Suggest dropping the more expensive one
     const sorted = [...group].sort((a, b) => a.amount - b.amount);
-    // Savings = sum of all except cheapest
     for (let i = 1; i < sorted.length; i++) {
       overlapSavings += sorted[i].amount;
     }
   }
 
-  const savingsMonthly = appleTaxTotal + overlapSavings;
+  // Calculate cross-card duplicate savings
+  const crossCardSavingsMonthly = crossCardDuplicates.reduce(
+    (sum, d) => sum + d.savingsMonthly,
+    0
+  );
+
+  const savingsMonthly = appleTaxTotal + overlapSavings + crossCardSavingsMonthly;
   const savingsAnnual = savingsMonthly * 12;
+
+  // Determine card count from transactions
+  const cardIndices = new Set(
+    matched.filter((m) => m.cardIndex !== undefined).map((m) => m.cardIndex)
+  );
+  const cardCount = cardIndices.size || (matched.length > 0 ? 1 : 0);
 
   // Score calculation — only penalize actionable items, not unmatched
   let score = 100;
   score -= appleTaxItems.length * 5;
   score -= overlaps.length * 10;
   score -= Math.floor(appleTaxTotal / 500);
-  // Don't penalize unmatched items — they're usually not subscriptions
+  score -= crossCardDuplicates.length * 15;
   score = Math.max(0, Math.min(100, score));
 
   const grade = scoreToGrade(score);
@@ -61,6 +72,10 @@ export function generateReport(
     appleTaxItems,
     appleTaxTotal,
     overlaps,
+    crossCardDuplicates,
+    crossCardSavingsMonthly,
+    crossCardSavingsAnnual: crossCardSavingsMonthly * 12,
+    cardCount,
     savingsMonthly,
     savingsAnnual,
     matchedCount,

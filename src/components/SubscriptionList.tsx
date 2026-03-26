@@ -32,6 +32,7 @@ function categoryLabel(category: string): string {
 }
 
 export function SubscriptionList({ report }: { report: Report }) {
+  const isMultiCard = report.cardCount >= 2;
   const matched = report.allTransactions.filter((m) => m.matchedService);
   if (matched.length === 0) return null;
 
@@ -47,6 +48,9 @@ export function SubscriptionList({ report }: { report: Report }) {
               <div>
                 <div className="font-medium">{item.matchedService}</div>
                 <div className="text-xs text-gray-500">
+                  {isMultiCard && item.cardIndex !== undefined && (
+                    <span className="inline-block px-1 py-0.5 bg-gray-100 rounded text-xs mr-1">カード{item.cardIndex + 1}</span>
+                  )}
                   {item.date !== "unknown" && <span>{item.date}</span>}
                   {item.matchedRule?.category && (
                     <span>{item.date !== "unknown" ? " ・ " : ""}{categoryLabel(item.matchedRule.category)}</span>

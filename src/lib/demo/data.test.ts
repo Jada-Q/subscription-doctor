@@ -53,4 +53,24 @@ describe("generateDemoResult", () => {
     expect(demo.report.savingsMonthly).toBeGreaterThan(0);
     expect(demo.report.savingsAnnual).toBe(demo.report.savingsMonthly * 12);
   });
+
+  it("detects cross-card duplicates (Netflix + Amazon Prime on 2 cards)", () => {
+    expect(demo.report.crossCardDuplicates.length).toBeGreaterThanOrEqual(2);
+    const netflixDup = demo.report.crossCardDuplicates.find(
+      (d) => d.serviceName.includes("Netflix")
+    );
+    expect(netflixDup).toBeDefined();
+    expect(netflixDup!.instances.length).toBe(2);
+  });
+
+  it("reports cardCount of 2 in demo", () => {
+    expect(demo.report.cardCount).toBe(2);
+  });
+
+  it("includes cross-card savings", () => {
+    expect(demo.report.crossCardSavingsMonthly).toBeGreaterThan(0);
+    expect(demo.report.crossCardSavingsAnnual).toBe(
+      demo.report.crossCardSavingsMonthly * 12
+    );
+  });
 });

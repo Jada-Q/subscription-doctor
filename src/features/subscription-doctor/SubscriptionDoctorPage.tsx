@@ -5,7 +5,7 @@ import { recognizeImage } from "@/lib/ocr";
 import type { OcrResult } from "@/lib/ocr";
 import { parseTransactions } from "@/lib/parser";
 import type { ParsedTransaction } from "@/lib/parser";
-import { matchTransactions, detectOverlaps } from "@/lib/matcher";
+import { matchTransactions, detectOverlaps, detectCrossCardDuplicates } from "@/lib/matcher";
 import { generateReport } from "@/lib/report";
 import type { Report } from "@/lib/report";
 import { generateShareCard } from "@/lib/report/share";
@@ -20,6 +20,7 @@ import {
   FeatureCard,
   SubscriptionList,
   UnmatchedTransactions,
+  CrossCardDuplicates,
 } from "@/components";
 
 type Step = "upload" | "processing" | "result";
@@ -110,15 +111,25 @@ export default function SubscriptionDoctorPage() {
         const canvas = canvasRef.current;
         if (!canvas) throw new Error("Canvas not available");
 
-        // OCR each image and merge results
+        const isMultiCard = files.length >= 2;
+
+        // OCR each image and parse per-card
         const allOcrResults: OcrResult[] = [];
+        const allParsedTxs: ParsedTransaction[] = [];
         for (let i = 0; i < files.length; i++) {
           setStatus(`OCR 処理中... (${i + 1}/${files.length})`);
           const ocr = await recognizeImage(files[i], canvas, setStatus);
           allOcrResults.push(ocr);
+          // Parse per-card with cardIndex for multi-card mode
+          const cardTxs = parseTransactions(
+            ocr.text,
+            "generic",
+            isMultiCard ? i : undefined
+          );
+          allParsedTxs.push(...cardTxs);
         }
 
-        // Merge OCR results
+        // Merge OCR results (for debug view)
         const mergedOcr: OcrResult = {
           text: allOcrResults.map((o) => o.text).join("\n"),
           lines: allOcrResults.flatMap((o) => o.lines),
@@ -130,28 +141,27 @@ export default function SubscriptionDoctorPage() {
         setOcrResult(mergedOcr);
         trackEvent("ocr_complete", { lines: mergedOcr.lines.length, duration: mergedOcr.duration });
 
-        // Step 2: Parse transactions
         setStatus("テキスト構造化中...");
-        const txs = parseTransactions(mergedOcr.text);
-        setTransactions(txs);
+        setTransactions(allParsedTxs);
 
         // Step 3: Match against rules
         setStatus("サービス照合中...");
-        const matchedTxs = matchTransactions(txs);
+        const matchedTxs = matchTransactions(allParsedTxs);
 
-        // Step 4: Detect overlaps
+        // Step 4: Detect overlaps + cross-card duplicates
         const overlapGroups = detectOverlaps(matchedTxs);
+        const crossCardDups = detectCrossCardDuplicates(matchedTxs);
 
         // Step 5: Generate report
         setStatus("レポート生成中...");
-        const rpt = generateReport(matchedTxs, overlapGroups);
+        const rpt = generateReport(matchedTxs, overlapGroups, crossCardDups);
         setReport(rpt);
         hasResultRef.current = true;
 
         recordScan();
         trackEvent("result_view", { matched: rpt.matchedCount, score: rpt.score });
         // Persist result so iOS Safari page reloads can restore it
-        saveResult({ ocrResult: mergedOcr, transactions: txs, report: rpt });
+        saveResult({ ocrResult: mergedOcr, transactions: allParsedTxs, report: rpt });
         setStatus("");
         setStep("result");
       } catch (e) {
@@ -174,6 +184,10 @@ export default function SubscriptionDoctorPage() {
       const fileList = e.target.files;
       if (!fileList || fileList.length === 0) return;
       const files = Array.from(fileList);
+      if (files.length > 5) {
+        setError("アップロードできる画像は5枚までです。");
+        return;
+      }
       processImages(files);
     },
     [processImages]
@@ -451,6 +465,11 @@ export default function SubscriptionDoctorPage() {
                   </div>
                 ))}
               </section>
+            )}
+
+            {/* Cross-Card Duplicates */}
+            {report.crossCardDuplicates.length > 0 && (
+              <CrossCardDuplicates duplicates={report.crossCardDuplicates} />
             )}
 
             <SubscriptionList report={report} />

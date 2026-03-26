@@ -5,6 +5,7 @@ import type { MatchedTransaction } from "@/lib/matcher";
 import type { Report } from "@/lib/report";
 
 export function UnmatchedTransactions({ report }: { report: Report }) {
+  const isMultiCard = report.cardCount >= 2;
   const unmatched = report.allTransactions.filter((m) => !m.matchedService);
   if (unmatched.length === 0) return null;
 
@@ -22,6 +23,9 @@ export function UnmatchedTransactions({ report }: { report: Report }) {
               className="flex justify-between items-center p-2 text-gray-500"
             >
               <div>
+                {isMultiCard && item.cardIndex !== undefined && (
+                  <span className="inline-block px-1 py-0.5 bg-gray-100 rounded text-xs mr-1">カード{item.cardIndex + 1}</span>
+                )}
                 <span>{item.description}</span>
                 {item.date !== "unknown" && (
                   <span className="text-xs ml-2">{item.date}</span>

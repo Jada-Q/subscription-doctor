@@ -90,8 +90,12 @@ export function generateShareCard(report: Report): string {
   ctx.textAlign = "center";
 
   const emoji = gradeEmoji(report.grade);
+  const cardInfo = report.cardCount >= 2 ? `（${report.cardCount}枚のカード）` : "";
+  const dupInfo = report.crossCardDuplicates.length > 0
+    ? ` / カード横断重複: ${report.crossCardDuplicates.length}件`
+    : "";
   ctx.fillText(
-    `${emoji} ${report.totalCount}件のサブスクを検出`,
+    `${emoji} ${report.totalCount}件のサブスクを検出${cardInfo}${dupInfo}`,
     CARD_WIDTH / 2,
     statsY
   );

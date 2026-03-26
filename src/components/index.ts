@@ -5,5 +5,6 @@ export { FeedbackSection } from "./FeedbackSection";
 export { FeatureCard } from "./FeatureCard";
 export { SubscriptionList } from "./SubscriptionList";
 export { UnmatchedTransactions } from "./UnmatchedTransactions";
+export { CrossCardDuplicates } from "./CrossCardDuplicates";
 export { TabNavigator } from "./TabNavigator";
 export type { TabId } from "./TabNavigator";

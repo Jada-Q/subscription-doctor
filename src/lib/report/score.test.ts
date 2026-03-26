@@ -90,6 +90,57 @@ describe("generateReport", () => {
     const report = generateReport(matched, []);
     expect(report.score).toBe(100);
   });
+
+  it("deducts 15 points per cross-card duplicate", () => {
+    const matched = [makeTx(), makeTx()];
+    const crossCardDuplicates = [
+      {
+        ruleId: "netflix_premium",
+        serviceName: "Netflix (Premium)",
+        instances: matched,
+        totalMonthly: 2000,
+        savingsMonthly: 1000,
+      },
+    ];
+    const report = generateReport(matched, [], crossCardDuplicates);
+    expect(report.score).toBe(85); // 100 - 15
+    expect(report.crossCardDuplicates).toHaveLength(1);
+  });
+
+  it("includes cross-card savings in total savings", () => {
+    const matched = [makeTx(), makeTx()];
+    const crossCardDuplicates = [
+      {
+        ruleId: "netflix_premium",
+        serviceName: "Netflix (Premium)",
+        instances: matched,
+        totalMonthly: 3180,
+        savingsMonthly: 1590,
+      },
+    ];
+    const report = generateReport(matched, [], crossCardDuplicates);
+    expect(report.crossCardSavingsMonthly).toBe(1590);
+    expect(report.crossCardSavingsAnnual).toBe(19080);
+    expect(report.savingsMonthly).toBe(1590); // only cross-card savings (no apple tax or overlaps)
+  });
+
+  it("works without cross-card duplicates (backward compat)", () => {
+    const matched = [makeTx()];
+    const report = generateReport(matched, []);
+    expect(report.crossCardDuplicates).toHaveLength(0);
+    expect(report.crossCardSavingsMonthly).toBe(0);
+    expect(report.cardCount).toBe(1);
+  });
+
+  it("calculates cardCount from transactions", () => {
+    const matched = [
+      makeTx({ cardIndex: 0 }),
+      makeTx({ cardIndex: 1 }),
+      makeTx({ cardIndex: 2 }),
+    ];
+    const report = generateReport(matched, []);
+    expect(report.cardCount).toBe(3);
+  });
 });
 
 describe("gradeLabel", () => {

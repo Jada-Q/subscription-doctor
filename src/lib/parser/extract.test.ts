@@ -182,4 +182,26 @@ describe("parseTransactions", () => {
     expect(result).toHaveLength(1);
     expect(result[0].date).toBe("26/02/15");
   });
+
+  it("stamps cardIndex when provided", () => {
+    const text = "02/15 NETFLIX 1590";
+    const result = parseTransactions(text, "generic", 2);
+    expect(result).toHaveLength(1);
+    expect(result[0].cardIndex).toBe(2);
+  });
+
+  it("leaves cardIndex undefined when not provided", () => {
+    const text = "02/15 NETFLIX 1590";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].cardIndex).toBeUndefined();
+  });
+
+  it("stamps cardIndex on all transactions", () => {
+    const text = ["02/15 NETFLIX 1590", "02/16 SPOTIFY 980"].join("\n");
+    const result = parseTransactions(text, "generic", 0);
+    expect(result).toHaveLength(2);
+    expect(result[0].cardIndex).toBe(0);
+    expect(result[1].cardIndex).toBe(0);
+  });
 });

@@ -37,6 +37,9 @@ export function ScoreCard({ report }: { report: Report }) {
       </div>
       <div className="text-sm text-gray-500 mt-1">
         {report.matchedCount}件のサブスクを識別
+        {report.cardCount >= 2 && (
+          <span className="block text-xs mt-0.5">{report.cardCount}枚のカードを分析</span>
+        )}
       </div>
     </div>
   );

@@ -1,5 +1,6 @@
 import type { ParsedTransaction } from "../parser/types";
 import type { ServiceRule, MatchedTransaction } from "./types";
+import type { CrossCardDuplicate } from "../report/types";
 import rulesData from "../../data/rules.json";
 
 const rules: ServiceRule[] = rulesData as ServiceRule[];
@@ -92,6 +93,7 @@ function matchTransaction(tx: ParsedTransaction): MatchedTransaction {
     appleTaxAmount: 0,
     billingCycle: "unknown",
     rawLine: tx.rawLine,
+    ...(tx.cardIndex !== undefined && { cardIndex: tx.cardIndex }),
   };
 }
 
@@ -111,6 +113,7 @@ function buildMatch(
     appleTaxAmount: appleTax > 0 ? appleTax : 0,
     billingCycle: rule.billingCycle,
     rawLine: tx.rawLine,
+    ...(tx.cardIndex !== undefined && { cardIndex: tx.cardIndex }),
   };
 }
 
@@ -169,6 +172,47 @@ export function detectOverlaps(
   }
 
   return groups;
+}
+
+/**
+ * Detect the same subscription service appearing on different cards.
+ * Returns groups where the same rule.id is matched on 2+ distinct cardIndex values.
+ */
+export function detectCrossCardDuplicates(
+  matched: MatchedTransaction[]
+): CrossCardDuplicate[] {
+  const byRule = new Map<string, MatchedTransaction[]>();
+
+  for (const m of matched) {
+    if (m.matchedRule && m.cardIndex !== undefined) {
+      const existing = byRule.get(m.matchedRule.id);
+      if (existing) {
+        existing.push(m);
+      } else {
+        byRule.set(m.matchedRule.id, [m]);
+      }
+    }
+  }
+
+  const duplicates: CrossCardDuplicate[] = [];
+  for (const [ruleId, instances] of byRule) {
+    const uniqueCards = new Set(instances.map((i) => i.cardIndex));
+    if (uniqueCards.size < 2) continue;
+
+    const sorted = [...instances].sort((a, b) => a.amount - b.amount);
+    const total = instances.reduce((s, i) => s + i.amount, 0);
+    const savings = total - sorted[0].amount;
+
+    duplicates.push({
+      ruleId,
+      serviceName: instances[0].matchedService!,
+      instances,
+      totalMonthly: total,
+      savingsMonthly: savings,
+    });
+  }
+
+  return duplicates;
 }
 
 /**
