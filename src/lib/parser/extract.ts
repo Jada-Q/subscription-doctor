@@ -106,7 +106,15 @@ function extractAmount(text: string): number | null {
     return isRefund ? -val : val;
   }
 
-  // Standalone number at end (likely amount)
+  // SMBC/multi-column table format:
+  //   "ご利用金額  区分(1-2桁)  回数(1-2桁)  お支払い金額  [現地通貨 換算レート 換算日...]"
+  // e.g. "1,622 1 1 1,622 10.00USD 162.265 0227"  → お支払い金額 = 1622
+  //      "-15,092 1 1 -15,092 ..."                 → お支払い金額 = -15092 (refund)
+  // Must come BEFORE the "trailing number" fallback to avoid picking up 換算日(0227/0228).
+  const tableMatch = normalized.match(/(-?\d{3,})\s+\d{1,2}\s+\d{1,2}\s+(-?\d{3,})/);
+  if (tableMatch) return parseInt(tableMatch[2], 10);
+
+  // Standalone number at end (likely amount) — generic fallback
   const numMatch = normalized.match(/\s(\d{3,})$/);
   if (numMatch) {
     const val = parseInt(numMatch[1], 10);

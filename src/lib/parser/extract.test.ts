@@ -232,6 +232,43 @@ describe("parseTransactions", () => {
     expect(result[1].amount).toBe(980);
   });
 
+  // --- SMBC multi-column table format (actual OCR output) ---
+
+  it("extracts お支払い金額 from SMBC table row — not 換算日 at end", () => {
+    // Real OCR line: 換算日(0227) was being picked up as ¥227
+    const text = "26/02/26 SUNOINC.(SUNO.COM) 1,622 1 1 1,622 10.00USD 162.265 0227";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].amount).toBe(1622);
+  });
+
+  it("excludes refund from SMBC table row (negative お支払い金額)", () => {
+    // Real OCR line: 換算日(0228) was being picked up as ¥228, refund not excluded
+    const text = "26/02/27 EXPRESSVPN.COM(GIBRALTAR) -15,092 1 1 -15,092 -15092.00 JPY 1.00 0228";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(0);
+  });
+
+  it("detects APPLECOMBILL from SMBC table row", () => {
+    const text = "26/03/03 APPLECOMBILL 1,500 1 1 1,500 0";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].amount).toBe(1500);
+    expect(result[0].description).toContain("APPLECOMBILL");
+  });
+
+  it("handles full SMBC statement with foreign/domestic/refund in one batch", () => {
+    const text = [
+      "26/03/03 APPLECOMBILL 1,500 1 1 1,500 0",
+      "26/02/26 SUNOINC.(SUNO.COM) 1,622 1 1 1,622 10.00USD 162.265 0227",
+      "26/02/27 EXPRESSVPN.COM(GIBRALTAR) -15,092 1 1 -15,092 -15092.00 JPY 1.00 0228",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(2); // ExpressVPN excluded as refund
+    expect(result.find((t) => t.description.includes("APPLECOMBILL"))?.amount).toBe(1500);
+    expect(result.find((t) => t.description.includes("SUNOINC") || t.description.includes("SUNO"))?.amount).toBe(1622);
+  });
+
   // --- Bug fixes: お支払い金額 column, refunds, APPLE COM BILL ---
 
   it("uses お支払い金額 line as authoritative JPY amount (overrides spurious amount on description line)", () => {
