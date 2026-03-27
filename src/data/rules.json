@@ -21,7 +21,7 @@
     ],
     "advice": "Google One 100GBは月額¥250で容量2倍。iCloudとの併用が不要なら乗り換え検討を。",
     "alternatives": [],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "icloud_200gb",
@@ -51,7 +51,7 @@
         "note": "ほぼ同額"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "icloud_2tb",
@@ -82,7 +82,7 @@
         "note": "同額だがYouTube Premium特典付き"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "icloud_6tb",
@@ -112,7 +112,7 @@
         "note": "データ整理で十分かも"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "onedrive",
@@ -180,7 +180,7 @@
         "note": "月¥100お得"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "apple_tv_plus",
@@ -206,7 +206,7 @@
         "note": "¥300増で Music+Arcade+iCloud 50GB付き"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "apple_one_individual",
@@ -228,7 +228,7 @@
     ],
     "advice": "Apple Oneは4サービス込みでお得なバンドル。個別契約より割安です。",
     "alternatives": [],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "netflix_standard",
@@ -832,11 +832,17 @@
     "plan": "",
     "keywords": [
       "ANTHROPIC",
-      "CLAUDE"
+      "CLAUDE",
+      "APPLE COM BILL",
+      "APPLE.COM/BILL",
+      "APPLECOMBILL"
     ],
-    "amounts": [],
-    "appStorePrice": 0,
-    "officialPrice": 0,
+    "amounts": [
+      2800,
+      3000
+    ],
+    "appStorePrice": 3000,
+    "officialPrice": 2800,
     "category": "ai_tools",
     "billingCycle": "monthly",
     "overlaps": [],
@@ -1279,7 +1285,7 @@
         "note": "¥300増で Music+TV++iCloud付き"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "xbox_game_pass",
@@ -2033,7 +2039,7 @@
         "note": "無料で豊富"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "strava",
@@ -2468,7 +2474,7 @@
     ],
     "advice": "家族6人まで共有可能。Apple Music/TV+/Arcade/iCloud 200GBのセット。個別契約より大幅お得。",
     "alternatives": [],
-    "cancelUrl": "https://support.apple.com/ja-jp/108052"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428"
   },
   {
     "id": "meiji_yasuda_mimamori",
