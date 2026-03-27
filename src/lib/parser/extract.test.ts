@@ -204,4 +204,91 @@ describe("parseTransactions", () => {
     expect(result[0].cardIndex).toBe(0);
     expect(result[1].cardIndex).toBe(0);
   });
+
+  it("retroactively updates amount from 回払い line (Japanese 2-line format)", () => {
+    // Common pattern: service name on line 1 (may have spurious number),
+    // real amount on the 回払い line (skipped for description, but amount extracted)
+    const text = [
+      "SUNO INC ご本人 227",
+      "26/02/26 1回払い 26/03 1,622",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].description).toContain("SUNO");
+    expect(result[0].amount).toBe(1622); // real amount from 回払い line
+    expect(result[0].date).toBe("26/02/26");
+  });
+
+  it("retroactively updates amount from 1回払い line without corrupting unrelated transactions", () => {
+    const text = [
+      "NETFLIX ご本人 999",
+      "26/02/18 1回払い 26/03 1,590",
+      "SPOTIFY ご本人 100",
+      "26/02/20 1回払い 26/03 980",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(2);
+    expect(result[0].amount).toBe(1590);
+    expect(result[1].amount).toBe(980);
+  });
+
+  // --- Bug fixes: お支払い金額 column, refunds, APPLE COM BILL ---
+
+  it("uses お支払い金額 line as authoritative JPY amount (overrides spurious amount on description line)", () => {
+    // Suno pattern: description line has USD-derived number, real JPY on お支払い line
+    const text = [
+      "SUNO INC SUNOCOM ご本人 227",
+      "26/02/27 1回払い 26/03",
+      "お支払い金額 ¥1,622",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].amount).toBe(1622);
+    expect(result[0].description).toContain("SUNO");
+  });
+
+  it("excludes refund transaction when お支払い金額 line is negative", () => {
+    // ExpressVPN refund pattern
+    const text = [
+      "EXPRESSVPN GIBRALTAR ご本人 228",
+      "26/02/28 1回払い 26/03",
+      "お支払い金額 -¥15,092",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(0);
+  });
+
+  it("excludes refund transaction when 回払い line has △ amount", () => {
+    const text = [
+      "EXPRESSVPN GIBRALTAR ご本人 228",
+      "26/02/28 1回払い 26/03 △15092",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(0);
+  });
+
+  it("creates transaction from description-only line when お支払い金額 line follows", () => {
+    // APPLE COM BILL pattern: no amount on description line
+    const text = [
+      "APPLE COM BILL ご本人",
+      "26/02/15 1回払い 26/03",
+      "お支払い金額 ¥1,500",
+    ].join("\n");
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(1);
+    expect(result[0].amount).toBe(1500);
+    expect(result[0].description).toContain("APPLE");
+  });
+
+  it("excludes negative amounts on description line (direct refund)", () => {
+    const text = "02/15 EXPRESSVPN -¥15,092";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(0);
+  });
+
+  it("detects △ prefix as refund and returns negative amount", () => {
+    const text = "02/15 EXPRESSVPN △15092";
+    const result = parseTransactions(text);
+    expect(result).toHaveLength(0);
+  });
 });

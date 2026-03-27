@@ -80,21 +80,38 @@ function extractDate(text: string): string | null {
 /**
  * Extract amount in JPY from text.
  * Handles: ¥1,300 / ¥1300 / 1,300円 / 1300
+ * Returns negative for refunds (△/▲ prefix, or -¥ prefix).
  */
 function extractAmount(text: string): number | null {
   const normalized = removeNumberCommas(text);
 
-  // ¥ prefix
+  // Detect refund indicators: △/▲ (Japanese), or -¥ prefix
+  const isRefund = /[△▲]/.test(text) || /-\s*¥/.test(normalized);
+
+  // △/▲ directly before digits (no space): △15092
+  const triangleMatch = normalized.match(/[△▲]\s*(\d+)/);
+  if (triangleMatch) return -parseInt(triangleMatch[1], 10);
+
+  // ¥ prefix (handles -¥ too — isRefund covers the sign)
   const yenMatch = normalized.match(/¥\s*(\d+)/);
-  if (yenMatch) return parseInt(yenMatch[1], 10);
+  if (yenMatch) {
+    const val = parseInt(yenMatch[1], 10);
+    return isRefund ? -val : val;
+  }
 
   // 円 suffix
   const enMatch = normalized.match(/(\d+)\s*円/);
-  if (enMatch) return parseInt(enMatch[1], 10);
+  if (enMatch) {
+    const val = parseInt(enMatch[1], 10);
+    return isRefund ? -val : val;
+  }
 
   // Standalone number at end (likely amount)
   const numMatch = normalized.match(/\s(\d{3,})$/);
-  if (numMatch) return parseInt(numMatch[1], 10);
+  if (numMatch) {
+    const val = parseInt(numMatch[1], 10);
+    return isRefund ? -val : val;
+  }
 
   return null;
 }
@@ -209,6 +226,9 @@ export function parseTransactions(
   const lines = ocrText.split("\n").map(normalizeText).filter(Boolean);
   const transactions: ParsedTransaction[] = [];
   let lastDate: string | null = null;
+  // Holds a description-only line waiting for its JPY amount from a subsequent
+  // お支払い金額 line. Cleared when a new description line or complete transaction appears.
+  let pendingTx: Omit<ParsedTransaction, "amount"> | null = null;
 
   for (const line of lines) {
     // ALWAYS extract date from every line, even lines we'll skip.
@@ -226,21 +246,78 @@ export function parseTransactions(
     }
 
     // Skip non-transaction lines (after extracting date above)
-    if (SKIP_PATTERNS.some((p) => p.test(line))) continue;
+    if (SKIP_PATTERNS.some((p) => p.test(line))) {
+      // For "回払い" lines: the real JPY charge amount is often on this skipped line.
+      // If the amount is negative (△/refund), discard the pending/last transaction.
+      if (/回払い/.test(line)) {
+        const skipLineAmount = extractAmount(line);
+        if (skipLineAmount !== null) {
+          if (skipLineAmount < 0) {
+            // Refund on 回払い line → discard
+            pendingTx = null;
+            if (transactions.length > 0) transactions.pop();
+          } else if (skipLineAmount > 0) {
+            if (pendingTx) {
+              transactions.push({ ...pendingTx, amount: skipLineAmount });
+              pendingTx = null;
+            } else if (transactions.length > 0) {
+              transactions[transactions.length - 1].amount = skipLineAmount;
+            }
+          }
+        }
+      }
+      // For "お支払い" lines: authoritative JPY payment amount.
+      // Always overrides any spurious amount from the description line (e.g. USD value).
+      // Negative amount means refund → discard transaction.
+      if (/お支払い/.test(line)) {
+        const skipLineAmount = extractAmount(line);
+        if (skipLineAmount !== null) {
+          if (skipLineAmount < 0) {
+            // Refund → discard
+            pendingTx = null;
+            if (transactions.length > 0) transactions.pop();
+          } else if (skipLineAmount > 0) {
+            if (pendingTx) {
+              transactions.push({ ...pendingTx, amount: skipLineAmount });
+              pendingTx = null;
+            } else if (transactions.length > 0) {
+              transactions[transactions.length - 1].amount = skipLineAmount;
+            }
+          }
+        }
+      }
+      continue;
+    }
 
     const amount = extractAmount(line);
 
     // Date-only line: just update lastDate (already done above)
     if (date && !amount && isDateOnlyLine(line)) continue;
 
-    // A transaction line needs an amount > 0
-    if (!amount || amount === 0) continue;
-
     const effectiveDate = date || lastDate || "unknown";
     const description = extractDescription(line, date, amount);
 
     // Skip if description is too short (likely noise)
     if (description.length < 2) continue;
+
+    // New description line clears any stale pending transaction
+    pendingTx = null;
+
+    if (!amount || amount === 0) {
+      // Description exists but no amount on this line.
+      // Save as pending — a subsequent お支払い金額 line will supply the JPY amount.
+      pendingTx = {
+        date: effectiveDate,
+        description,
+        rawLine: line,
+        isLikelySubscription: isLikelySubscription(description, line),
+        ...(cardIndex !== undefined && { cardIndex }),
+      };
+      continue;
+    }
+
+    // Negative amount on description line = refund, skip
+    if (amount < 0) continue;
 
     transactions.push({
       date: effectiveDate,
@@ -252,5 +329,6 @@ export function parseTransactions(
     });
   }
 
-  return transactions;
+  // Final safety filter: exclude any refund/zero-amount entries
+  return transactions.filter((tx) => tx.amount > 0);
 }
