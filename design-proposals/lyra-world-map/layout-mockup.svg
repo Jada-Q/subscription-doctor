@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1188 840" width="1188" height="840">
+  <defs>
+    <linearGradient id="sea" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#7FECDC"/>
+      <stop offset="1" stop-color="#40E0D0"/>
+    </linearGradient>
+    <pattern id="staff" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="10" x2="40" y2="10" stroke="#FFFFF0" stroke-opacity="0.35" stroke-width="0.5"/>
+      <line x1="0" y1="20" x2="40" y2="20" stroke="#FFFFF0" stroke-opacity="0.35" stroke-width="0.5"/>
+      <line x1="0" y1="30" x2="40" y2="30" stroke="#FFFFF0" stroke-opacity="0.35" stroke-width="0.5"/>
+    </pattern>
+    <style>
+      .ttl { font-family: 'Cormorant Garamond', 'Times New Roman', serif; font-style: italic; }
+      .sub { font-family: 'Futura', 'Helvetica Neue', sans-serif; letter-spacing: 4px; }
+      .label { font-family: 'Avenir Next', 'Helvetica Neue', sans-serif; font-weight: 300; }
+      .jp { font-family: 'Hiragino Sans', 'Noto Sans JP', sans-serif; font-weight: 300; }
+      .continent { font-family: 'Avenir Next', sans-serif; font-weight: 600; letter-spacing: 2px; fill: #1F3A5F; }
+    </style>
+  </defs>
+
+  <!-- Base ivory background -->
+  <rect width="1188" height="840" fill="#FFFFF0"/>
+
+  <!-- Sea / global area -->
+  <rect x="40" y="120" width="1108" height="640" fill="url(#sea)" rx="8"/>
+  <rect x="40" y="120" width="1108" height="640" fill="url(#staff)" rx="8"/>
+
+  <!-- Title block -->
+  <text x="60" y="65" class="ttl" font-size="38" fill="#1F3A5F">Symphony of Hope</text>
+  <text x="60" y="95" class="sub" font-size="13" fill="#FF7F50">— 希望のシンフォニー世界地図 —</text>
+
+  <!-- Brand mark right -->
+  <text x="1128" y="60" class="ttl" font-size="22" fill="#1F3A5F" text-anchor="end">Lyra Design</text>
+  <text x="1128" y="82" class="label" font-size="10" fill="#1F3A5F" text-anchor="end" opacity="0.7">est. 2026</text>
+
+  <!-- Constellation Lyra (top right of map, hidden signature) -->
+  <g transform="translate(1040,160)">
+    <circle cx="0" cy="0" r="2.5" fill="#FFD700"/>
+    <circle cx="18" cy="-8" r="3.5" fill="#FFD700"/>
+    <circle cx="32" cy="14" r="2" fill="#FFD700"/>
+    <circle cx="10" cy="22" r="2" fill="#FFD700"/>
+    <circle cx="-8" cy="18" r="1.8" fill="#FFD700"/>
+    <line x1="0" y1="0" x2="18" y2="-8" stroke="#FFD700" stroke-width="0.4" opacity="0.6"/>
+    <line x1="18" y1="-8" x2="32" y2="14" stroke="#FFD700" stroke-width="0.4" opacity="0.6"/>
+    <line x1="32" y1="14" x2="10" y2="22" stroke="#FFD700" stroke-width="0.4" opacity="0.6"/>
+    <line x1="10" y1="22" x2="-8" y2="18" stroke="#FFD700" stroke-width="0.4" opacity="0.6"/>
+    <line x1="-8" y1="18" x2="0" y2="0" stroke="#FFD700" stroke-width="0.4" opacity="0.6"/>
+    <text x="40" y="22" class="label" font-size="8" fill="#1F3A5F" opacity="0.5">★ Lyra constellation</text>
+  </g>
+
+  <!-- Continents (stylized soft shapes, no political borders) -->
+  <!-- Europe (Strings) -->
+  <path d="M 480,210 Q 540,190 600,210 Q 640,240 620,290 Q 580,310 520,300 Q 470,280 480,210 Z" fill="#FF7F50" opacity="0.85"/>
+  <text x="540" y="260" class="continent" font-size="13" text-anchor="middle">EUROPE</text>
+  <text x="540" y="278" class="jp" font-size="10" text-anchor="middle" fill="#1F3A5F">弦楽器 ♬</text>
+
+  <!-- Asia (Woodwinds) -->
+  <path d="M 640,200 Q 780,180 900,220 Q 960,280 920,360 Q 820,400 700,370 Q 620,320 640,200 Z" fill="#FF7F50" opacity="0.85"/>
+  <text x="790" y="290" class="continent" font-size="14" text-anchor="middle">ASIA</text>
+  <text x="790" y="308" class="jp" font-size="10" text-anchor="middle" fill="#1F3A5F">木管楽器 ♪</text>
+
+  <!-- Africa (Percussion) -->
+  <path d="M 510,330 Q 600,320 650,400 Q 660,500 600,560 Q 530,560 500,490 Q 470,400 510,330 Z" fill="#FF7F50" opacity="0.85"/>
+  <text x="570" y="450" class="continent" font-size="14" text-anchor="middle">AFRICA</text>
+  <text x="570" y="468" class="jp" font-size="10" text-anchor="middle" fill="#1F3A5F">打楽器 ♩</text>
+
+  <!-- North America (Brass) -->
+  <path d="M 130,220 Q 250,180 360,220 Q 400,290 360,360 Q 260,380 180,340 Q 100,290 130,220 Z" fill="#FF7F50" opacity="0.85"/>
+  <text x="240" y="290" class="continent" font-size="13" text-anchor="middle">N. AMERICA</text>
+  <text x="240" y="308" class="jp" font-size="10" text-anchor="middle" fill="#1F3A5F">金管楽器 ♭</text>
+
+  <!-- South America -->
+  <path d="M 270,400 Q 340,400 360,470 Q 360,560 320,620 Q 270,640 250,580 Q 230,490 270,400 Z" fill="#FF7F50" opacity="0.85"/>
+  <text x="305" y="510" class="continent" font-size="11" text-anchor="middle">S. AMERICA</text>
+  <text x="305" y="525" class="jp" font-size="9" text-anchor="middle" fill="#1F3A5F">金管 ♯</text>
+
+  <!-- Oceania (Voice/Choir) -->
+  <path d="M 870,550 Q 950,540 990,580 Q 1000,630 950,650 Q 880,650 850,610 Q 840,570 870,550 Z" fill="#FF7F50" opacity="0.85"/>
+  <text x="920" y="605" class="continent" font-size="12" text-anchor="middle">OCEANIA</text>
+  <text x="920" y="622" class="jp" font-size="9" text-anchor="middle" fill="#1F3A5F">声楽 ♫</text>
+
+  <!-- Antarctica (Rest / 休符) -->
+  <path d="M 240,720 Q 500,705 750,715 Q 900,720 1000,735 L 1000,750 L 240,750 Z" fill="#FFFFF0" opacity="0.9" stroke="#1F3A5F" stroke-opacity="0.15"/>
+  <text x="620" y="740" class="continent" font-size="10" text-anchor="middle" opacity="0.6">ANTARCTICA — Rest 休符 𝄽</text>
+
+  <!-- Hidden notes scattered (sampling, real version has 88) -->
+  <g fill="#FFD700" opacity="0.85">
+    <text x="100" y="500" font-size="14">♪</text>
+    <text x="700" y="180" font-size="12">♫</text>
+    <text x="820" y="500" font-size="13">♬</text>
+    <text x="200" y="650" font-size="11">♩</text>
+    <text x="950" y="350" font-size="14">♪</text>
+    <text x="420" y="160" font-size="12">♭</text>
+    <text x="1050" y="500" font-size="13">♯</text>
+    <text x="60" y="350" font-size="11">♫</text>
+    <text x="780" y="700" font-size="14">♪</text>
+    <text x="500" y="680" font-size="12">♬</text>
+  </g>
+
+  <!-- Small icon hints around continents (cultural trio) -->
+  <g class="jp" font-size="14" text-anchor="middle">
+    <text x="820" y="350" fill="#1F3A5F">🗻</text>
+    <text x="850" y="365" fill="#1F3A5F" font-size="11">富士</text>
+    <text x="555" y="240" fill="#1F3A5F">🎻</text>
+    <text x="240" y="320" fill="#1F3A5F">🎺</text>
+    <text x="570" y="425" fill="#1F3A5F">🥁</text>
+    <text x="920" y="585" fill="#1F3A5F">🎤</text>
+    <text x="780" y="280" fill="#1F3A5F">🐼</text>
+    <text x="850" y="340" fill="#1F3A5F">🐘</text>
+  </g>
+
+  <!-- Legend -->
+  <g transform="translate(60,790)">
+    <text x="0" y="0" class="label" font-size="11" fill="#1F3A5F">♪ 文化 Culture</text>
+    <text x="130" y="0" class="label" font-size="11" fill="#1F3A5F">🐾 動物 Animal</text>
+    <text x="260" y="0" class="label" font-size="11" fill="#1F3A5F">🎵 楽器 Instrument</text>
+    <text x="420" y="0" class="label" font-size="11" fill="#1F3A5F">★ 隠し音符 88 個 / Hidden Notes</text>
+  </g>
+  <text x="1128" y="800" class="label" font-size="9" fill="#1F3A5F" text-anchor="end" opacity="0.7">© Lyra Design 2026 — Symphony of Hope World Map</text>
+
+  <!-- Frame -->
+  <rect x="20" y="20" width="1148" height="800" fill="none" stroke="#1F3A5F" stroke-opacity="0.15" stroke-width="1"/>
+</svg>
