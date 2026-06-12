@@ -1,0 +1,17 @@
+{
+  "name": "时间电网 Time Grid",
+  "short_name": "时间电网",
+  "description": "任务是负载，精力是发电曲线，会议是基荷——让求解器替你排日程。全部端侧运行。",
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#2563eb",
+  "background_color": "#f8fafc",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

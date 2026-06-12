@@ -4,6 +4,7 @@ import { DEFAULT_CONFIG, at, slotsPerDay } from "../types.ts";
 import { TEMPLATES, energyAtSlot } from "../energy.ts";
 import { solve } from "../solver.ts";
 import { objectiveB } from "../objective.ts";
+import { parseICS, scheduleToICS, slotToDate } from "../ics.ts";
 
 /**
  * 时间电网 Time Grid — Phase 2 最小 UI。
@@ -13,6 +14,14 @@ import { objectiveB } from "../objective.ts";
 
 const cfg = DEFAULT_CONFIG;
 const STORAGE_KEY = "time-grid-state-v1";
+/** 调度锚点：第 0 天 = 今天（本地时间） */
+const ANCHOR = new Date();
+
+function dayLabel(d: number): string {
+  const date = slotToDate(d * slotsPerDay(cfg), ANCHOR, cfg);
+  const md = `${date.getMonth() + 1}/${date.getDate()}`;
+  return d === 0 ? `今天 ${md}` : md;
+}
 
 interface AppState {
   tasks: Task[];
@@ -135,7 +144,7 @@ function fmtSlot(slot: number): string {
   const h = (slot % spd) / cfg.slotsPerHour;
   const hh = String(Math.floor(h)).padStart(2, "0");
   const mm = String(Math.round((h % 1) * 60)).padStart(2, "0");
-  return `第${day}天 ${hh}:${mm}`;
+  return `${dayLabel(day)} ${hh}:${mm}`;
 }
 
 function energyBg(e: number): string {
@@ -166,7 +175,7 @@ function renderCurvePicker(state: AppState): HTMLElement {
 function renderTaskForm(): HTMLElement {
   const dayOptions = Array.from(
     { length: cfg.horizonDays },
-    (_, d) => `<option value="${d}">第${d}天</option>`,
+    (_, d) => `<option value="${d}">${dayLabel(d)}</option>`,
   ).join("");
   return el(`<form id="task-form" class="entity-form">
     <h3>添加任务</h3>
@@ -209,7 +218,7 @@ function renderTaskForm(): HTMLElement {
 function renderMeetingForm(): HTMLElement {
   const dayOptions = Array.from(
     { length: cfg.horizonDays },
-    (_, d) => `<option value="${d}">第${d}天</option>`,
+    (_, d) => `<option value="${d}">${dayLabel(d)}</option>`,
   ).join("");
   const hourOptions = (sel: number) =>
     Array.from({ length: 33 }, (_, i) => 7 + i * 0.5)
@@ -252,7 +261,7 @@ function renderLists(state: AppState): HTMLElement {
       (m) => `<li>
         <span class="dot meeting-dot"></span>
         <span class="name">${esc(m.title)}</span>
-        <span class="meta">${fmtSlot(m.start)} – ${fmtSlot(m.end).split(" ")[1]}</span>
+        <span class="meta">${fmtSlot(m.start)} – ${fmtSlot(m.end).split(" ").pop()}</span>
         <button data-del-meeting="${m.id}" title="删除">✕</button>
       </li>`,
     )
@@ -308,7 +317,7 @@ function renderGrid(state: AppState, ui: UiState): HTMLElement {
       }
       cells += `<div class="${cls}" style="${style}" title="${tip}">${inner}</div>`;
     }
-    rows += `<div class="grid-row"><div class="day-label">第${d}天</div>${cells}</div>`;
+    rows += `<div class="grid-row"><div class="day-label">${dayLabel(d)}</div>${cells}</div>`;
   }
 
   const dropped =
@@ -328,13 +337,15 @@ function renderGrid(state: AppState, ui: UiState): HTMLElement {
   return el(`<div class="grid-panel">
     <div class="grid-toolbar">
       <button id="solve-btn" class="primary">⚡ 求解（re-dispatch）</button>
+      <button id="export-btn" ${schedule ? "" : "disabled"}>⬇ 导出 .ics</button>
+      <label class="file-btn">⬆ 导入日历 .ics<input id="import-input" type="file" accept=".ics,text/calendar" hidden /></label>
       <button id="sample-btn">载入示例</button>
       <button id="clear-btn" class="danger">清空</button>
     </div>
     ${ui.error ? `<div class="error">${esc(ui.error)}</div>` : ""}
     <div class="grid">${header}${rows}</div>
     ${dropped}${score}
-    <p class="hint">背景色 = 你的精力曲线（暖黄为高能区）；深度任务只会被排进高能时隙；任务块之间自动留 15 分钟缓冲；每日只调度可用时间的 70%。数据全部存在本机浏览器。</p>
+    <p class="hint">背景色 = 你的精力曲线（暖黄为高能区）；深度任务只会被排进高能时隙；任务块之间自动留 15 分钟缓冲；每日只调度可用时间的 70%。导出 .ics 后导入 Google/Apple 日历即可在手机查看计划；导入 .ics 会把日历事件作为会议基荷（全天/循环事件暂不支持）。数据全部存在本机浏览器。</p>
   </div>`);
 }
 
@@ -474,6 +485,49 @@ function wire(): void {
     resolveNow();
     render();
   });
+  document.getElementById("export-btn")?.addEventListener("click", () => {
+    if (!ui.schedule) return;
+    const ics = scheduleToICS(ui.schedule, state.tasks, ANCHOR, cfg);
+    const url = URL.createObjectURL(new Blob([ics], { type: "text/calendar" }));
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = "time-grid.ics";
+    a.click();
+    URL.revokeObjectURL(url);
+  });
+
+  document
+    .getElementById("import-input")
+    ?.addEventListener("change", async (ev) => {
+      const input = ev.target as HTMLInputElement;
+      const file = input.files?.[0];
+      if (!file) return;
+      try {
+        const { events, skipped } = parseICS(await file.text(), ANCHOR, cfg);
+        for (const e of events) {
+          state.meetings.push({
+            id: `m-${crypto.randomUUID().slice(0, 8)}`,
+            title: e.title,
+            start: e.start,
+            end: e.end,
+          });
+        }
+        saveState(state);
+        if (events.length > 0 && ui.schedule) resolveNow();
+        // 求解成功会清空 ui.error，导入提示必须在其后写入
+        ui.error =
+          events.length === 0
+            ? `未导入任何事件${skipped > 0 ? `（${skipped} 个事件被跳过：全天/循环/地平线外）` : ""}`
+            : skipped > 0
+              ? `已导入 ${events.length} 个会议，跳过 ${skipped} 个（全天/循环/地平线外）`
+              : ui.error;
+      } catch (err) {
+        ui.error = `导入失败：${err instanceof Error ? err.message : String(err)}`;
+      }
+      input.value = "";
+      render();
+    });
+
   document.getElementById("sample-btn")?.addEventListener("click", () => {
     state.tasks = SAMPLE.tasks.map((t) => ({ ...t }));
     state.meetings = SAMPLE.meetings.map((m) => ({ ...m }));
@@ -492,3 +546,10 @@ function wire(): void {
 }
 
 render();
+
+// PWA：仅生产环境注册 Service Worker（离线可用）
+if (import.meta.env.PROD && "serviceWorker" in navigator) {
+  navigator.serviceWorker.register("/sw.js").catch(() => {
+    // 离线能力是渐进增强，注册失败不影响核心功能
+  });
+}

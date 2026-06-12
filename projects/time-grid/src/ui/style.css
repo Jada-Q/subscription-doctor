@@ -205,6 +205,18 @@ body {
 .grid-toolbar .danger {
   color: #b91c1c;
 }
+.grid-toolbar .file-btn {
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: #fff;
+  cursor: pointer;
+}
+.grid-toolbar button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
 
 .grid {
   display: flex;

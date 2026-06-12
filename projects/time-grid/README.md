@@ -31,9 +31,20 @@ npm run build && npm run preview  # 生产构建预览
 
 ## Web UI（Phase 2 已交付）
 
-`src/ui/` — Vite + 原生 TypeScript（无框架，gzip 后 ~8KB）：任务/会议 CRUD、三条精力曲线切换、
+`src/ui/` — Vite + 原生 TypeScript（无框架，gzip 后 ~9KB）：任务/会议 CRUD、三条精力曲线切换、
 时间网格视图（精力曲线为背景色、任务块着色、会议为斜纹基荷）、一键求解 / re-dispatch、
 丢弃任务告警、目标 B 得分展示。状态存 localStorage，全部端侧。
+
+## 产品闭环（Phase 3 已交付）
+
+- **真实日期锚定**：第 0 天 = 今天，网格/表单/列表全部显示实际日期
+- **ICS 导出**（`src/ics.ts`）：求解结果一键下载 `.ics`，导入 Google/Apple 日历即可在手机查看计划；
+  UID 带任务 ID，重排后重新导入可被日历客户端覆盖
+- **ICS 导入**：日历导出的 `.ics` 拖给文件选择器 → 事件成为会议基荷并自动重排；
+  全天/循环/地平线外事件显式提示跳过数量，绝不静默丢弃（MVP 限制：RRULE 不展开、TZID 按本地时间解析）
+- **PWA**：manifest + Service Worker 运行时缓存，可安装、离线可用
+
+部署：`npm run build` 产出 `dist/` 纯静态站，任何静态托管（Vercel/Netlify/GitHub Pages）直接可用，无服务端。
 
 ## 设计要点
 
