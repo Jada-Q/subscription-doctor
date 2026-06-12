@@ -5,6 +5,13 @@ import { TEMPLATES, energyAtSlot } from "../energy.ts";
 import { solve } from "../solver.ts";
 import { objectiveB } from "../objective.ts";
 import { parseICS, scheduleToICS, slotToDate } from "../ics.ts";
+import {
+  applyFeedback,
+  calibratedCurve,
+  emptyCalibration,
+  type Calibration,
+  type Rating,
+} from "../calibration.ts";
 
 /**
  * 时间电网 Time Grid — Phase 2 最小 UI。
@@ -23,15 +30,21 @@ function dayLabel(d: number): string {
   return d === 0 ? `今天 ${md}` : md;
 }
 
+/** UI 层任务：完成状态只影响"是否参与调度"，求解核心无需感知 */
+type UiTask = Task & { done?: boolean };
+
 interface AppState {
-  tasks: Task[];
+  tasks: UiTask[];
   meetings: Meeting[];
   curveName: string;
+  calib: Calibration;
 }
 
 interface UiState {
   schedule: Schedule | null;
   error: string | null;
+  /** 待回答的完成时微调查（记录完成时刻的小时） */
+  pendingFeedback: { hour: number } | null;
 }
 
 const PALETTE = [
@@ -48,11 +61,25 @@ const PALETTE = [
 function loadState(): AppState {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
-    if (raw) return JSON.parse(raw) as AppState;
+    if (raw) {
+      const parsed = JSON.parse(raw) as Partial<AppState>;
+      return {
+        tasks: parsed.tasks ?? [],
+        meetings: parsed.meetings ?? [],
+        curveName: parsed.curveName ?? TEMPLATES[0].name,
+        // 旧版存档无标定数据 → 空标定
+        calib: parsed.calib ?? emptyCalibration(),
+      };
+    }
   } catch {
     // 损坏的存档直接忽略，回到空状态
   }
-  return { tasks: [], meetings: [], curveName: TEMPLATES[0].name };
+  return {
+    tasks: [],
+    meetings: [],
+    curveName: TEMPLATES[0].name,
+    calib: emptyCalibration(),
+  };
 }
 
 function saveState(state: AppState): void {
@@ -70,9 +97,9 @@ function curveOf(state: AppState) {
 function toScenario(state: AppState): Scenario {
   return {
     name: "user",
-    tasks: state.tasks,
+    tasks: state.tasks.filter((t) => !t.done),
     meetings: state.meetings,
-    curve: curveOf(state),
+    curve: calibratedCurve(curveOf(state), state.calib),
   };
 }
 
@@ -168,6 +195,12 @@ function renderCurvePicker(state: AppState): HTMLElement {
         ${labels[c.name] ?? c.name}
       </label>`,
     ).join("")}</div>
+    ${
+      state.calib.total > 0
+        ? `<div class="calib-note">已融合你的 ${state.calib.total} 次状态反馈
+            <button id="reset-calib" title="清除标定数据，回到模板">重置</button></div>`
+        : `<div class="calib-note muted">完成任务时反馈状态，曲线会越用越准</div>`
+    }
   </div>`);
   return node;
 }
@@ -244,7 +277,7 @@ function renderLists(state: AppState): HTMLElement {
   const loadLabel = ["", "轻", "中", "深度"];
   const tasks = state.tasks
     .map(
-      (t, i) => `<li>
+      (t, i) => `<li class="${t.done ? "done" : ""}">
         <span class="dot" style="background:${PALETTE[i % PALETTE.length]}"></span>
         <span class="name">${esc(t.title)}</span>
         <span class="meta">${t.duration / 4}h · ${loadLabel[t.load]} · P${t.priority}${
@@ -252,6 +285,7 @@ function renderLists(state: AppState): HTMLElement {
             ? ` · ${t.hardDeadline ? "硬" : ""}截止 ${fmtSlot(t.deadline)}`
             : ""
         }${t.splittable ? "" : " · 不可拆"}</span>
+        ${t.done ? "" : `<button data-done-task="${t.id}" class="done-btn" title="标记完成">✓</button>`}
         <button data-del-task="${t.id}" title="删除">✕</button>
       </li>`,
     )
@@ -342,6 +376,15 @@ function renderGrid(state: AppState, ui: UiState): HTMLElement {
       <button id="sample-btn">载入示例</button>
       <button id="clear-btn" class="danger">清空</button>
     </div>
+    ${
+      ui.pendingFeedback
+        ? `<div class="survey">任务已完成 🎉 刚才状态如何？
+            <button data-rate="3">🔥 高能</button>
+            <button data-rate="2">😐 一般</button>
+            <button data-rate="1">🥱 低迷</button>
+            <button data-rate="skip" class="skip">跳过</button></div>`
+        : ""
+    }
     ${ui.error ? `<div class="error">${esc(ui.error)}</div>` : ""}
     <div class="grid">${header}${rows}</div>
     ${dropped}${score}
@@ -352,14 +395,14 @@ function renderGrid(state: AppState, ui: UiState): HTMLElement {
 // ---------- 事件与主循环 ----------
 
 const state = loadState();
-const ui: UiState = { schedule: null, error: null };
+const ui: UiState = { schedule: null, error: null, pendingFeedback: null };
 const root = document.getElementById("app");
 if (!root) throw new Error("missing #app");
 
 function resolveNow(): void {
-  if (state.tasks.length === 0) {
+  if (state.tasks.filter((t) => !t.done).length === 0) {
     ui.schedule = null;
-    ui.error = "请先添加至少一个任务";
+    ui.error = "没有待调度的任务 — 添加任务或点「载入示例」";
     return;
   }
   try {
@@ -468,6 +511,42 @@ function wire(): void {
         render();
       });
     });
+  document
+    .querySelectorAll<HTMLButtonElement>("[data-done-task]")
+    .forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const task = state.tasks.find((t) => t.id === btn.dataset.doneTask);
+        if (!task) return;
+        task.done = true;
+        ui.pendingFeedback = { hour: new Date().getHours() };
+        saveState(state);
+        if (ui.schedule) resolveNow();
+        render();
+      });
+    });
+  document.querySelectorAll<HTMLButtonElement>("[data-rate]").forEach((btn) => {
+    btn.addEventListener("click", () => {
+      const v = btn.dataset.rate;
+      if (ui.pendingFeedback && v !== "skip") {
+        state.calib = applyFeedback(
+          state.calib,
+          ui.pendingFeedback.hour,
+          Number(v) as Rating,
+        );
+        saveState(state);
+        // 曲线变了，已有日程基于旧曲线 → 重排
+        if (ui.schedule) resolveNow();
+      }
+      ui.pendingFeedback = null;
+      render();
+    });
+  });
+  document.getElementById("reset-calib")?.addEventListener("click", () => {
+    state.calib = emptyCalibration();
+    saveState(state);
+    if (ui.schedule) resolveNow();
+    render();
+  });
   document
     .querySelectorAll<HTMLButtonElement>("[data-del-meeting]")
     .forEach((btn) => {
