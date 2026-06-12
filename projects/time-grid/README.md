@@ -69,4 +69,4 @@ npm run build && npm run preview  # 生产构建预览
 - Phase 1 收尾项: Python CP-SAT 离线基准（`bench/cpsat_baseline.py`），度量启发式最优性间隙
 - Phase 3: ICS 导入/导出（ical.js）、精力被动标定闭环、PWA
 
-<!-- deploy: retry-after-pages-enabled -->
+<!-- deploy: no-restriction-retry -->
