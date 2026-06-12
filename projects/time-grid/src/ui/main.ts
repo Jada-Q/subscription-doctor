@@ -626,9 +626,11 @@ function wire(): void {
 
 render();
 
-// PWA：仅生产环境注册 Service Worker（离线可用）
+// PWA：仅生产环境注册 Service Worker（离线可用）；BASE_URL 适配子路径部署
 if (import.meta.env.PROD && "serviceWorker" in navigator) {
-  navigator.serviceWorker.register("/sw.js").catch(() => {
-    // 离线能力是渐进增强，注册失败不影响核心功能
-  });
+  navigator.serviceWorker
+    .register(`${import.meta.env.BASE_URL}sw.js`)
+    .catch(() => {
+      // 离线能力是渐进增强，注册失败不影响核心功能
+    });
 }
