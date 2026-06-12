@@ -23,7 +23,17 @@ npx vitest run -c projects/time-grid/vitest.config.ts
 
 # ASCII 甘特演示（Node 22+ 直接跑 TS）
 node projects/time-grid/src/demo.ts
+
+# Web UI（Phase 2，在 projects/time-grid 下）
+npm install && npm run dev      # 开发
+npm run build && npm run preview  # 生产构建预览
 ```
+
+## Web UI（Phase 2 已交付）
+
+`src/ui/` — Vite + 原生 TypeScript（无框架，gzip 后 ~8KB）：任务/会议 CRUD、三条精力曲线切换、
+时间网格视图（精力曲线为背景色、任务块着色、会议为斜纹基荷）、一键求解 / re-dispatch、
+丢弃任务告警、目标 B 得分展示。状态存 localStorage，全部端侧。
 
 ## 设计要点
 

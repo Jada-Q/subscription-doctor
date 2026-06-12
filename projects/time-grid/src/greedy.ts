@@ -116,8 +116,14 @@ function bestStart(
     const e = avgEnergy(scenario.curve, s, s + len, cfg);
     // 深度：精力最大化；轻：精力最小化（让出高能区）；中：最早开始。
     // 同分取更早的起点（-s/1e6 作微小决胜项），保证确定性。
-    const score =
+    // 软截止被放宽时，延误按目标 B 的权重计入评分，避免"为了一点精力增益拖一整天"。
+    const lateness =
+      task.deadline !== undefined
+        ? Math.max(0, s + len - task.deadline) * 2 * task.priority
+        : 0;
+    const base =
       task.load === 3 ? e - s / 1e6 : task.load === 1 ? -e - s / 1e6 : -s;
+    const score = base - lateness;
     if (score > bestScore) {
       bestScore = score;
       best = s;
