@@ -21,7 +21,8 @@
     ],
     "advice": "Google One 100GBは月額¥250で容量2倍。iCloudとの併用が不要なら乗り換え検討を。",
     "alternatives": [],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "icloud_200gb",
@@ -51,7 +52,8 @@
         "note": "ほぼ同額"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "icloud_2tb",
@@ -82,7 +84,8 @@
         "note": "同額だがYouTube Premium特典付き"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "icloud_6tb",
@@ -112,7 +115,8 @@
         "note": "データ整理で十分かも"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "onedrive",
@@ -145,7 +149,8 @@
         "note": "ほぼ同額で安定"
       }
     ],
-    "cancelUrl": "https://account.microsoft.com/services"
+    "cancelUrl": "https://account.microsoft.com/services",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "apple_music",
@@ -180,7 +185,8 @@
         "note": "月¥100お得"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "apple_tv_plus",
@@ -206,7 +212,8 @@
         "note": "¥300増で Music+Arcade+iCloud 50GB付き"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "apple_one_individual",
@@ -228,7 +235,8 @@
     ],
     "advice": "Apple Oneは4サービス込みでお得なバンドル。個別契約より割安です。",
     "alternatives": [],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "netflix_standard",
@@ -257,7 +265,8 @@
         "note": "Apple税を回避"
       }
     ],
-    "cancelUrl": "https://www.netflix.com/cancelplan"
+    "cancelUrl": "https://www.netflix.com/cancelplan",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "spotify_premium",
@@ -294,7 +303,8 @@
         "note": "広告付きで無料"
       }
     ],
-    "cancelUrl": "https://www.spotify.com/jp/account/subscription/"
+    "cancelUrl": "https://www.spotify.com/jp/account/subscription/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "youtube_premium",
@@ -328,7 +338,8 @@
         "note": "Apple税を回避"
       }
     ],
-    "cancelUrl": "https://www.youtube.com/paid_memberships"
+    "cancelUrl": "https://www.youtube.com/paid_memberships",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "amazon_prime",
@@ -354,7 +365,8 @@
         "note": "月額換算で¥108お得"
       }
     ],
-    "cancelUrl": "https://www.amazon.co.jp/gp/primecentral"
+    "cancelUrl": "https://www.amazon.co.jp/gp/primecentral",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "disney_plus",
@@ -381,7 +393,8 @@
         "note": "月額換算で¥165お得"
       }
     ],
-    "cancelUrl": "https://www.disneyplus.com/ja-jp/account"
+    "cancelUrl": "https://www.disneyplus.com/ja-jp/account",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "chatgpt_plus",
@@ -415,7 +428,8 @@
         "note": "Anthropic製AI、コーディングに強い"
       }
     ],
-    "cancelUrl": "https://chatgpt.com/#settings/subscription"
+    "cancelUrl": "https://chatgpt.com/#settings/subscription",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "adobe_cc",
@@ -445,7 +459,8 @@
         "note": "デザイン用途なら十分"
       }
     ],
-    "cancelUrl": "https://account.adobe.com/plans"
+    "cancelUrl": "https://account.adobe.com/plans",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "microsoft_365",
@@ -472,7 +487,8 @@
         "note": "無料で基本機能は十分"
       }
     ],
-    "cancelUrl": "https://account.microsoft.com/services"
+    "cancelUrl": "https://account.microsoft.com/services",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "google_one",
@@ -499,7 +515,8 @@
     ],
     "advice": "iCloudと併用していませんか？どちらか一方に統一すると節約に。",
     "alternatives": [],
-    "cancelUrl": "https://one.google.com/about/plans"
+    "cancelUrl": "https://one.google.com/about/plans",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "nuro_hikari",
@@ -536,7 +553,8 @@
         "note": "楽天ポイント還元あり"
       }
     ],
-    "cancelUrl": "https://www.nuro.jp/support/"
+    "cancelUrl": "https://www.nuro.jp/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "au_hikari",
@@ -567,7 +585,8 @@
         "note": "縛りなし最安級"
       }
     ],
-    "cancelUrl": "https://www.au.com/support/"
+    "cancelUrl": "https://www.au.com/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "softbank_hikari",
@@ -598,7 +617,8 @@
         "note": "縛りなし最安級"
       }
     ],
-    "cancelUrl": "https://www.softbank.jp/internet/support/"
+    "cancelUrl": "https://www.softbank.jp/internet/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "docomo_hikari",
@@ -629,7 +649,8 @@
         "note": "縛りなし最安級"
       }
     ],
-    "cancelUrl": "https://www.docomo.ne.jp/hikari/support/"
+    "cancelUrl": "https://www.docomo.ne.jp/hikari/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "hulu",
@@ -646,7 +667,8 @@
     "overlaps": [],
     "advice": "日テレ系コンテンツが中心。Netflixと両方契約中なら、視聴頻度が低い方を解約検討。",
     "alternatives": [],
-    "cancelUrl": "https://account.hulu.jp/"
+    "cancelUrl": "https://account.hulu.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "u_next",
@@ -676,7 +698,8 @@
         "note": "コスパ最強"
       }
     ],
-    "cancelUrl": "https://account.unext.jp/"
+    "cancelUrl": "https://account.unext.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "dazn",
@@ -705,7 +728,8 @@
         "note": "Apple税を回避"
       }
     ],
-    "cancelUrl": "https://my.dazn.com/account"
+    "cancelUrl": "https://my.dazn.com/account",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "abema_premium",
@@ -729,7 +753,8 @@
         "note": "広告付きで基本無料"
       }
     ],
-    "cancelUrl": "https://abema.tv/account/setting"
+    "cancelUrl": "https://abema.tv/account/setting",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "line_music",
@@ -761,7 +786,8 @@
         "note": "曲数最多級"
       }
     ],
-    "cancelUrl": "https://music.line.me/webapp/settings"
+    "cancelUrl": "https://music.line.me/webapp/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "notion",
@@ -780,7 +806,8 @@
     ],
     "advice": "個人利用なら無料プランで十分な場合が多い。チーム機能が不要なら見直しを。",
     "alternatives": [],
-    "cancelUrl": "https://www.notion.so/my-account"
+    "cancelUrl": "https://www.notion.so/my-account",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "canva_pro",
@@ -797,7 +824,8 @@
     "overlaps": [],
     "advice": "無料プランでもテンプレート豊富。プレミアム素材を頻繁に使わないなら無料で十分。",
     "alternatives": [],
-    "cancelUrl": "https://www.canva.com/settings/billing"
+    "cancelUrl": "https://www.canva.com/settings/billing",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "dropbox",
@@ -824,7 +852,8 @@
         "note": "安価なクラウド"
       }
     ],
-    "cancelUrl": "https://www.dropbox.com/account/plan"
+    "cancelUrl": "https://www.dropbox.com/account/plan",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "claude_pro",
@@ -848,7 +877,8 @@
     "overlaps": [],
     "advice": "ChatGPT Plusと両方契約中なら、用途に合った方に絞ると節約に。",
     "alternatives": [],
-    "cancelUrl": "https://claude.ai/settings"
+    "cancelUrl": "https://claude.ai/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "github",
@@ -865,7 +895,8 @@
     "overlaps": [],
     "advice": "個人開発なら無料プランで十分。プライベートリポジトリも無制限で使えます。",
     "alternatives": [],
-    "cancelUrl": "https://github.com/settings/billing"
+    "cancelUrl": "https://github.com/settings/billing",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "nintendo_online",
@@ -889,7 +920,8 @@
         "note": "月額換算で¥106お得"
       }
     ],
-    "cancelUrl": "https://ec.nintendo.com/my/membership_service"
+    "cancelUrl": "https://ec.nintendo.com/my/membership_service",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "playstation_plus",
@@ -909,7 +941,8 @@
     "overlaps": [],
     "advice": "年払いにすると月額より大幅お得。オンライン対戦をしないならEssentialで十分。",
     "alternatives": [],
-    "cancelUrl": "https://management.account.sony.com/"
+    "cancelUrl": "https://management.account.sony.com/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "rakuten_magazine",
@@ -935,7 +968,8 @@
         "note": "月額換算で¥88お得"
       }
     ],
-    "cancelUrl": "https://magazine.rakuten.co.jp/account/"
+    "cancelUrl": "https://magazine.rakuten.co.jp/account/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "yahoo_premium",
@@ -954,7 +988,8 @@
     "overlaps": [],
     "advice": "SoftBankユーザーなら無料特典で使えます。特典を使い切れていないなら解約検討を。",
     "alternatives": [],
-    "cancelUrl": "https://premium.yahoo.co.jp/cancel/"
+    "cancelUrl": "https://premium.yahoo.co.jp/cancel/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "kindle_unlimited",
@@ -973,7 +1008,8 @@
     "overlaps": [],
     "advice": "月に2冊以上読めば元が取れます。読書量が少ない月は一時解約も可能。",
     "alternatives": [],
-    "cancelUrl": "https://www.amazon.co.jp/kindle-dbs/hz/subscribe/ku"
+    "cancelUrl": "https://www.amazon.co.jp/kindle-dbs/hz/subscribe/ku",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "audible",
@@ -990,7 +1026,8 @@
     "overlaps": [],
     "advice": "月1冊のクレジット制。聴き終わらないなら一時休会(最大3ヶ月)で節約を。",
     "alternatives": [],
-    "cancelUrl": "https://www.audible.co.jp/account/overview"
+    "cancelUrl": "https://www.audible.co.jp/account/overview",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "suno_ai",
@@ -1018,7 +1055,8 @@
         "note": "無料プランあり・高品質AI音楽"
       }
     ],
-    "cancelUrl": "https://suno.com/account"
+    "cancelUrl": "https://suno.com/account",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "udio",
@@ -1043,7 +1081,8 @@
         "note": "無料プランあり・人気AI音楽"
       }
     ],
-    "cancelUrl": "https://www.udio.com/settings"
+    "cancelUrl": "https://www.udio.com/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "midjourney",
@@ -1060,7 +1099,8 @@
     "overlaps": [],
     "advice": "AI画像生成サービス。年払いで月額20%オフ。利用頻度が低いなら月契約で必要な時だけ。",
     "alternatives": [],
-    "cancelUrl": "https://www.midjourney.com/account/"
+    "cancelUrl": "https://www.midjourney.com/account/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "cursor",
@@ -1078,7 +1118,8 @@
     "overlaps": [],
     "advice": "AIコーディングエディタ。年払いで$192/年($16/月)が月額$20より20%お得。",
     "alternatives": [],
-    "cancelUrl": "https://cursor.sh/settings"
+    "cancelUrl": "https://cursor.sh/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "d_anime_store",
@@ -1105,7 +1146,8 @@
         "note": "Apple税を回避"
       }
     ],
-    "cancelUrl": "https://animestore.docomo.ne.jp/animestore/tp_pc"
+    "cancelUrl": "https://animestore.docomo.ne.jp/animestore/tp_pc",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "lemino",
@@ -1129,7 +1171,8 @@
         "note": "広告付きで一部無料"
       }
     ],
-    "cancelUrl": "https://lemino.docomo.ne.jp/"
+    "cancelUrl": "https://lemino.docomo.ne.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "wowow",
@@ -1153,7 +1196,8 @@
         "note": "映画中心なら十分"
       }
     ],
-    "cancelUrl": "https://www.wowow.co.jp/support/cancel/"
+    "cancelUrl": "https://www.wowow.co.jp/support/cancel/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "niconico_premium",
@@ -1183,7 +1227,8 @@
         "note": "広告付き"
       }
     ],
-    "cancelUrl": "https://premium.nicovideo.jp/"
+    "cancelUrl": "https://premium.nicovideo.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "crunchyroll",
@@ -1209,7 +1254,8 @@
         "note": "国内アニメ最安級"
       }
     ],
-    "cancelUrl": "https://www.crunchyroll.com/account/subscription"
+    "cancelUrl": "https://www.crunchyroll.com/account/subscription",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "telasa",
@@ -1233,7 +1279,8 @@
         "note": "見逃し配信は無料"
       }
     ],
-    "cancelUrl": "https://www.telasa.jp/mypage"
+    "cancelUrl": "https://www.telasa.jp/mypage",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "fod_premium",
@@ -1258,7 +1305,8 @@
         "note": "見逃し配信は無料"
       }
     ],
-    "cancelUrl": "https://fod.fujitv.co.jp/mypage/"
+    "cancelUrl": "https://fod.fujitv.co.jp/mypage/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "apple_arcade",
@@ -1285,7 +1333,8 @@
         "note": "¥300増で Music+TV++iCloud付き"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "xbox_game_pass",
@@ -1304,7 +1353,8 @@
     "overlaps": [],
     "advice": "Core(月¥842)とUltimate(月¥1,450)の違いを確認。PCゲームだけならPC Game Pass(月¥850)で十分。",
     "alternatives": [],
-    "cancelUrl": "https://account.microsoft.com/services"
+    "cancelUrl": "https://account.microsoft.com/services",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "perplexity_pro",
@@ -1323,7 +1373,8 @@
     ],
     "advice": "AI検索エンジン。ChatGPT Plusと両方契約中なら、用途が被っていないか確認を。年払いで$200/年($17/月)。",
     "alternatives": [],
-    "cancelUrl": "https://www.perplexity.ai/settings"
+    "cancelUrl": "https://www.perplexity.ai/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "gemini_advanced",
@@ -1346,7 +1397,8 @@
     ],
     "advice": "Google One AI Premium(月¥2,900)に含まれる。2TB Google Oneストレージ付き。ChatGPTと両方は不要かも。",
     "alternatives": [],
-    "cancelUrl": "https://one.google.com/about/plans"
+    "cancelUrl": "https://one.google.com/about/plans",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "copilot_pro",
@@ -1366,7 +1418,8 @@
     ],
     "advice": "Microsoft 365との連携が強み。Office製品を使わないならChatGPTの方が汎用性が高い。",
     "alternatives": [],
-    "cancelUrl": "https://account.microsoft.com/services"
+    "cancelUrl": "https://account.microsoft.com/services",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "one_password",
@@ -1390,7 +1443,8 @@
         "note": "無料で基本機能十分"
       }
     ],
-    "cancelUrl": "https://my.1password.com/settings/billing"
+    "cancelUrl": "https://my.1password.com/settings/billing",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "evernote",
@@ -1420,7 +1474,8 @@
         "note": "iCloud同期・無料"
       }
     ],
-    "cancelUrl": "https://www.evernote.com/Settings.action"
+    "cancelUrl": "https://www.evernote.com/Settings.action",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "todoist",
@@ -1444,7 +1499,8 @@
         "note": "無料でiCloud同期"
       }
     ],
-    "cancelUrl": "https://todoist.com/app/settings/subscription"
+    "cancelUrl": "https://todoist.com/app/settings/subscription",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "grammarly",
@@ -1467,7 +1523,8 @@
         "note": "基本文法チェック"
       }
     ],
-    "cancelUrl": "https://account.grammarly.com/subscription"
+    "cancelUrl": "https://account.grammarly.com/subscription",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "figma",
@@ -1490,7 +1547,8 @@
         "note": "3プロジェクトまで無料"
       }
     ],
-    "cancelUrl": "https://www.figma.com/settings"
+    "cancelUrl": "https://www.figma.com/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "slack",
@@ -1515,7 +1573,8 @@
         "note": "無料で履歴無制限"
       }
     ],
-    "cancelUrl": "https://slack.com/intl/ja-jp/help/articles/203138250"
+    "cancelUrl": "https://slack.com/intl/ja-jp/help/articles/203138250",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "nikkei_digital",
@@ -1542,7 +1601,8 @@
         "note": "経済ニュース＋オリジナルコンテンツ"
       }
     ],
-    "cancelUrl": "https://regist.nikkei.com/ds/setup/deactivate.do"
+    "cancelUrl": "https://regist.nikkei.com/ds/setup/deactivate.do",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "newspicks",
@@ -1568,7 +1628,8 @@
         "note": "月額換算で¥450お得"
       }
     ],
-    "cancelUrl": "https://newspicks.com/settings/account"
+    "cancelUrl": "https://newspicks.com/settings/account",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "d_magazine",
@@ -1594,7 +1655,8 @@
         "note": "月¥250安い"
       }
     ],
-    "cancelUrl": "https://dmagazine.docomo.ne.jp/"
+    "cancelUrl": "https://dmagazine.docomo.ne.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "nordvpn",
@@ -1616,7 +1678,8 @@
     ],
     "advice": "2年プランが月額換算で最安。月額契約は割高。無料VPNは個人情報リスクがあるので注意。",
     "alternatives": [],
-    "cancelUrl": "https://my.nordaccount.com/dashboard/"
+    "cancelUrl": "https://my.nordaccount.com/dashboard/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "norton_360",
@@ -1643,7 +1706,8 @@
         "note": "Windows標準で基本十分"
       }
     ],
-    "cancelUrl": "https://my.norton.com/extspa/subscriptions"
+    "cancelUrl": "https://my.norton.com/extspa/subscriptions",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "mcafee",
@@ -1670,7 +1734,8 @@
         "note": "Windows標準で基本十分"
       }
     ],
-    "cancelUrl": "https://home.mcafee.com/root/subscription.aspx"
+    "cancelUrl": "https://home.mcafee.com/root/subscription.aspx",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "pairs",
@@ -1693,7 +1758,8 @@
     ],
     "advice": "App Store経由は公式より割高。公式サイトから契約すると月額が安くなります。長期プランで月額大幅割引。",
     "alternatives": [],
-    "cancelUrl": "https://pairs.lv/"
+    "cancelUrl": "https://pairs.lv/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "tinder",
@@ -1716,7 +1782,8 @@
     ],
     "advice": "複数のマッチングアプリを並行契約していませんか？一つに絞ると大幅節約に。",
     "alternatives": [],
-    "cancelUrl": "https://tinder.com/settings"
+    "cancelUrl": "https://tinder.com/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "with_dating",
@@ -1737,7 +1804,8 @@
     ],
     "advice": "複数のマッチングアプリを並行利用は高コスト。一つに集中した方が効果的。",
     "alternatives": [],
-    "cancelUrl": "https://with.is/"
+    "cancelUrl": "https://with.is/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "tapple",
@@ -1759,7 +1827,8 @@
     ],
     "advice": "複数のマッチングアプリ同時契約は月額1万円超えも。一つに集中がおすすめ。",
     "alternatives": [],
-    "cancelUrl": "https://tapple.me/"
+    "cancelUrl": "https://tapple.me/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "ahamo",
@@ -1791,7 +1860,8 @@
         "note": "1GB/月¥290〜"
       }
     ],
-    "cancelUrl": "https://ahamo.com/support/"
+    "cancelUrl": "https://ahamo.com/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "povo",
@@ -1810,7 +1880,8 @@
     "overlaps": [],
     "advice": "基本料¥0でトッピング制。使い方次第で最安。180日以内にトッピング購入が必要。",
     "alternatives": [],
-    "cancelUrl": "https://povo.jp/support/"
+    "cancelUrl": "https://povo.jp/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "linemo",
@@ -1828,7 +1899,8 @@
     "overlaps": [],
     "advice": "ミニプラン3GB/月¥990。LINEギガフリーが強み。LINE通話/ビデオ通話が多い人に最適。",
     "alternatives": [],
-    "cancelUrl": "https://www.linemo.jp/support/"
+    "cancelUrl": "https://www.linemo.jp/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "rakuten_mobile",
@@ -1847,7 +1919,8 @@
     "overlaps": [],
     "advice": "3GBまで月¥1,078、20GBまで¥2,178、無制限¥3,278。楽天エリアの電波状況を確認。",
     "alternatives": [],
-    "cancelUrl": "https://network.mobile.rakuten.co.jp/support/"
+    "cancelUrl": "https://network.mobile.rakuten.co.jp/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "uq_mobile",
@@ -1866,7 +1939,8 @@
     "overlaps": [],
     "advice": "au回線で安定。自宅セット割やau PAYカードお支払い割で月¥990〜。割引条件を確認。",
     "alternatives": [],
-    "cancelUrl": "https://www.uqwimax.jp/mobile/support/"
+    "cancelUrl": "https://www.uqwimax.jp/mobile/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "ymobile",
@@ -1891,7 +1965,8 @@
         "note": "3GB・LINEギガフリー"
       }
     ],
-    "cancelUrl": "https://www.ymobile.jp/support/"
+    "cancelUrl": "https://www.ymobile.jp/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "iijmio",
@@ -1909,7 +1984,8 @@
     "overlaps": [],
     "advice": "格安SIM老舗で安定。2GB/月¥850は業界最安級。データシェアも可能。",
     "alternatives": [],
-    "cancelUrl": "https://www.iijmio.jp/member/"
+    "cancelUrl": "https://www.iijmio.jp/member/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "mineo",
@@ -1927,7 +2003,8 @@
     "overlaps": [],
     "advice": "マイそく(最大1.5Mbps使い放題/月¥990)はライトユーザーに最適。パケット放題Plusも人気。",
     "alternatives": [],
-    "cancelUrl": "https://my.mineo.jp/"
+    "cancelUrl": "https://my.mineo.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "nifmo",
@@ -1951,7 +2028,8 @@
         "note": "業界最安級"
       }
     ],
-    "cancelUrl": "https://csoption.nifty.com/"
+    "cancelUrl": "https://csoption.nifty.com/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "disney_plus_premium",
@@ -1980,7 +2058,8 @@
         "note": "フルHDで¥330安い"
       }
     ],
-    "cancelUrl": "https://www.disneyplus.com/ja-jp/account"
+    "cancelUrl": "https://www.disneyplus.com/ja-jp/account",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "amazon_music_unlimited",
@@ -2012,7 +2091,8 @@
         "note": "Prime会員なら追加料金なし"
       }
     ],
-    "cancelUrl": "https://www.amazon.co.jp/music/settings"
+    "cancelUrl": "https://www.amazon.co.jp/music/settings",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "apple_fitness_plus",
@@ -2039,7 +2119,8 @@
         "note": "無料で豊富"
       }
     ],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "strava",
@@ -2062,7 +2143,8 @@
         "note": "基本記録は無料"
       }
     ],
-    "cancelUrl": "https://www.strava.com/settings/subscription"
+    "cancelUrl": "https://www.strava.com/settings/subscription",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "money_forward",
@@ -2089,7 +2171,8 @@
         "note": "4口座まで無料"
       }
     ],
-    "cancelUrl": "https://moneyforward.com/users/edit"
+    "cancelUrl": "https://moneyforward.com/users/edit",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "zaim",
@@ -2115,7 +2198,8 @@
         "note": "基本無料"
       }
     ],
-    "cancelUrl": "https://zaim.net/home/setting"
+    "cancelUrl": "https://zaim.net/home/setting",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "line_stamp_premium",
@@ -2140,7 +2224,8 @@
         "note": "Apple税を回避で半額"
       }
     ],
-    "cancelUrl": "https://store.line.me/stickershop/subscription"
+    "cancelUrl": "https://store.line.me/stickershop/subscription",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "duolingo_plus",
@@ -2163,7 +2248,8 @@
         "note": "広告付きで基本無料"
       }
     ],
-    "cancelUrl": "https://www.duolingo.com/settings/account"
+    "cancelUrl": "https://www.duolingo.com/settings/account",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "studysapuri",
@@ -2182,7 +2268,8 @@
     "overlaps": [],
     "advice": "12ヶ月パック(月¥1,815)が月額(¥2,178)より年間¥4,356お得。受験シーズン以外は休会も選択肢。",
     "alternatives": [],
-    "cancelUrl": "https://studysapuri.jp/member/"
+    "cancelUrl": "https://studysapuri.jp/member/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "spotify_duo",
@@ -2215,7 +2302,8 @@
         "note": "Apple税を回避"
       }
     ],
-    "cancelUrl": "https://www.spotify.com/jp/account/subscription/"
+    "cancelUrl": "https://www.spotify.com/jp/account/subscription/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "spotify_family",
@@ -2242,7 +2330,8 @@
     ],
     "advice": "最大6人まで。家族で使えば1人あたり¥263。2人以上で使うならDuoよりお得。",
     "alternatives": [],
-    "cancelUrl": "https://www.spotify.com/jp/account/subscription/"
+    "cancelUrl": "https://www.spotify.com/jp/account/subscription/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "youtube_music",
@@ -2275,7 +2364,8 @@
         "note": "月¥100安い"
       }
     ],
-    "cancelUrl": "https://www.youtube.com/paid_memberships"
+    "cancelUrl": "https://www.youtube.com/paid_memberships",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "tiktok_live",
@@ -2293,7 +2383,8 @@
     "overlaps": [],
     "advice": "TikTokのサブスクリプション型ギフト。自動更新をオフにしていない場合、意図せず課金が続いている可能性。",
     "alternatives": [],
-    "cancelUrl": "https://support.tiktok.com/"
+    "cancelUrl": "https://support.tiktok.com/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "pixiv_premium",
@@ -2317,7 +2408,8 @@
         "note": "基本無料"
       }
     ],
-    "cancelUrl": "https://www.pixiv.net/premium/cancel"
+    "cancelUrl": "https://www.pixiv.net/premium/cancel",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "chatwork",
@@ -2343,7 +2435,8 @@
         "note": "90日履歴で基本無料"
       }
     ],
-    "cancelUrl": "https://www.chatwork.com/service/packages/chatwork/payment_info.php"
+    "cancelUrl": "https://www.chatwork.com/service/packages/chatwork/payment_info.php",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "freee",
@@ -2361,7 +2454,8 @@
     "overlaps": [],
     "advice": "確定申告に必要な月だけ契約する方法も。年払いで月額2ヶ月分お得。",
     "alternatives": [],
-    "cancelUrl": "https://app.secure.freee.co.jp/settings/my_plan"
+    "cancelUrl": "https://app.secure.freee.co.jp/settings/my_plan",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "rakuten_tv",
@@ -2385,7 +2479,8 @@
         "note": "コスパ最強"
       }
     ],
-    "cancelUrl": "https://tv.rakuten.co.jp/mypage/"
+    "cancelUrl": "https://tv.rakuten.co.jp/mypage/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "vpn_express",
@@ -2406,7 +2501,8 @@
     ],
     "advice": "NordVPNと両方契約は不要。2年プランが月額換算で最安。月額契約は割高。",
     "alternatives": [],
-    "cancelUrl": "https://www.expressvpn.com/subscriptions"
+    "cancelUrl": "https://www.expressvpn.com/subscriptions",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "surfshark",
@@ -2426,7 +2522,8 @@
     ],
     "advice": "デバイス無制限が強み。他のVPNと重複していないか確認を。2年プランが最安。",
     "alternatives": [],
-    "cancelUrl": "https://my.surfshark.com/"
+    "cancelUrl": "https://my.surfshark.com/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "eset",
@@ -2452,7 +2549,8 @@
         "note": "Windows標準で基本十分"
       }
     ],
-    "cancelUrl": "https://my.eset.com/"
+    "cancelUrl": "https://my.eset.com/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "apple_one_family",
@@ -2474,7 +2572,8 @@
     ],
     "advice": "家族6人まで共有可能。Apple Music/TV+/Arcade/iCloud 200GBのセット。個別契約より大幅お得。",
     "alternatives": [],
-    "cancelUrl": "https://support.apple.com/ja-jp/118428"
+    "cancelUrl": "https://support.apple.com/ja-jp/118428",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "meiji_yasuda_mimamori",
@@ -2492,7 +2591,8 @@
     "overlaps": [],
     "advice": "見守り系サブスクは複数契約に注意。スマホのGPS共有(無料)で代替できる場合も。",
     "alternatives": [],
-    "cancelUrl": "https://www.meijiyasuda.co.jp/"
+    "cancelUrl": "https://www.meijiyasuda.co.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "secom",
@@ -2512,7 +2612,8 @@
     ],
     "advice": "ホームセキュリティ。スマートロック+防犯カメラ(一括購入)で月額費用なしに切り替えも選択肢。",
     "alternatives": [],
-    "cancelUrl": "https://www.secom.co.jp/support/"
+    "cancelUrl": "https://www.secom.co.jp/support/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "alsok",
@@ -2532,7 +2633,8 @@
     ],
     "advice": "SECOMと両方契約は完全に無駄。一つに統一を。",
     "alternatives": [],
-    "cancelUrl": "https://www.alsok.co.jp/"
+    "cancelUrl": "https://www.alsok.co.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "coop_deli",
@@ -2551,7 +2653,8 @@
     "overlaps": [],
     "advice": "配達手数料が毎週かかります。まとめ買いで頻度を減らすか、スーパーとの併用で最適化を。",
     "alternatives": [],
-    "cancelUrl": "https://www.coopnet.or.jp/"
+    "cancelUrl": "https://www.coopnet.or.jp/",
+    "lastVerified": "2026-07-05"
   },
   {
     "id": "oisix",
@@ -2569,6 +2672,7 @@
     "overlaps": [],
     "advice": "ミールキットは便利ですが割高。自炊と組み合わせて頻度を調整すると節約に。",
     "alternatives": [],
-    "cancelUrl": "https://www.oisix.com/OtameshiTouroku.lp.g6--top--top-shinki_domo_a__html.htm"
+    "cancelUrl": "https://www.oisix.com/OtameshiTouroku.lp.g6--top--top-shinki_domo_a__html.htm",
+    "lastVerified": "2026-07-05"
   }
 ]
