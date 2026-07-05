@@ -13,13 +13,26 @@ Apple tax detection is Subscription Doctor's core differentiating feature -- ide
 - Data is labeled as "community-sourced" (社区众包) to avoid Apple ToS violations
 - No direct App Store scraping -- prices are manually maintained
 
-## MSCA Law (Japan)
+## MSCA Law (Japan) — Updated 2026-07-05
 
-Apple is required to execute Japan's MSCA法案 by December 2025, which will:
+MSCA（スマホソフトウェア競争促進法）は **2025年12月18日に施行済み**。iOS 26.2で対応。
 
-- Allow alternative payment methods in apps
-- Reduce Apple's commission to **10-15%** (down from 30%)
-- This is a long-term tailwind -- the Apple tax may shrink but won't disappear
+実際の手数料体系（PROJECT_PLANの「10-15%」は不正確だった）:
+
+- App Store標準コミッション: **21%** + Apple IAP利用時は決済処理手数料5% = **合計26%**
+- 従来30%からの実質削減は **わずか4%**
+- Small Business Program / 2年目以降サブスク: 基本 **10%**（従来15%から）
+- 代替マーケットプレイス経由: Core Technology Commission **5%**
+
+2026年2月、IT関連7業界団体（600社超）が「経済的インセンティブがない」と緊急共同声明。
+
+**→ Apple税は依然として有効な訴求ポイント。手数料削減が小さいため、App Store経由 vs 公式サイトの価格差は今後も残る。**
+
+Sources:
+
+- https://www.apple.com/newsroom/2025/12/apple-announces-changes-to-ios-in-japan/
+- https://developer.apple.com/support/app-distribution-in-japan/
+- https://mcf.or.jp/newsletter/20260205-41651
 
 ## Example
 

@@ -9,6 +9,12 @@
 - [[freee]] — Japanese cloud accounting platform (確定申告 focused)
 - [[money-forward]] — Japanese cloud accounting and personal finance platform
 - [[subsHub]] — Japanese subscription management app (manual entry)
+- [[zaim]] — Japan's largest household budget app (1,000万DL+) with built-in subscription checker since 2020
+- [[costly]] — Japanese iOS subscription management app with privacy-first design; closest positioning competitor
+
+## Raw
+
+- [[2026-07-05-japan-subscrip-market-research]] — Deep research: 日本サブスク管理市場 2025-2026 動向（8件確認、2件否定、過期日 2026-10-05）
 
 ## Concepts
 

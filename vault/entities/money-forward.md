@@ -9,7 +9,13 @@ Money Forward (MF) is a leading Japanese cloud accounting and personal finance p
 
 ## Relationship to Subscription Doctor
 
-Money Forward is the most likely Japanese incumbent to enter the subscription audit space, given its existing consumer finance app (Money Forward ME) with bank API integrations. Like [[freee]], it focuses on accounting rather than subscription-specific optimization and does not detect [[apple-tax-detection|Apple tax]].
+Money Forward **already entered** the subscription audit space:
+
+- **2022年12月**: Money Forward ME にサブスクレポート機能追加（プレミアム限定）
+- **2025年8月5日**: プレミアム料金改定 — クレカ決済 月額540円 / App Store決済 月額590円
+- ストア経由 vs 直接決済で月額50円の価格差 = Apple税/Google税の転嫁が可視化されている
+
+Like [[freee]], it uses bank API integrations (server-side) and does not detect [[apple-tax-detection|Apple tax]] for the user's own subscriptions. The MF pricing differential itself validates our Apple tax detection thesis.
 
 The PROJECT_PLAN identifies a 6-12 month competitive window before incumbents like Money Forward could respond. Subscription Doctor's strategy is to build brand and community during this window rather than relying on feature moat alone.
 
